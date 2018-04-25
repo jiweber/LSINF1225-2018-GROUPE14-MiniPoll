@@ -13,6 +13,9 @@
         <activity android:name=".MainActivity">
         </activity>
 
+        <activity android:name=".MenuPrincipalActivity">
+        </activity>
+
         <activity
             android:name=".ConnexionActivity"
             android:label="@string/title_activity_connexion"
