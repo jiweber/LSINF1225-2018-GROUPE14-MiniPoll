@@ -4,6 +4,7 @@ package be.lsinf1225.minipoll;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.QuickContactBadge;
 //import android.widget.TextView;
 
 public class MenuPrincipalActivity extends AppCompatActivity {
@@ -11,6 +12,8 @@ public class MenuPrincipalActivity extends AppCompatActivity {
     Button btn_sond;
     Button btn_quest;
     Button btn_aide;
+    QuickContactBadge amis;
+    QuickContactBadge profil;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,5 +22,8 @@ public class MenuPrincipalActivity extends AppCompatActivity {
         btn_quest = findViewById(R.id.button2);
         btn_sond = findViewById(R.id.button5);
         btn_aide = findViewById(R.id.button3);
+        amis = findViewById(R.id.quickContactBadge2);
+        profil = findViewById(R.id.quickContactBadge);
+
     }
 }
