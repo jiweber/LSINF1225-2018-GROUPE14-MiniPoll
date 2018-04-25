@@ -1,6 +1,7 @@
 package be.lsinf1225.minipoll;
 
 //import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -55,6 +56,9 @@ public class MenuPrincipalActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             Log.i("DEBUG","Bouton nouveau");
+            Intent acti_new = new Intent(getApplicationContext(), NouveauActivity.class);
+            startActivity(acti_new);
+            finish();
         }
     };
     View.OnClickListener btn_quest_ls = new View.OnClickListener() {
@@ -82,16 +86,7 @@ public class MenuPrincipalActivity extends AppCompatActivity {
             Log.i("DEBUG","Bouton aide");
         }
     };
-    public void setFontTxt(TextView textView, String fontName) {
-        if(fontName != null){
-            try {
-                Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/" + fontName);
-                textView.setTypeface(typeface);
-            } catch (Exception e) {
-                Log.e("FONT", fontName + " not found", e);
-            }
-        }
-    }
+
     public void setFontBut(Button button, String fontName) {
         if(fontName != null){
             try {
