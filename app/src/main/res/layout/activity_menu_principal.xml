@@ -6,17 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary">
 
-    <QuickContactBadge
-        android:id="@+id/quickContactBadge2"
-        android:layout_width="83dp"
-        android:layout_height="84dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="29dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/sym_def_app_icon"
-        android:layout_marginLeft="16dp" />
-
     <Button
         android:id="@+id/button2"
         android:layout_width="257dp"
@@ -53,17 +42,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <QuickContactBadge
-        android:id="@+id/quickContactBadge"
-        android:layout_width="80dp"
-        android:layout_height="84dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="29dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/sym_def_app_icon"
-        android:layout_marginRight="16dp" />
-
     <Button
         android:id="@+id/button5"
         android:layout_width="257dp"
@@ -75,4 +53,27 @@
         app:layout_constraintBottom_toTopOf="@+id/button2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="29dp"
+        android:background="@drawable/friends"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="16dp" />
+
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="29dp"
+        android:background="@drawable/ic_launcher_foreground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginRight="16dp" />
+
 </android.support.constraint.ConstraintLayout>

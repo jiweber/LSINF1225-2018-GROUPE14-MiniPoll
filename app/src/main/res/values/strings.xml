@@ -5,5 +5,5 @@
     <string name="btn_mes_sondages">Mes sondages</string>
     <string name="btn_aider_un_ami">Aider un ami</string>
     <string name="btn_mes_questionnaires">Mes questionnaires</string>
-    <string name="menu_principal">activity_menu_principal</string>
+    <string name="menu_principal">Menu Principal</string>
 </resources>
