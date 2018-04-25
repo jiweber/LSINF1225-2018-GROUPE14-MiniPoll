@@ -13,13 +13,22 @@
         <activity android:name=".MainActivity">
         </activity>
 
-        <activity android:name=".MenuPrincipalActivity">
-        </activity>
+
 
         <activity
             android:name=".ConnexionActivity"
             android:label="@string/title_activity_connexion"
             android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".MenuPrincipalActivity"
+            android:label="@string/menu_principal">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
