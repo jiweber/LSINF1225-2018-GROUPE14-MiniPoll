@@ -30,10 +30,10 @@ public class MenuPrincipalActivity extends AppCompatActivity {
         btn_friends = findViewById(R.id.button);
         btn_profil = findViewById(R.id.button6);
 
-        setFontBut(btn_aide, "GeosansLight.ttf");
-        setFontBut(btn_new, "GeosansLight.ttf");
-        setFontBut(btn_sond, "GeosansLight.ttf");
-        setFontBut(btn_quest, "GeosansLight.ttf");
+        setFontBut(btn_aide);
+        setFontBut(btn_new);
+        setFontBut(btn_sond);
+        setFontBut(btn_quest);
 
         btn_profil.setOnClickListener(btn_profil_ls);
         btn_friends.setOnClickListener(btn_friends_ls);
@@ -87,14 +87,12 @@ public class MenuPrincipalActivity extends AppCompatActivity {
         }
     };
 
-    public void setFontBut(Button button, String fontName) {
-        if(fontName != null){
-            try {
-                Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/" + fontName);
-                button.setTypeface(typeface);
-            } catch (Exception e) {
-                Log.e("FONT", fontName + " not found", e);
-            }
+    public void setFontBut(Button button) {
+        try {
+            Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/Quicksand-Light.ttf");
+            button.setTypeface(typeface);
+        } catch (Exception e) {
+            Log.e("FONT", button + " not found", e);
         }
     }
 }

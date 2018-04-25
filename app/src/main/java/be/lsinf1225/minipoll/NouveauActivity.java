@@ -17,6 +17,7 @@ public class NouveauActivity extends AppCompatActivity {
     Button questionnaire;
     Button aide;
     TextView nouveau;
+    TextView interrogation;
     ImageView poll;
     ImageButton retour;
 
@@ -30,8 +31,13 @@ public class NouveauActivity extends AppCompatActivity {
         nouveau = findViewById(R.id.textView);
         poll = findViewById(R.id.imageView);
         retour = findViewById(R.id.imageButton);
+        interrogation = findViewById(R.id.textView4);
 
-        setFontTxt(nouveau, "GeosansLight.ttf");
+        setFontTxt(nouveau);
+        setFontTxt(interrogation);
+        setFontBut(sondage);
+        setFontBut(questionnaire);
+        setFontBut(aide);
 
         retour.setOnClickListener(retouract);
 
@@ -46,14 +52,21 @@ public class NouveauActivity extends AppCompatActivity {
             finish();
         }
     };
-    public void setFontTxt(TextView textView, String fontName) {
-        if(fontName != null){
-            try {
-                Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/" + fontName);
-                textView.setTypeface(typeface);
+    public void setFontTxt(TextView textView) {
+        try {
+            Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/Quicksand-Light.ttf");
+            textView.setTypeface(typeface);
+        } catch (Exception e) {
+            Log.e("FONT", textView + " not found", e);
+        }
+    }
+
+    public void setFontBut(Button button) {
+        try {
+                Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/Quicksand-Light.ttf");
+                button.setTypeface(typeface);
             } catch (Exception e) {
-                Log.e("FONT", fontName + " not found", e);
+                Log.e("FONT", button + " not found", e);
             }
         }
     }
-}
