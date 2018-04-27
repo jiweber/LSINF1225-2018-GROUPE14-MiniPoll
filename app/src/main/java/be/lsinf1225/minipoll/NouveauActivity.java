@@ -29,9 +29,9 @@ public class NouveauActivity extends AppCompatActivity {
         questionnaire = findViewById(R.id.button7);
         aide = findViewById(R.id.button9);
         nouveau = findViewById(R.id.textView);
-        poll = findViewById(R.id.imageView);
+        //poll = findViewById(R.id.imageView);
         retour = findViewById(R.id.imageButton);
-        interrogation = findViewById(R.id.textView4);
+        //interrogation = findViewById(R.id.textView4);
 
         setFontTxt(nouveau);
         setFontTxt(interrogation);

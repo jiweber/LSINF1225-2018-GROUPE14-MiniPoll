@@ -27,7 +27,7 @@ public class MenuPrincipalActivity extends AppCompatActivity {
         btn_quest = findViewById(R.id.button2);
         btn_sond = findViewById(R.id.button5);
         btn_aide = findViewById(R.id.button3);
-        btn_friends = findViewById(R.id.button);
+        //btn_friends = findViewById(R.id.button);
         btn_profil = findViewById(R.id.button6);
 
         setFontBut(btn_aide);
