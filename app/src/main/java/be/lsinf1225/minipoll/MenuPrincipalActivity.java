@@ -1,6 +1,6 @@
 package be.lsinf1225.minipoll;
 
-//import android.content.Context;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
-//import android.widget.TextView;
 
 public class MenuPrincipalActivity extends AppCompatActivity {
     Button btn_new;
@@ -27,7 +26,7 @@ public class MenuPrincipalActivity extends AppCompatActivity {
         btn_quest = findViewById(R.id.button2);
         btn_sond = findViewById(R.id.button5);
         btn_aide = findViewById(R.id.button3);
-        //btn_friends = findViewById(R.id.button);
+        btn_friends = findViewById(R.id.button);
         btn_profil = findViewById(R.id.button6);
 
         setFontBut(btn_aide);
