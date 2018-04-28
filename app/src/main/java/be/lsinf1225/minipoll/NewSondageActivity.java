@@ -1,11 +1,17 @@
 package be.lsinf1225.minipoll;
 
+import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 public class NewSondageActivity extends AppCompatActivity {
 
@@ -14,6 +20,8 @@ public class NewSondageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_sondage);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        ImageButton retour = findViewById(R.id.imageButton2);
+        retour.setOnClickListener(rtr);
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -23,7 +31,34 @@ public class NewSondageActivity extends AppCompatActivity {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        })
+
+        ;
     }
 
+    View.OnClickListener rtr = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent actiret = new Intent(getApplicationContext(),NouveauActivity.class);
+            startActivity(actiret);
+        }
+    };
+
+    public void setFontTxt(TextView textView) {
+        try {
+            Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/Quicksand-Light.ttf");
+            textView.setTypeface(typeface);
+        } catch (Exception e) {
+            Log.e("FONT", textView + " not found", e);
+        }
+    }
+
+    public void setFontBut(Button button) {
+        try {
+            Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/Quicksand-Light.ttf");
+            button.setTypeface(typeface);
+        } catch (Exception e) {
+            Log.e("FONT", button + " not found", e);
+        }
+    }
 }

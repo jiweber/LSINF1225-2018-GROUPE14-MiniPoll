@@ -14,7 +14,8 @@
         android:layout_height="41dp"
         android:layout_marginTop="16dp"
         android:gravity="center_horizontal"
-        android:text="Nouveau Sondage"
+        android:text="@string/nouveau_sondage"
+        android:textColor="@color/colorWhite"
         android:textSize="32sp" />
 
     <Button
@@ -22,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_nouveau_sondage"
-        android:text="Inviter des Amis"
+        android:text="@string/inviter_des_amis"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

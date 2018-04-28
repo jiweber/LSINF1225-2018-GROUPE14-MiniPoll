@@ -34,6 +34,7 @@
             android:name=".NewSondageActivity"
             android:label="@string/title_activity_new_sondage"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".Profil"></activity>
     </application>
 
 </manifest>

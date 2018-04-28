@@ -11,4 +11,6 @@
     <string name="nouveau">Nouveau</string>
     <string name="questionnaire">Questionnaire</string>
     <string name="title_activity_new_sondage">NewSondageActivity</string>
+    <string name="nouveau_sondage">Nouveau Sondage</string>
+    <string name="inviter_des_amis">Inviter des Amis</string>
 </resources>

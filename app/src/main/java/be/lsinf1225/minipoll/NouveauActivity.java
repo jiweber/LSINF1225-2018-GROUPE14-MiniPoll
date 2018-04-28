@@ -40,6 +40,7 @@ public class NouveauActivity extends AppCompatActivity {
         setFontBut(aide);
 
         retour.setOnClickListener(retouract);
+        sondage.setOnClickListener(nouvsond);
 
 
     }
@@ -52,21 +53,30 @@ public class NouveauActivity extends AppCompatActivity {
             finish();
         }
     };
-    public void setFontTxt(TextView textView) {
-        try {
-            Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/Quicksand-Light.ttf");
-            textView.setTypeface(typeface);
-        } catch (Exception e) {
-            Log.e("FONT", textView + " not found", e);
+
+    View.OnClickListener nouvsond = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent sond = new Intent(getApplicationContext(), NewSondageActivity.class);
+            startActivity(sond);
+            finish();
         }
+    };
+    public void setFontTxt(TextView textView) {
+    try {
+        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/Quicksand-Light.ttf");
+        textView.setTypeface(typeface);
+    } catch (Exception e) {
+        Log.e("FONT", textView + " not found", e);
     }
+}
 
     public void setFontBut(Button button) {
         try {
-                Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/Quicksand-Light.ttf");
-                button.setTypeface(typeface);
-            } catch (Exception e) {
-                Log.e("FONT", button + " not found", e);
-            }
+            Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/Quicksand-Light.ttf");
+            button.setTypeface(typeface);
+        } catch (Exception e) {
+            Log.e("FONT", button + " not found", e);
         }
     }
+}
