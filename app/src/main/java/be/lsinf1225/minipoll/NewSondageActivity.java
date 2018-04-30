@@ -19,46 +19,5 @@ public class NewSondageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_sondage);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        ImageButton retour = findViewById(R.id.imageButton2);
-        retour.setOnClickListener(rtr);
-        setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        })
-
-        ;
-    }
-
-    View.OnClickListener rtr = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Intent actiret = new Intent(getApplicationContext(),NouveauActivity.class);
-            startActivity(actiret);
-        }
-    };
-
-    public void setFontTxt(TextView textView) {
-        try {
-            Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/Quicksand-Light.ttf");
-            textView.setTypeface(typeface);
-        } catch (Exception e) {
-            Log.e("FONT", textView + " not found", e);
-        }
-    }
-
-    public void setFontBut(Button button) {
-        try {
-            Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/Quicksand-Light.ttf");
-            button.setTypeface(typeface);
-        } catch (Exception e) {
-            Log.e("FONT", button + " not found", e);
-        }
     }
 }

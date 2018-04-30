@@ -3,14 +3,16 @@
     package="be.lsinf1225.minipoll">
 
     <application
-        android:name="be.lsinf1225.minipoll.MiniPoll"
+        android:name=".MiniPoll"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".MainActivity" />
+
         <activity
             android:name=".ConnexionActivity"
             android:label="@string/title_activity_connexion"
@@ -21,6 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".MenuPrincipalActivity"
             android:label="@string/menu_principal">
@@ -30,12 +33,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".NouveauActivity" />
-        <activity
-            android:name=".NewSondageActivity"
-            android:label="@string/title_activity_new_sondage"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".Profil"></activity>
+
+        <activity android:name=".NewSondageActivity" />
+
+        <activity android:name=".Profil" />
+
     </application>
 
 </manifest>
