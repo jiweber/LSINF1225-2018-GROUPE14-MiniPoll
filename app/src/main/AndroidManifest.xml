@@ -3,6 +3,7 @@
     package="be.lsinf1225.minipoll">
 
     <application
+        android:name="be.lsinf1225.minipoll.MiniPoll"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
