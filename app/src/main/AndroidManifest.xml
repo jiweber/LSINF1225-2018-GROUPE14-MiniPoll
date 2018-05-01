@@ -24,7 +24,9 @@
         <activity
             android:name=".activity.MenuPrincipalActivity"
             android:label="@string/menu_principal" />
-        <activity android:name=".activity.NouveauActivity" />
+        <activity
+            android:name=".activity.NouveauActivity"
+            android:label="Nouveau"/>
         <activity android:name=".activity.NewSondageActivity" />
         <activity android:name=".activity.Profil" />
         <activity android:name=".activity.GestionAmis"/>
