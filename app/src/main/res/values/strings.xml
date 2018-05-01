@@ -20,4 +20,5 @@
     <string name="inscription">Inscription</string>
     <string name="connexion">connexion</string>
     <string name="imagepoll">ImagePoll</string>
+    <string name="interrogation">\?</string>
 </resources>

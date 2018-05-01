@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context="be.lsinf1225.minipoll.NouveauActivity">
+    tools:context="be.lsinf1225.minipoll.activity.NouveauActivity">
 
     <Button
         android:id="@+id/button7"
@@ -83,7 +83,7 @@
         android:layout_height="95dp"
         android:layout_marginBottom="45dp"
         android:layout_marginStart="24dp"
-        android:text="?"
+        android:text="@string/interrogation"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@color/colorWhite"

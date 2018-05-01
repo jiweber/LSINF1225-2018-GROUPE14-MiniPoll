@@ -11,10 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".MainActivity" />
+        <activity android:name=".activity.MainActivity" />
 
         <activity
-            android:name=".ConnexionActivity"
+            android:name=".activity.ConnexionActivity"
             android:label="MiniPoll"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -25,14 +25,14 @@
         </activity>
 
         <activity
-            android:name=".MenuPrincipalActivity"
+            android:name=".activity.MenuPrincipalActivity"
             android:label="@string/menu_principal"/>
 
-        <activity android:name=".NouveauActivity" />
+        <activity android:name=".activity.NouveauActivity" />
 
-        <activity android:name=".NewSondageActivity" />
+        <activity android:name=".activity.NewSondageActivity" />
 
-        <activity android:name=".Profil" />
+        <activity android:name=".activity.Profil" />
 
     </application>
 
