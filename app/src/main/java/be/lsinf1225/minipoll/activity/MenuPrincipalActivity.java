@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import be.lsinf1225.minipoll.R;
 
@@ -15,8 +16,8 @@ public class MenuPrincipalActivity extends AppCompatActivity {
     Button btn_sond;
     Button btn_quest;
     Button btn_aide;
-    Button btn_friends;
-    Button btn_profil;
+    ImageButton btn_friends;
+    ImageButton btn_profil;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,8 +26,8 @@ public class MenuPrincipalActivity extends AppCompatActivity {
         btn_quest = findViewById(R.id.button2);
         btn_sond = findViewById(R.id.button5);
         btn_aide = findViewById(R.id.button3);
-        btn_friends = findViewById(R.id.button);
-        btn_profil = findViewById(R.id.button6);
+        btn_friends = findViewById(R.id.amis);
+        btn_profil = findViewById(R.id.profil);
 
         setFontBut(btn_aide);
         setFontBut(btn_new);
@@ -50,6 +51,7 @@ public class MenuPrincipalActivity extends AppCompatActivity {
             Log.i("DEBUG","Bouton profil");
         }
     };
+
     View.OnClickListener btn_new_ls = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -59,12 +61,14 @@ public class MenuPrincipalActivity extends AppCompatActivity {
             finish();
         }
     };
+
     View.OnClickListener btn_quest_ls = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             Log.i("DEBUG","Bouton questionnaire");
         }
     };
+
     View.OnClickListener btn_sond_ls = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -75,6 +79,11 @@ public class MenuPrincipalActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             Log.i("DEBUG","Bouton amis");
+            Intent amis = new Intent(getApplicationContext(),GestionAmis.class);
+            Log.i("FLAG", "Passé");
+            startActivity(amis);
+            Log.i("FLAG", "Présent");
+            finish();
         }
     };
 

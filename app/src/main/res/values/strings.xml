@@ -21,4 +21,8 @@
     <string name="connexion">connexion</string>
     <string name="imagepoll">ImagePoll</string>
     <string name="interrogation">\?</string>
+    <string name="gestion_des_amis">Gestion des amis</string>
+    <string name="chercher_des_amis">Chercher des amis</string>
+    <string name="demandes_d_amis">Demandes d\'amis</string>
+    <string name="liste_des_amis">Liste des amis</string>
 </resources>

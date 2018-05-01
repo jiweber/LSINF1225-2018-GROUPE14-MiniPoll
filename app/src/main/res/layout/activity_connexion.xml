@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="be.lsinf1225.minipoll.activity.MainActivity"
+    android:background="@color/colorPrimary"
     android:gravity="center"
-    android:background="@color/colorPrimary">
+    tools:context="be.lsinf1225.minipoll.activity.MainActivity">
 
     <TextView
         android:id="@+id/tv_text_login"
@@ -60,10 +59,10 @@
         android:layout_marginStart="17dp"
         android:hint="@string/entrez_le_password"
         android:inputType="textPassword"
-        android:textColorHint="@color/colorWhite"
         android:shadowColor="@color/colorWhite"
         android:textColor="@color/colorWhite"
         android:textColorHighlight="@color/colorWhite"
+        android:textColorHint="@color/colorWhite"
         android:textColorLink="@color/colorWhite"
         app:layout_constraintBottom_toTopOf="@+id/btn_connexion"
         app:layout_constraintEnd_toEndOf="parent"
@@ -85,7 +84,7 @@
     <Button
         android:id="@+id/btn_inscription"
         android:layout_width="300dp"
-        android:layout_height="47dp"
+        android:layout_height="0dp"
         android:layout_below="@id/btn_connexion"
         android:layout_marginBottom="40dp"
         android:layout_marginEnd="42dp"

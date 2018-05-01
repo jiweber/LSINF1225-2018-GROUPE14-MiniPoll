@@ -10,9 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity android:name=".activity.MainActivity" />
-
         <activity
             android:name=".activity.ConnexionActivity"
             android:label="MiniPoll"
@@ -23,17 +21,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activity.MenuPrincipalActivity"
-            android:label="@string/menu_principal"/>
-
+            android:label="@string/menu_principal" />
         <activity android:name=".activity.NouveauActivity" />
-
         <activity android:name=".activity.NewSondageActivity" />
-
         <activity android:name=".activity.Profil" />
-
+        <activity android:name=".activity.GestionAmis"/>
     </application>
 
 </manifest>
