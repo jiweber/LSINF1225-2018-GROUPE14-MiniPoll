@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,51 +7,105 @@
     android:layout_height="match_parent"
     tools:context="be.lsinf1225.minipoll.MainActivity"
     android:gravity="center"
-    android:layout_margin="20dp">
+    android:background="@color/colorPrimary">
 
     <TextView
         android:id="@+id/tv_text_login"
-        android:text="Mail:"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="17dp"
+        android:layout_marginStart="17dp"
+        android:text="@string/mail"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintBottom_toTopOf="@+id/et_mail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
     <EditText
         android:id="@+id/et_mail"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
         android:layout_below="@id/tv_text_login"
-        android:hint="Entrez le mail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+        android:layout_marginBottom="5dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginStart="17dp"
+        android:hint="@string/entrez_le_mail"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorWhite"
+        app:layout_constraintBottom_toTopOf="@+id/tv_text_password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tv_text_password"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/et_mail"
-        android:text="Mot de passe:"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_marginEnd="17dp"
+        android:layout_marginStart="17dp"
+        android:text="@string/mot_de_passe"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintBottom_toTopOf="@+id/et_password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:layout_below="@id/tv_text_password"
         android:id="@+id/et_password"
-        android:hint="Entrez le password"
-        android:inputType="textPassword"
-        android:layout_width="match_parent"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
-        />
+        android:layout_below="@id/tv_text_password"
+        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginStart="17dp"
+        android:hint="@string/entrez_le_password"
+        android:inputType="textPassword"
+        android:textColorHint="@color/colorWhite"
+        android:shadowColor="@color/colorWhite"
+        android:textColor="@color/colorWhite"
+        android:textColorHighlight="@color/colorWhite"
+        android:textColorLink="@color/colorWhite"
+        app:layout_constraintBottom_toTopOf="@+id/btn_connexion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:layout_below="@id/et_password"
-        android:text="connexion"
         android:id="@+id/btn_connexion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_width="300dp"
+        android:layout_height="47dp"
+        android:layout_below="@id/et_password"
+        android:layout_marginBottom="15dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginStart="42dp"
+        android:text="@string/connexion"
+        app:layout_constraintBottom_toTopOf="@+id/btn_inscription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:layout_below="@id/btn_connexion"
-        android:text="Inscription"
         android:id="@+id/btn_inscription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_width="300dp"
+        android:layout_height="47dp"
+        android:layout_below="@id/btn_connexion"
+        android:layout_marginBottom="40dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginStart="42dp"
+        android:text="@string/inscription"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-</RelativeLayout>
+    <ImageView
+        android:id="@+id/poll"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_marginEnd="107dp"
+        android:layout_marginStart="107dp"
+        android:layout_marginTop="35dp"
+        android:contentDescription="@string/imagepoll"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/poll" />
+
+</android.support.constraint.ConstraintLayout>

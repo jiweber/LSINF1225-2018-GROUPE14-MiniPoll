@@ -13,4 +13,11 @@
     <string name="title_activity_new_sondage">NewSondageActivity</string>
     <string name="nouveau_sondage">Nouveau Sondage</string>
     <string name="inviter_des_amis">Inviter des Amis</string>
+    <string name="mail">Mail:</string>
+    <string name="mot_de_passe">Mot de passe:</string>
+    <string name="entrez_le_mail">Entrez le mail</string>
+    <string name="entrez_le_password">Entrez le mot de passe</string>
+    <string name="inscription">Inscription</string>
+    <string name="connexion">connexion</string>
+    <string name="imagepoll">ImagePoll</string>
 </resources>
