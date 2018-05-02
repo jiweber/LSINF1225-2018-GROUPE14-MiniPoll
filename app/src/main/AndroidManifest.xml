@@ -30,6 +30,8 @@
         <activity android:name=".activity.NewSondageActivity" />
         <activity android:name=".activity.Profil" />
         <activity android:name=".activity.GestionAmis"/>
+        <activity android:name=".activity.ListQuestionnaireActivity"
+            android:label="Questionnaires"></activity>
     </application>
 
 </manifest>
