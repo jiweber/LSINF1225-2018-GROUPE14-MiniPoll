@@ -73,6 +73,9 @@ public class MenuPrincipalActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             Log.i("DEBUG","Bouton sondage");
+            Intent acti_new = new Intent(getApplicationContext(), MySondagesActivity.class);
+            startActivity(acti_new);
+            finish();
         }
     };
     View.OnClickListener btn_friends_ls = new View.OnClickListener() {
