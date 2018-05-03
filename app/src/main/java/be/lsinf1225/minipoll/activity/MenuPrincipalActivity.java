@@ -66,6 +66,9 @@ public class MenuPrincipalActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             Log.i("DEBUG","Bouton questionnaire");
+            Intent questnr_view = new Intent(getApplicationContext(),MyQuestnrActivity.class);
+            startActivity(questnr_view);
+            finish();
         }
     };
 

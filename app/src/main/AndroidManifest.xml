@@ -31,6 +31,9 @@
         <activity android:name=".activity.Profil" />
         <activity android:name=".activity.GestionAmis" />
         <activity android:name=".activity.MySondagesActivity"/>
+        <activity
+            android:name=".activity.MyQuestnrActivity"
+            android:label="@string/myquestnr"/>
     </application>
 
 </manifest>
