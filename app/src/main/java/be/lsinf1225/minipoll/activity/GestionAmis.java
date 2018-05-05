@@ -18,7 +18,6 @@ public class GestionAmis extends AppCompatActivity {
     Button chercher;
     Button demandes;
     TextView titre;
-    ImageButton retour;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,13 +27,11 @@ public class GestionAmis extends AppCompatActivity {
         chercher = findViewById(R.id.chercher);
         demandes = findViewById(R.id.demandes);
         titre = findViewById(R.id.gestion);
-        retour = findViewById(R.id.retour);
         setFontBut(liste);
         setFontBut(chercher);
         setFontBut(demandes);
         setFontTxt(titre);
 
-        retour.setOnClickListener(retouract);
     }
 
     public void setFontTxt(TextView textView) {
@@ -54,13 +51,4 @@ public class GestionAmis extends AppCompatActivity {
             Log.e("FONT", button + " not found", e);
         }
     }
-
-    View.OnClickListener retouract = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Intent retourmen = new Intent(getApplicationContext(), MenuPrincipalActivity.class);
-            startActivity(retourmen);
-            finish();
-        }
-    };
 }

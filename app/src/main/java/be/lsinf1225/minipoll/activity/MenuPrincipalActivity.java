@@ -58,7 +58,6 @@ public class MenuPrincipalActivity extends AppCompatActivity {
             Log.i("DEBUG","Bouton nouveau");
             Intent acti_new = new Intent(getApplicationContext(), NouveauActivity.class);
             startActivity(acti_new);
-            finish();
         }
     };
 
@@ -68,7 +67,6 @@ public class MenuPrincipalActivity extends AppCompatActivity {
             Log.i("DEBUG","Bouton questionnaire");
             Intent questnr_view = new Intent(getApplicationContext(),MyQuestnrActivity.class);
             startActivity(questnr_view);
-            finish();
         }
     };
 
@@ -78,7 +76,6 @@ public class MenuPrincipalActivity extends AppCompatActivity {
             Log.i("DEBUG","Bouton sondage");
             Intent acti_new = new Intent(getApplicationContext(), MySondagesActivity.class);
             startActivity(acti_new);
-            finish();
         }
     };
     View.OnClickListener btn_friends_ls = new View.OnClickListener() {
@@ -89,7 +86,6 @@ public class MenuPrincipalActivity extends AppCompatActivity {
             Log.i("FLAG", "Passé");
             startActivity(amis);
             Log.i("FLAG", "Présent");
-            finish();
         }
     };
 

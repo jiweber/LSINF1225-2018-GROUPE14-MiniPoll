@@ -21,7 +21,6 @@ public class NouveauActivity extends AppCompatActivity {
     TextView nouveau;
     TextView interrogation;
     ImageView poll;
-    ImageButton retour;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +31,6 @@ public class NouveauActivity extends AppCompatActivity {
         aide = findViewById(R.id.button9);
         nouveau = findViewById(R.id.textView);
         poll = findViewById(R.id.imageView);
-        retour = findViewById(R.id.imageButton);
         interrogation = findViewById(R.id.textView4);
 
         setFontTxt(nouveau);
@@ -41,20 +39,11 @@ public class NouveauActivity extends AppCompatActivity {
         setFontBut(questionnaire);
         setFontBut(aide);
 
-        retour.setOnClickListener(retouract);
         sondage.setOnClickListener(nouvsond);
 
 
     }
 
-    View.OnClickListener retouract = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Intent retourmen = new Intent(getApplicationContext(), MenuPrincipalActivity.class);
-            startActivity(retourmen);
-            finish();
-        }
-    };
 
     View.OnClickListener nouvsond = new View.OnClickListener() {
         @Override

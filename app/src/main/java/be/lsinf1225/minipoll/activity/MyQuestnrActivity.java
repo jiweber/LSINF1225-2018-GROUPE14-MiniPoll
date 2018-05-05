@@ -16,26 +16,11 @@ import be.lsinf1225.minipoll.R;
 
 public class MyQuestnrActivity extends AppCompatActivity {
 
-    private ImageButton back;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_myquestnr);
 
-        back=findViewById(R.id.back_to_main);
-        back.setOnClickListener(back1);
-
     }
-
-    View.OnClickListener back1 = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Log.i("DEBUG","Bouton back");
-            Intent acti_new = new Intent(getApplicationContext(), MenuPrincipalActivity.class);
-            startActivity(acti_new);
-            finish();
-        }
-    };
 }
