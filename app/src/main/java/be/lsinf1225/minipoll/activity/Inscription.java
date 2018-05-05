@@ -1,5 +1,6 @@
 package be.lsinf1225.minipoll.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -26,6 +27,7 @@ public class Inscription extends AppCompatActivity {
     EditText mdp_insc;
     EditText re_mdp_insc;
     Button insc;
+    public static Activity inscription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,8 @@ public class Inscription extends AppCompatActivity {
 
 
         insc.setOnClickListener(insciption);
+
+        inscription = this;
     }
 
 

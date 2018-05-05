@@ -1,5 +1,6 @@
 package be.lsinf1225.minipoll.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -28,6 +29,7 @@ public class ConnexionActivity extends AppCompatActivity {
     EditText et_mail;
     Button btn_connexion;
     Button btn_inscription;
+    public static Activity connexion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,8 @@ public class ConnexionActivity extends AppCompatActivity {
         btn_connexion.setOnClickListener(co);
 
         btn_inscription.setOnClickListener(insc);
+
+        connexion = this;
     }
 
     View.OnClickListener co = new View.OnClickListener() {

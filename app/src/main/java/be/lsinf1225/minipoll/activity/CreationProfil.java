@@ -1,5 +1,6 @@
 package be.lsinf1225.minipoll.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Path;
@@ -85,6 +86,8 @@ public class CreationProfil extends AppCompatActivity {
                 Intent menu = new Intent(getApplicationContext(),MenuPrincipalActivity.class);
                 MiniPoll.setUserMail(Mail);
                 startActivity(menu);
+                ConnexionActivity.connexion.finish();
+                Inscription.inscription.finish();
                 finish();
             }
         }
