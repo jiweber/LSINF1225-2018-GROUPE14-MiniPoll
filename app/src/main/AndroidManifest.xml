@@ -34,7 +34,8 @@
         <activity
             android:name=".activity.MyQuestnrActivity"
             android:label="@string/myquestnr" />
-        <activity android:name=".activity.SondageActivity"></activity>
+        <activity android:name=".activity.SondageActivity" />
+        <activity android:name=".activity.Inscription" />
     </application>
 
 </manifest>

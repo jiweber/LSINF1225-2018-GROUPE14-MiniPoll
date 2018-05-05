@@ -87,10 +87,10 @@ DROP TABLE IF EXISTS Utilisateur;
 CREATE TABLE Utilisateur (Mail TEXT NOT NULL UNIQUE PRIMARY KEY, Nom TEXT NOT NULL, Prénom TEXT NOT NULL, "Mot de passe" TEXT NOT NULL, Photo NUMERIC DEFAULT 'default.jpeg' NOT NULL, "Meilleur ami" TEXT, FOREIGN KEY ("Meilleur ami") REFERENCES Utilisateur (Mail));
 INSERT INTO Utilisateur (Mail, Nom, Prénom, "Mot de passe", Photo, "Meilleur ami") VALUES ('harry.smith@mymail.com', 'Smith', 'Harry', 'hsmIth123', 'default.jpeg', 'arthur98@gmail.com');
 INSERT INTO Utilisateur (Mail, Nom, Prénom, "Mot de passe", Photo, "Meilleur ami") VALUES ('arthur98@gmail.com', 'Debraie', 'Arthur', 'mot2passe', 'My_foto.jpeg', 'gb@ucluvain.be');
-INSERT INTO Utilisateur (Mail, Nom, Prénom, "Mot de passe", Photo, "Meilleur ami") VALUES ('LDV@uclouvain.be', 'De Vogeleer', 'Louis', 123, '''default.jpeg''', NULL);
-INSERT INTO Utilisateur (Mail, Nom, Prénom, "Mot de passe", Photo, "Meilleur ami") VALUES ('adb@uclouvain.be', 'de Biolley', 'Antoine', 321, '''default.jpeg''', NULL);
-INSERT INTO Utilisateur (Mail, Nom, Prénom, "Mot de passe", Photo, "Meilleur ami") VALUES ('jw@uclouvain.be', 'Weber', 'Jimmy', 596, '''default.jpeg''', NULL);
-INSERT INTO Utilisateur (Mail, Nom, Prénom, "Mot de passe", Photo, "Meilleur ami") VALUES ('gb@uclouvain.be', 'Bellon', 'Guillaume', '''0234''', '''default.jpeg''', NULL);
+INSERT INTO Utilisateur (Mail, Nom, Prénom, "Mot de passe", Photo, "Meilleur ami") VALUES ('LDV@uclouvain.be', 'De Vogeleer', 'Louis', 123, 'default.jpeg', NULL);
+INSERT INTO Utilisateur (Mail, Nom, Prénom, "Mot de passe", Photo, "Meilleur ami") VALUES ('adb@uclouvain.be', 'de Biolley', 'Antoine', 321, 'default.jpeg', NULL);
+INSERT INTO Utilisateur (Mail, Nom, Prénom, "Mot de passe", Photo, "Meilleur ami") VALUES ('jw@uclouvain.be', 'Weber', 'Jimmy', 596, 'default.jpeg''', NULL);
+INSERT INTO Utilisateur (Mail, Nom, Prénom, "Mot de passe", Photo, "Meilleur ami") VALUES ('gb@uclouvain.be', 'Bellon', 'Guillaume', '0234', 'default.jpeg', NULL);
 
 COMMIT TRANSACTION;
 PRAGMA foreign_keys = on;
