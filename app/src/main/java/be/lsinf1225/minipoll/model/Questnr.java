@@ -3,8 +3,10 @@ package be.lsinf1225.minipoll.model;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import be.lsinf1225.minipoll.MiniPoll;
 import be.lsinf1225.minipoll.MySQLiteHelper;
@@ -39,9 +41,9 @@ public class Questnr {
         String mail= MiniPoll.getUserMail();
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
 
-        String sql = "select Q.IDquestionnaire, Q.Titre, Q.Auteur" +
-                "from Questionnaire Q, Participation_questionnaire PQ" +
-                "where Q.IDquestionnaire=PQ.IDquestionnaire and PQ.mail='"+mail+"'"+";";
+        String sql = "SELECT Q.IDquestionnaire, Q.Titre, Q.Auteur" +
+                "FROM Questionnaire Q, Participation_questionnaire PQ" +
+                "WHERE Q.IDquestionnaire=PQ.IDquestionnaire and PQ.mail='"+mail+"'"+";";
 
         Cursor c = db.rawQuery(sql,null);
         c.moveToFirst();
@@ -56,6 +58,15 @@ public class Questnr {
         c.close();
         db.close();
         return questnr;
+    }
+
+    public static List<String> getTtitles(){
+        List<String> titles = new ArrayList<String>();
+        ArrayList<Questnr> qst = Questnr.getSQLQuestnr();
+        for (int i=0;i<qst.size();i++){
+            titles.add(qst.get(i).getTitreQstnr());
+        }
+        return  titles;
     }
 
 }

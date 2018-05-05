@@ -18,26 +18,28 @@ public class Sondage implements Serializable{
     private int id;
     private String title;
     private String creator;
-    private ArrayList<String> participants;
-    private int propositionNumber;
+    private String[] participants;
     private int[][] rangs;
     private Proposition[] propositions;
     private int[] status;
 
-    public Sondage(int id, String title, String creator, ArrayList<String> participants, ArrayList<String> enonces) {
+    public Sondage(int id, String title, String creator, String[] participants, String[] enonces) {
         this.id = id;
         this.title = title;
         this.creator = creator;
         this.participants = participants;
-        this.propositionNumber = enonces.size();
-        this.rangs = new int[this.propositionNumber][participants.size()];
+        int propositionNumber = enonces.length;
+        this.rangs = new int[propositionNumber][participants.length];
         this.propositions = new Proposition[propositionNumber];
         for(int i=0; i<propositionNumber; i++){
-            this.propositions[i] = new Proposition(enonces.get(i));
+            this.propositions[i] = new Proposition(enonces[i]);
         }
-        this.status = new int[participants.size()];
+        this.status = new int[participants.length];
     }
 
+    public Proposition[] getPropositions() {
+        return propositions;
+    }
 
     public int getId(){
         return id;
@@ -61,6 +63,14 @@ public class Sondage implements Serializable{
         else{
             return 2;
         }
+    }
+
+    public String[] getEnonces(){
+        String[] enonces = new String[propositions.length];
+        for(int i=0; i<propositions.length; i++){
+            enonces[i] = propositions[i].getEnonce();
+        }
+        return enonces;
     }
 
     public static ArrayList<Sondage> getCreatorSondages(){
@@ -96,7 +106,7 @@ public class Sondage implements Serializable{
     }
     */
 
-    private static ArrayList<String> getSQLParticipants(int id, SQLiteDatabase db){
+    private static String[] getSQLParticipants(int id, SQLiteDatabase db){
         String sqlPart = "select A.Mail_participant from Participation_sondage A, Sondage S where A.IDsondage =" + id +";";
         Cursor cPart = db.rawQuery(sqlPart, null);
         ArrayList<String> participants = new ArrayList<String>();
@@ -106,10 +116,12 @@ public class Sondage implements Serializable{
             cPart.moveToNext();
         }
         cPart.close();
-        return participants;
+        String[] participantsTab = new String[participants.size()];
+        participantsTab = participants.toArray(participantsTab);
+        return participantsTab;
     }
 
-    private static ArrayList<String> getSQLPropositions(int id, SQLiteDatabase db){
+    private static String[] getSQLPropositions(int id, SQLiteDatabase db){
         String sqlProp = "select O.Ennoncé_de_la_proposition from Proposition_sondage O, Sondage S where O.IDsondage =" + id +";";
         Cursor cProp = db.rawQuery(sqlProp, null);
         ArrayList<String> propositions = new ArrayList<String>();
@@ -119,7 +131,9 @@ public class Sondage implements Serializable{
             cProp.moveToNext();
         }
         cProp.close();
-        return propositions;
+        String[] propositionsTab = new String[propositions.size()];
+        propositionsTab = propositions.toArray(propositionsTab);
+        return propositionsTab;
     }
 
     public static String[] getRemainingFriends()
@@ -133,6 +147,10 @@ public class Sondage implements Serializable{
         public Proposition(String enonce) {
             this.enonce = enonce;
             generalRank = 0;
+        }
+
+        public String getEnonce() {
+            return enonce;
         }
 
         public void setGeneralRank(int generalRank) {
