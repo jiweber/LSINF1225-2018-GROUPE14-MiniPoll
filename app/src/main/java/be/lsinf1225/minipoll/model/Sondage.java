@@ -136,6 +136,10 @@ public class Sondage implements Serializable{
         return propositionsTab;
     }
 
+    public static String[] getRemainingFriends()
+    {
+        return null;                            //TODO
+    }
     private class Proposition {
         private String enonce;
         private int generalRank;
