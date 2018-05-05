@@ -23,6 +23,15 @@ import android.widget.Toast;
 
 public class MiniPoll extends Application {
 
+    private static String userMail;
+
+    public static String getUserMail() {
+        return userMail;
+    }
+    public static void setUserMail(String userMail) {
+        userMail = userMail;
+    }
+
     /**
      * Référence au contexte de l'application
      */
