@@ -25,6 +25,7 @@
     <string name="chercher_des_amis">Chercher des amis</string>
     <string name="demandes_d_amis">Demandes d\'amis</string>
     <string name="liste_des_amis">Liste des amis</string>
+    <string name="mailoupassincorr">Mail ou mot de passe incorrect</string>
 
     <!-- Questionnaire -->
     <string name="myquestnr">Mes Questionnaires</string>
