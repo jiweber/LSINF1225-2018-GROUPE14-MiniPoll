@@ -29,5 +29,13 @@
 
     <!-- Questionnaire -->
     <string name="myquestnr">Mes Questionnaires</string>
+    <string name="creation_d_un_compte">Creation d\'un compte</string>
+    <string name="entrez_l_adresse_mail">Entrez l\'adresse mail</string>
+    <string name="entrez_le_mot_de_passe">Entrez le mot de passe</string>
+    <string name="confirmez_le_mot_de_passe">Confirmez le mot de passe</string>
+    <string name="s_inscrire">S\'inscrire</string>
+    <string name="maildeuxpoints">Mail :</string>
+    <string name="mot_de_passedeuxpoints">Mot de passe :</string>
+    <string name="confirmation">Confirmation :</string>
 
 </resources>
