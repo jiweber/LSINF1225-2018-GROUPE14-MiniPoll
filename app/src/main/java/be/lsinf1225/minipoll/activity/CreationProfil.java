@@ -1,8 +1,12 @@
 package be.lsinf1225.minipoll.activity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Path;
 import android.graphics.Picture;
 import android.graphics.Typeface;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +15,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.io.IOException;
 
 import be.lsinf1225.minipoll.MiniPoll;
 import be.lsinf1225.minipoll.MySQLiteHelper;
@@ -27,6 +33,7 @@ public class CreationProfil extends AppCompatActivity {
     EditText et_name;
     EditText et_prename;
     Button creation;
+    String imagepath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +43,13 @@ public class CreationProfil extends AppCompatActivity {
         Mdp = prof.getStringExtra("Mdp");
         Mail = prof.getStringExtra("Mail");
         PP = findViewById(R.id.pp_cre_pro);
+        PP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(photoPickerIntent, 1);
+            }
+        });
         title = findViewById(R.id.title_cre_pro);
         setFontTxt(title);
         tv_name = findViewById(R.id.tv_name_cre_pro);
@@ -58,15 +72,15 @@ public class CreationProfil extends AppCompatActivity {
         public void onClick(View view) {
             String Name = et_name.getText().toString();
             String Prename = et_prename.getText().toString();
-            String PathPP = "Jesaispascommentgereruneimage";            //TODO
-            if(Name.equals("")|Prename.equals("")|PathPP.equals(""))
+            if(Name.equals("")|Prename.equals("")|PP == null)
             {
                 MiniPoll.notifyShort(R.string.choisirdonnees);
             }
             else
             {
+
                 String SQL = "INSERT INTO Utilisateur (Mail, Nom, Prénom, \"Mot de passe\", Photo) VALUES (?,?,?,?,?);";
-                MySQLiteHelper.get().getWritableDatabase().execSQL(SQL,new String[]{Mail, Name, Prename, Mdp, PathPP});
+                MySQLiteHelper.get().getWritableDatabase().execSQL(SQL,new Object[]{Mail, Name, Prename, Mdp, imagepath});
                 MiniPoll.notifyLong(R.string.Profilcree);
                 Intent menu = new Intent(getApplicationContext(),MenuPrincipalActivity.class);
                 MiniPoll.setUserMail(Mail);
@@ -76,6 +90,18 @@ public class CreationProfil extends AppCompatActivity {
         }
     };
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        Uri uri = data.getData();
+        imagepath = String.valueOf(uri);
+        try {
+            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+            PP.setImageBitmap(bitmap);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void setFontTxt(TextView textView) {
         try {
