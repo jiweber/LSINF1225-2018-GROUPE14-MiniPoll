@@ -50,12 +50,7 @@ public class ConnexionActivity extends AppCompatActivity {
 
         btn_connexion.setOnClickListener(co);
 
-        btn_inscription.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //TODO
-            }
-        });
+        btn_inscription.setOnClickListener(insc);
     }
 
     View.OnClickListener co = new View.OnClickListener() {
@@ -90,6 +85,14 @@ public class ConnexionActivity extends AppCompatActivity {
 
 
 
+        }
+    };
+
+    View.OnClickListener insc = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent ins = new Intent(getApplicationContext(),Inscription.class);
+            startActivity(ins);
         }
     };
 
