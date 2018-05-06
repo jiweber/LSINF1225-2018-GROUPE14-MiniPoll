@@ -37,5 +37,9 @@
     <string name="maildeuxpoints">Mail :</string>
     <string name="mot_de_passedeuxpoints">Mot de passe :</string>
     <string name="confirmation">Confirmation :</string>
+    <string name="maildejautilise">Cet adresse e-mail est déjà utilisée</string>
+    <string name="motsdepassesdiff">Les mots de passe ne correspondent pas</string>
+    <string name="choisirdonnees">Veuillez remplir les donées et choisir une photo de profil</string>
+    <string name="Profilcree">Profil créé avec succès</string>
 
 </resources>

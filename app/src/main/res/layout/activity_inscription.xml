@@ -47,6 +47,7 @@
         android:hint="@string/entrez_le_mot_de_passe"
         android:inputType="textPassword"
         android:textColorHint="@color/colorWhite"
+        android:textColor="@color/colorWhite"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mdpdeuxpoints" />
@@ -61,6 +62,7 @@
         android:hint="@string/confirmez_le_mot_de_passe"
         android:inputType="textPassword"
         android:textColorHint="@color/colorWhite"
+        android:textColor="@color/colorWhite"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/remdp" />

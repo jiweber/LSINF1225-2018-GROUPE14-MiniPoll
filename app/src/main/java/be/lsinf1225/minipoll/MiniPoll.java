@@ -51,7 +51,7 @@ public class MiniPoll extends Application {
      *
      * @param resId Id de la ressource (R.string.* ) contenant le message à afficher.
      *
-     * @see MusicPlayerApp#notify
+     * @see MiniPoll#notify
      */
     public static void notifyShort(int resId) {
         notify(resId, Toast.LENGTH_SHORT);
@@ -62,7 +62,7 @@ public class MiniPoll extends Application {
      *
      * @param resId Id de la ressource (R.string.* ) contenant le message à afficher.
      *
-     * @see MusicPlayerApp#notify
+     * @see MiniPoll#notify
      */
     public static void notifyLong(int resId) {
         notify(resId, Toast.LENGTH_LONG);
