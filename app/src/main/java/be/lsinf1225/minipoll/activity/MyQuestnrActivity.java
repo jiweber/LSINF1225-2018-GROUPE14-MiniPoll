@@ -32,10 +32,22 @@ public class MyQuestnrActivity extends AppCompatActivity {
 
         qstnr=findViewById(R.id.listQstrn);
 
+        /*DEBUG*/
+        if (Questnr.getSQLQuestnr().get(0)!=null){
+            Log.i("test1",Questnr.getSQLQuestnr().get(0).toString());
+        } else {Log.i("test1","missing");}
+
+        if (Questnr.getTtitles().get(0)!=null){
+            Log.i("test2",Questnr.getTtitles().get(0));
+        } else {Log.i("test2","missing");}
+
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1);
+                android.R.layout.simple_list_item_1,u_qstnr);
 
         qstnr.setAdapter(adapter);
 
     }
+
+
 }

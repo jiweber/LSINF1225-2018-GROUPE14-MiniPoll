@@ -35,15 +35,16 @@ public class Questnr {
         return AuteurQstnr;
     }
 
-    private static ArrayList<Questnr> getSQLQuestnr(){
+    public static ArrayList<Questnr> getSQLQuestnr(){
 
         ArrayList<Questnr> questnr = new ArrayList<Questnr>();
-        String mail= MiniPoll.getUserMail();
+        //String mail= MiniPoll.getUserMail();
+        String mail="LDV@uclouvain.be";
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
 
         String sql = "SELECT Q.IDquestionnaire, Q.Titre, Q.Auteur" +
-                "FROM Questionnaire Q, Participation_questionnaire PQ" +
-                "WHERE Q.IDquestionnaire=PQ.IDquestionnaire and PQ.mail='"+mail+"'"+";";
+                " FROM Questionnaire Q, Participation_questionnaire PQ" +
+                " WHERE Q.IDquestionnaire=PQ.IDquestionnaire and PQ.mail='"+mail+"'"+";";
 
         Cursor c = db.rawQuery(sql,null);
         c.moveToFirst();
@@ -63,10 +64,15 @@ public class Questnr {
     public static List<String> getTtitles(){
         List<String> titles = new ArrayList<String>();
         ArrayList<Questnr> qst = Questnr.getSQLQuestnr();
-        for (int i=0;i<qst.size();i++){
+        for (int i=0;i < qst.size();i++){
             titles.add(qst.get(i).getTitreQstnr());
         }
         return  titles;
+    }
+
+    public String toString(){
+        String resume = Integer.toString(IDQstnr) + " " + TitreQstnr + " " + AuteurQstnr;
+        return resume;
     }
 
 }

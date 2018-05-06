@@ -57,9 +57,9 @@ INSERT INTO Question (IDquestion, IDquestionnaire, Enoncé) VALUES (5, '1', 'Bat
 
 -- Table: Questionnaire
 DROP TABLE IF EXISTS Questionnaire;
-CREATE TABLE Questionnaire (IDquestionnaire INTEGER NOT NULL DEFAULT 1 PRIMARY KEY AUTOINCREMENT UNIQUE, Titre TEXT NOT NULL, "Auteur " TEXT NOT NULL REFERENCES Utilisateur (Mail) ON DELETE CASCADE ON UPDATE CASCADE MATCH SIMPLE);
-INSERT INTO Questionnaire (IDquestionnaire, Titre, "Auteur ") VALUES (1, 'Histoire', 'harry.smith@mymail.com');
-INSERT INTO Questionnaire (IDquestionnaire, Titre, "Auteur ") VALUES (2, 'Maths', 'harry.smith@mymail.com');
+CREATE TABLE Questionnaire (IDquestionnaire INTEGER NOT NULL DEFAULT 1 PRIMARY KEY AUTOINCREMENT UNIQUE, Titre TEXT NOT NULL, Auteur TEXT NOT NULL REFERENCES Utilisateur (Mail) ON DELETE CASCADE ON UPDATE CASCADE MATCH SIMPLE);
+INSERT INTO Questionnaire (IDquestionnaire, Titre, Auteur) VALUES (1, 'Histoire', 'harry.smith@mymail.com');
+INSERT INTO Questionnaire (IDquestionnaire, Titre, Auteur) VALUES (2, 'Maths', 'harry.smith@mymail.com');
 
 -- Table: Relation
 DROP TABLE IF EXISTS Relation;
