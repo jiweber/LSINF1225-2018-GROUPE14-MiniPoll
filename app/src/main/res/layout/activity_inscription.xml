@@ -19,12 +19,12 @@
             <TextView
                 android:id="@+id/creation"
                 android:layout_width="match_parent"
-                android:layout_height="64dp"
+                android:layout_height="wrap_content"
                 android:text="@string/creation_d_un_compte"
-                android:textSize="40sp"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textColor="@color/colorWhite"
+                android:textSize="40sp"
                 tools:layout_editor_absoluteX="146dp"
                 tools:layout_editor_absoluteY="16dp" />
 
