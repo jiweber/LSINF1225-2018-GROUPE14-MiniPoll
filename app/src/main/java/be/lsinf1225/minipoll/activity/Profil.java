@@ -1,5 +1,6 @@
 package be.lsinf1225.minipoll.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -40,6 +41,7 @@ public class Profil extends AppCompatActivity {
     Button mod_logout;
     String imagepath;
     Boolean modif;
+    Activity mod;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +94,8 @@ public class Profil extends AppCompatActivity {
                 startActivityForResult(photoPickerIntent, 1);
             }
         });
+
+        mod = this;
     }
 
     View.OnClickListener logout = new View.OnClickListener() {
@@ -108,10 +112,10 @@ public class Profil extends AppCompatActivity {
     View.OnClickListener vali = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            String newMail = et_mod_mail.getText().toString();
-            String newName = et_mod_name.getText().toString();
-            String newPrename = et_mod_prename.getText().toString();
-            String newPassword = et_mod_pass.getText().toString();
+            final String newMail = et_mod_mail.getText().toString();
+            final String newName = et_mod_name.getText().toString();
+            final String newPrename = et_mod_prename.getText().toString();
+            final String newPassword = et_mod_pass.getText().toString();
 
             if(newMail.equals(""))
             {
@@ -160,23 +164,67 @@ public class Profil extends AppCompatActivity {
                         MiniPoll.notifyShort(R.string.maildejautilise);
                     }
                     else {
+                    final VerificationMDP verif = new VerificationMDP(mod);
+                    setFontBut(verif.getCancel());
+                    setFontBut(verif.getValidate());
+                    setFontEdTxt(verif.getEt_password());
+                    setFontTxt(verif.getEnnonce());
+                    setFontTxt(verif.getTitle());
                         if(newPassword.equals("")) {
-                            //TODO : Lancer la confirmation par le mot de passe
-                            String SQLW = "UPDATE Utilisateur SET Mail = ?, Nom = ?, Prénom = ?, Photo = ? WHERE Mail = ?;";
-                            MySQLiteHelper.get().getWritableDatabase().execSQL(SQLW,new Object[]{newMail,newName,newPrename,imagepath,MiniPoll.getConnected_user().getMail()});
-                            MiniPoll.setConnected_user(new User(newMail,MiniPoll.getConnected_user().getMdp(),newPrename,newName,imagepath));
+                            verif.getValidate().setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    if(MiniPoll.getConnected_user().getMdp().equals(verif.getEt_password().getText().toString())) {
+                                        String SQLW = "UPDATE Utilisateur SET Mail = ?, Nom = ?, Prénom = ?, Photo = ? WHERE Mail = ?;";
+                                        MySQLiteHelper.get().getWritableDatabase().execSQL(SQLW, new Object[]{newMail, newName, newPrename, imagepath, MiniPoll.getConnected_user().getMail()});
+                                        MiniPoll.setConnected_user(new User(newMail, MiniPoll.getConnected_user().getMdp(), newPrename, newName, imagepath));
+                                        Intent menu = new Intent(getApplicationContext(),MenuPrincipalActivity.class);
+                                        startActivity(menu);
+                                        MiniPoll.notifyLong(R.string.modireussie);
+                                        finish();
+                                        verif.dismiss();
+                                    }
+                                    else
+                                    {
+                                        MiniPoll.notifyShort(R.string.mdpincorr);
+                                        verif.dismiss();
+                                    }
+                                }
+                            });
+
                         }
                         else
                         {
-                            //TODO : Lancer la confirmation par l'ancien mot de passe
-                            String SQLW = "UPDATE Utilisateur SET Mail = ?, Nom = ?, Prénom = ?, \"Mot de passe\" = ?, Photo = ? WHERE Mail = ?;";
-                            MySQLiteHelper.get().getWritableDatabase().execSQL(SQLW,new Object[]{newMail,newName,newPrename,newPassword,imagepath,MiniPoll.getConnected_user().getMail()});
-                            MiniPoll.setConnected_user(new User(newMail,newPassword,newPrename,newName,imagepath));
+                            verif.setEnnonce("Veuillez entrer votre ancien mot de passe afin de confirmer les modifications");
+                            verif.getValidate().setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    if(MiniPoll.getConnected_user().getMdp().equals(verif.getEt_password().getText().toString())) {
+                                        String SQLW = "UPDATE Utilisateur SET Mail = ?, Nom = ?, Prénom = ?, \"Mot de passe\" = ?, Photo = ? WHERE Mail = ?;";
+                                        MySQLiteHelper.get().getWritableDatabase().execSQL(SQLW,new Object[]{newMail,newName,newPrename,newPassword,imagepath,MiniPoll.getConnected_user().getMail()});
+                                        MiniPoll.setConnected_user(new User(newMail,newPassword,newPrename,newName,imagepath));
+                                        Intent menu = new Intent(getApplicationContext(),MenuPrincipalActivity.class);
+                                        startActivity(menu);
+                                        MiniPoll.notifyLong(R.string.modireussie);
+                                        finish();
+                                        verif.dismiss();
+                                    }
+                                    else
+                                    {
+                                        MiniPoll.notifyShort(R.string.mdpincorr);
+                                        verif.dismiss();
+                                    }
+                                }
+                            });
                         }
-                    Intent menu = new Intent(getApplicationContext(),MenuPrincipalActivity.class);
-                    startActivity(menu);
-                    MiniPoll.notifyLong(R.string.modireussie);
-                    finish();
+                        verif.getCancel().setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                verif.dismiss();
+                            }
+                        });
+
+                        verif.build();
                     }
                 }
 

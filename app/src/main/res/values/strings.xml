@@ -39,7 +39,7 @@
     <string name="confirmation">Confirmation :</string>
     <string name="maildejautilise">Cet adresse e-mail est déjà utilisée</string>
     <string name="motsdepassesdiff">Les mots de passe ne correspondent pas</string>
-    <string name="choisirdonnees">Veuillez remplir les donées et choisir une photo de profil</string>
+    <string name="choisirdonnees">Veuillez remplir tous les champs</string>
     <string name="Profilcree">Profil créé avec succès</string>
     <string name="modification_du_profil">Modification du profil</string>
     <string name="photo_de_profil">Photo de profil :</string>
@@ -57,5 +57,6 @@
     <string name="prenomentrevide">Le prénom entré est vide</string>
     <string name="modireussie">Modification réussie</string>
     <string name="veuillezremplir">Veuillez remplir tous les champs</string>
+    <string name="mdpincorr">Mot de passe saisi incorrect</string>
 
 </resources>
