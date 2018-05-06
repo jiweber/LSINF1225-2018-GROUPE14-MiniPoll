@@ -12,9 +12,6 @@ import be.lsinf1225.minipoll.MySQLiteHelper;
 
 public class Sondage implements Serializable{
 
-    public static final String DB_TABLE_USER = "Utilisateur";
-    public static final String DB_TABLE_SONDAGE = "Sondage";
-
     private int id;
     private String title;
     private String creator;
@@ -78,8 +75,8 @@ public class Sondage implements Serializable{
         String mail = MiniPoll.getUserMail();
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
 
-        String sqlID = "select IDsondage, Intitulé  from Sondage where Mail_Auteur =" + mail +";";
-        Cursor c = db.rawQuery(sqlID, null);
+        String sqlID = "SELECT IDsondage, Intitulé  FROM Sondage WHERE Mail_Auteur = ?;";
+        Cursor c = db.rawQuery(sqlID, new String[]{mail});
         c.moveToFirst();
         while (!c.isAfterLast()){
             int idSondage = c.getInt(0);
@@ -95,7 +92,7 @@ public class Sondage implements Serializable{
     /*
     public static Sondage getSondage(int id){
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
-        String sql = "select Intitulé, Mail_Auteur from Sondage S where S.IDsondage =" + id + ";";
+        String sql = "SELECT Intitulé, Mail_Auteur FROM Sondage S WHERE S.IDsondage ='" + id + "';";
         Cursor c = db.rawQuery(sql, null);
         c.moveToFirst();
 
@@ -107,8 +104,8 @@ public class Sondage implements Serializable{
     */
 
     private static String[] getSQLParticipants(int id, SQLiteDatabase db){
-        String sqlPart = "select A.Mail_participant from Participation_sondage A, Sondage S where A.IDsondage =" + id +";";
-        Cursor cPart = db.rawQuery(sqlPart, null);
+        String sqlPart = "SELECT A.Mail_participant FROM Participation_sondage A, Sondage S WHERE A.IDsondage = ?;";
+        Cursor cPart = db.rawQuery(sqlPart, new String[]{""+id});
         ArrayList<String> participants = new ArrayList<String>();
         cPart.moveToFirst();
         while(!cPart.isAfterLast()){
@@ -122,8 +119,8 @@ public class Sondage implements Serializable{
     }
 
     private static String[] getSQLPropositions(int id, SQLiteDatabase db){
-        String sqlProp = "select O.Ennoncé_de_la_proposition from Proposition_sondage O, Sondage S where O.IDsondage =" + id +";";
-        Cursor cProp = db.rawQuery(sqlProp, null);
+        String sqlProp = "SELECT O.Ennoncé_de_la_proposition FROM Proposition_sondage O, Sondage S WHERE O.IDsondage = ?;";
+        Cursor cProp = db.rawQuery(sqlProp, new String[]{""+id});
         ArrayList<String> propositions = new ArrayList<String>();
         cProp.moveToFirst();
         while(!cProp.isAfterLast()){
