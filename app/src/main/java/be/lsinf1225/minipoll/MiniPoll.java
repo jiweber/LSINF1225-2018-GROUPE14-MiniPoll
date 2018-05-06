@@ -1,7 +1,12 @@
 package be.lsinf1225.minipoll;
 
 import android.app.Application;
+import android.graphics.Typeface;
+import android.util.Log;
 import android.view.Gravity;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**

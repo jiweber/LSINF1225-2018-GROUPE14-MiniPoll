@@ -1,5 +1,6 @@
 package be.lsinf1225.minipoll.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,7 @@ public class MenuPrincipalActivity extends AppCompatActivity {
     Button btn_aide;
     ImageButton btn_friends;
     ImageButton btn_profil;
+    public static Activity menu_activity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +43,7 @@ public class MenuPrincipalActivity extends AppCompatActivity {
         btn_quest.setOnClickListener(btn_quest_ls);
         btn_new.setOnClickListener(btn_new_ls);
 
-
+        menu_activity = this;
 
     }
 
@@ -49,6 +51,8 @@ public class MenuPrincipalActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             Log.i("DEBUG","Bouton profil");
+            Intent acti_mod_pro = new Intent(getApplicationContext(), Profil.class);
+            startActivity(acti_mod_pro);
         }
     };
 

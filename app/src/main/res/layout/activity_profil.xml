@@ -8,7 +8,126 @@
     tools:context="be.lsinf1225.minipoll.activity.Profil">
 
 
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="0dp">
 
+            <TextView
+                android:id="@+id/title_mod_pro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/modification_du_profil"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/colorWhite" />
 
+            <TextView
+                android:id="@+id/tv_mod_pic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/photo_de_profil"
+                android:textColor="@color/colorWhite" />
+
+            <ImageView
+                android:id="@+id/pic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+            <TextView
+                android:id="@+id/tv_mod_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/nom"
+                android:textColor="@color/colorWhite" />
+
+            <EditText
+                android:id="@+id/et_mod_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/entrez_votre_nouveau_nom"
+                android:inputType="textPersonName"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/colorWhite" />
+
+            <TextView
+                android:id="@+id/tv_mod_prename"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/pr_nom"
+                android:textColor="@color/colorWhite" />
+
+            <EditText
+                android:id="@+id/et_mod_prename"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/entrez_votre_nouveau_pr_nom"
+                android:inputType="textPersonName"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/colorWhite" />
+
+            <TextView
+                android:id="@+id/tv_mod_mail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/mail_2p"
+                android:textColor="@color/colorWhite" />
+
+            <EditText
+                android:id="@+id/et_mod_mail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/entrez_votre_nouveau_mail"
+                android:inputType="textPersonName"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/colorWhite" />
+
+            <TextView
+                android:id="@+id/tv_mod_pass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/pass_2p"
+                android:textColor="@color/colorWhite" />
+
+            <EditText
+                android:id="@+id/et_mod_pass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/colorWhite" />
+
+            <Button
+                android:id="@+id/mod_validate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/modifier_les_changements" />
+
+            <Button
+                android:id="@+id/mod_logout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/se_d_connecter" />
+        </LinearLayout>
+
+    </ScrollView>
 </android.support.constraint.ConstraintLayout>

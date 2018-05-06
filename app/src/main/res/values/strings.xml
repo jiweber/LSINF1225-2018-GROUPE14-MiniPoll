@@ -41,5 +41,16 @@
     <string name="motsdepassesdiff">Les mots de passe ne correspondent pas</string>
     <string name="choisirdonnees">Veuillez remplir les donées et choisir une photo de profil</string>
     <string name="Profilcree">Profil créé avec succès</string>
+    <string name="modification_du_profil">Modification du profil</string>
+    <string name="photo_de_profil">Photo de profil :</string>
+    <string name="nom">Nom :</string>
+    <string name="entrez_votre_nouveau_nom">Entrez votre nouveau nom</string>
+    <string name="pr_nom">Prénom</string>
+    <string name="entrez_votre_nouveau_pr_nom">Entrez votre nouveau prénom</string>
+    <string name="mail_2p">Mail :</string>
+    <string name="entrez_votre_nouveau_mail">Entrez votre nouveau mail</string>
+    <string name="pass_2p">Mot de passe</string>
+    <string name="modifier_les_changements">Modifier les changements</string>
+    <string name="se_d_connecter">Se déconnecter</string>
 
 </resources>
