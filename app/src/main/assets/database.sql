@@ -1,4 +1,4 @@
---
+﻿--
 -- File generated with SQLiteStudio v3.1.1 on Fri May 4 09:23:02 2018
 --
 -- Text encoding used: UTF-8
@@ -91,6 +91,7 @@ INSERT INTO Utilisateur (Mail, Nom, Prénom, "Mot de passe", Photo, "Meilleur am
 INSERT INTO Utilisateur (Mail, Nom, Prénom, "Mot de passe", Photo, "Meilleur ami") VALUES ('adb@uclouvain.be', 'de Biolley', 'Antoine', 321, 'default.jpeg', NULL);
 INSERT INTO Utilisateur (Mail, Nom, Prénom, "Mot de passe", Photo, "Meilleur ami") VALUES ('jw@uclouvain.be', 'Weber', 'Jimmy', 596, 'default.jpeg''', NULL);
 INSERT INTO Utilisateur (Mail, Nom, Prénom, "Mot de passe", Photo, "Meilleur ami") VALUES ('gb@uclouvain.be', 'Bellon', 'Guillaume', '0234', 'default.jpeg', NULL);
+INSERT INTO Utilisateur (Mail, Nom, PrÃ©nom, "Mot de passe", Photo, "Meilleur ami") VALUES ('a', 'Nom', 'Prénom', 'a', 'default.jpeg', NULL);
 
 COMMIT TRANSACTION;
 PRAGMA foreign_keys = on;

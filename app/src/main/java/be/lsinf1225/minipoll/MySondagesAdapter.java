@@ -57,9 +57,6 @@ public class MySondagesAdapter extends ArrayAdapter<Sondage> {
         return convertView;
     }
 
-    public Sondage getItem(int position){
-        return getItem(position);
-    }
 
     private class SondageViewHolder{
         public TextView creator;
