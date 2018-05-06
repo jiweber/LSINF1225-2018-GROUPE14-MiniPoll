@@ -79,8 +79,8 @@ CREATE TABLE Réponse_questionnnaire (ID_question REFERENCES Question (IDquestio
 -- Table: Sondage
 DROP TABLE IF EXISTS Sondage;
 CREATE TABLE Sondage (IDsondage INTEGER NOT NULL DEFAULT 1 PRIMARY KEY AUTOINCREMENT UNIQUE, Nombre_choix INTEGER NOT NULL DEFAULT 2, Mail_auteur TEXT NOT NULL, Intitulé TEXT NOT NULL, FOREIGN KEY (Mail_auteur) REFERENCES Utilisateur (Mail));
-INSERT INTO Sondage (IDsondage, Nombre_choix, Mail_auteur, Intitulé) VALUES (1, 2, 'arthur98@gmail.com', 'Plus belle capitale');
-INSERT INTO Sondage (IDsondage, Nombre_choix, Mail_auteur, Intitulé) VALUES (2, 2, 'arthur98@gmail.com', 'Nom de mon prochain fils');
+INSERT INTO Sondage (IDsondage, Nombre_choix, Mail_auteur, Intitulé) VALUES (1, 2, 'a', 'Plus belle capitale');
+INSERT INTO Sondage (IDsondage, Nombre_choix, Mail_auteur, Intitulé) VALUES (2, 2, 'a', 'Nom de mon prochain fils');
 
 -- Table: Utilisateur
 DROP TABLE IF EXISTS Utilisateur;
@@ -91,7 +91,7 @@ INSERT INTO Utilisateur (Mail, Nom, Prénom, "Mot de passe", Photo, "Meilleur am
 INSERT INTO Utilisateur (Mail, Nom, Prénom, "Mot de passe", Photo, "Meilleur ami") VALUES ('adb@uclouvain.be', 'de Biolley', 'Antoine', 321, 'default.jpeg', NULL);
 INSERT INTO Utilisateur (Mail, Nom, Prénom, "Mot de passe", Photo, "Meilleur ami") VALUES ('jw@uclouvain.be', 'Weber', 'Jimmy', 596, 'default.jpeg''', NULL);
 INSERT INTO Utilisateur (Mail, Nom, Prénom, "Mot de passe", Photo, "Meilleur ami") VALUES ('gb@uclouvain.be', 'Bellon', 'Guillaume', '0234', 'default.jpeg', NULL);
-INSERT INTO Utilisateur (Mail, Nom, PrÃ©nom, "Mot de passe", Photo, "Meilleur ami") VALUES ('a', 'Nom', 'Prénom', 'a', 'default.jpeg', NULL);
+INSERT INTO Utilisateur (Mail, Nom, Prénom, "Mot de passe", Photo, "Meilleur ami") VALUES ('a', 'Nom', 'Prénom', 'a', 'default.jpeg', NULL);
 
 COMMIT TRANSACTION;
 PRAGMA foreign_keys = on;

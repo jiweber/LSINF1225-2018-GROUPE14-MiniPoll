@@ -19,6 +19,7 @@ import org.w3c.dom.Text;
 import be.lsinf1225.minipoll.MiniPoll;
 import be.lsinf1225.minipoll.MySQLiteHelper;
 import be.lsinf1225.minipoll.R;
+import be.lsinf1225.minipoll.model.User;
 
 public class ConnexionActivity extends AppCompatActivity {
 
@@ -75,7 +76,7 @@ public class ConnexionActivity extends AppCompatActivity {
             else if((c.getString(0)).equals(pass))
             {
                 c.close();
-                MiniPoll.setUserMail(mail);
+                User.setUserMail(mail);
                 Intent connected = new Intent(getApplicationContext(), MenuPrincipalActivity.class);
                 startActivity(connected);
                 finish();
@@ -91,6 +92,7 @@ public class ConnexionActivity extends AppCompatActivity {
 
         }
     };
+
 
     View.OnClickListener insc = new View.OnClickListener() {
         @Override

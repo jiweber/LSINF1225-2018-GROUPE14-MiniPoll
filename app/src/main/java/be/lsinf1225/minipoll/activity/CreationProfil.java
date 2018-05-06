@@ -22,6 +22,7 @@ import java.io.IOException;
 import be.lsinf1225.minipoll.MiniPoll;
 import be.lsinf1225.minipoll.MySQLiteHelper;
 import be.lsinf1225.minipoll.R;
+import be.lsinf1225.minipoll.model.User;
 
 public class CreationProfil extends AppCompatActivity {
 
@@ -68,30 +69,31 @@ public class CreationProfil extends AppCompatActivity {
     }
 
 
-    View.OnClickListener crea = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            String Name = et_name.getText().toString();
-            String Prename = et_prename.getText().toString();
-            if(Name.equals("")|Prename.equals("")|PP == null)
-            {
-                MiniPoll.notifyShort(R.string.choisirdonnees);
-            }
-            else
-            {
+    View.OnClickListener crea;
 
-                String SQL = "INSERT INTO Utilisateur (Mail, Nom, Prénom, \"Mot de passe\", Photo) VALUES (?,?,?,?,?);";
-                MySQLiteHelper.get().getWritableDatabase().execSQL(SQL,new Object[]{Mail, Name, Prename, Mdp, imagepath});
-                MiniPoll.notifyLong(R.string.Profilcree);
-                Intent menu = new Intent(getApplicationContext(),MenuPrincipalActivity.class);
-                MiniPoll.setUserMail(Mail);
-                startActivity(menu);
-                ConnexionActivity.connexion.finish();
-                Inscription.inscription.finish();
-                finish();
+    {
+        crea = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String Name = et_name.getText().toString();
+                String Prename = et_prename.getText().toString();
+                if (Name.equals("") | Prename.equals("") | PP == null) {
+                    MiniPoll.notifyShort(R.string.choisirdonnees);
+                } else {
+
+                    String SQL = "INSERT INTO Utilisateur (Mail, Nom, Prénom, \"Mot de passe\", Photo) VALUES (?,?,?,?,?);";
+                    MySQLiteHelper.get().getWritableDatabase().execSQL(SQL, new Object[]{Mail, Name, Prename, Mdp, imagepath});
+                    MiniPoll.notifyLong(R.string.Profilcree);
+                    Intent menu = new Intent(getApplicationContext(), MenuPrincipalActivity.class);
+                    User.setUserMail(Mail);
+                    startActivity(menu);
+                    ConnexionActivity.connexion.finish();
+                    Inscription.inscription.finish();
+                    finish();
+                }
             }
-        }
-    };
+        };
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
