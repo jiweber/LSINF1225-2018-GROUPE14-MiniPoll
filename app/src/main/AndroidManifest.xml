@@ -32,6 +32,10 @@
         <activity android:name=".activity.Profil" />
         <activity android:name=".activity.GestionAmis" />
         <activity android:name=".activity.MySondagesActivity" />
+        <activity android:name=".activity.ChercherAmisActivity" />
+        <activity android:name=".activity.DemandeAmisActivity" />
+        <activity android:name=".activity.ListeAmisActivity" />
+
         <activity
             android:name=".activity.MyQuestnrActivity"
             android:label="@string/myquestnr" />

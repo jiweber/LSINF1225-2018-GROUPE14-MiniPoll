@@ -15,8 +15,8 @@ import be.lsinf1225.minipoll.R;
 public class GestionAmis extends AppCompatActivity {
 
     Button liste;
-    Button chercher;
     Button demandes;
+    Button chercher;
     TextView titre;
 
     @Override
@@ -31,6 +31,31 @@ public class GestionAmis extends AppCompatActivity {
         setFontBut(chercher);
         setFontBut(demandes);
         setFontTxt(titre);
+        Log.i("DEBUG_J", "gestionamis");
+
+        liste.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               Intent intent = new Intent(getApplicationContext(), ListeAmisActivity.class);
+               startActivity(intent);
+            }
+        });
+
+        demandes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), DemandeAmisActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        chercher.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ChercherAmisActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
