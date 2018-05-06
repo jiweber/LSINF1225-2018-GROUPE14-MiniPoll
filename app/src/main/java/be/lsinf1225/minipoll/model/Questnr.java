@@ -4,6 +4,7 @@ package be.lsinf1225.minipoll.model;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.util.SparseArray;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +18,15 @@ public class Questnr {
     private String TitreQstnr;
     private String AuteurQstnr;
 
-    public Questnr(int IDquestnr, String titre, String auteur) {
+    private String u_mail = MiniPoll.getUserMail();
+
+    private static SparseArray<Questnr> questnrSparseArray = new SparseArray<>();
+
+    private Questnr(int IDquestnr, String titre, String auteur) {
         this.IDQstnr = IDquestnr;
         this.TitreQstnr = titre;
         this.AuteurQstnr = auteur;
+        Questnr.questnrSparseArray.put(IDquestnr,this);
     }
 
     public int getIDQstnr() {
@@ -35,9 +41,9 @@ public class Questnr {
         return AuteurQstnr;
     }
 
-    public static ArrayList<Questnr> getSQLQuestnr(){
+    private static ArrayList<Questnr> getSQLQuestnr(){
 
-        ArrayList<Questnr> questnr = new ArrayList<Questnr>();
+        ArrayList<Questnr> questnrs = new ArrayList<Questnr>();
         //String mail= MiniPoll.getUserMail();
         String mail="LDV@uclouvain.be";
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
@@ -52,13 +58,20 @@ public class Questnr {
             int id = c.getInt(0);
             String titre = c.getString(1);
             String auteur = c.getString(2);
-            questnr.add(new Questnr(id,titre,auteur));
+
+            Questnr questnr = Questnr.questnrSparseArray.get(id);
+            if(questnr==null){
+                questnr = new Questnr(id,titre,auteur);
+            }
+
+            questnrs.add(questnr);
             c.moveToNext();
         }
 
         c.close();
         db.close();
-        return questnr;
+
+        return questnrs;
     }
 
     public static List<String> getTtitles(){
@@ -71,7 +84,7 @@ public class Questnr {
     }
 
     public String toString(){
-        String resume = Integer.toString(IDQstnr) + " " + TitreQstnr + " " + AuteurQstnr;
+        String resume = "Participant: " + u_mail + ";" + Integer.toString(IDQstnr) + " " + TitreQstnr + " " + AuteurQstnr;
         return resume;
     }
 
