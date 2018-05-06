@@ -7,113 +7,130 @@
     android:background="@color/colorPrimary"
     tools:context="be.lsinf1225.minipoll.activity.Inscription">
 
-    <TextView
-        android:id="@+id/Creation"
-        android:layout_width="222dp"
-        android:layout_height="64dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/creation_d_un_compte"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="@color/colorWhite"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/mail_insc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:ems="10"
-        android:hint="@string/entrez_l_adresse_mail"
-        android:inputType="textPersonName"
-        android:textColor="@color/colorWhite"
-        android:textColorHint="@color/colorWhite"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/maildeuxpoints" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-    <EditText
-        android:id="@+id/mdp_insc"
-        android:layout_width="235dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:ems="10"
-        android:hint="@string/entrez_le_mot_de_passe"
-        android:inputType="textPassword"
-        android:textColorHint="@color/colorWhite"
-        android:textColor="@color/colorWhite"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mdpdeuxpoints" />
+            <TextView
+                android:id="@+id/creation"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:text="@string/creation_d_un_compte"
+                android:textSize="40sp"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/colorWhite"
+                tools:layout_editor_absoluteX="146dp"
+                tools:layout_editor_absoluteY="16dp" />
 
-    <EditText
-        android:id="@+id/mdp_re_insc"
-        android:layout_width="235dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:ems="10"
-        android:hint="@string/confirmez_le_mot_de_passe"
-        android:inputType="textPassword"
-        android:textColorHint="@color/colorWhite"
-        android:textColor="@color/colorWhite"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/remdp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-    <Button
-        android:id="@+id/sinscrire"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/s_inscrire"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mdp_re_insc" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-    <TextView
-        android:id="@+id/maildeuxpoints"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="85dp"
-        android:layout_marginTop="31dp"
-        android:text="@string/maildeuxpoints"
-        android:textColor="@color/colorWhite"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Creation"
-        android:layout_marginLeft="85dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-    <TextView
-        android:id="@+id/mdpdeuxpoints"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="81dp"
-        android:layout_marginTop="15dp"
-        android:text="@string/mot_de_passedeuxpoints"
-        android:textColor="@color/colorWhite"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mail_insc"
-        android:layout_marginLeft="81dp" />
+            <TextView
+                android:id="@+id/maildeuxpoints"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/maildeuxpoints"
+                android:textColor="@color/colorWhite"
+                tools:layout_editor_absoluteX="85dp"
+                tools:layout_editor_absoluteY="111dp" />
 
-    <TextView
-        android:id="@+id/remdp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="81dp"
-        android:layout_marginTop="37dp"
-        android:text="@string/confirmation"
-        android:textColor="@color/colorWhite"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mdp_insc"
-        android:layout_marginLeft="81dp" />
+            <EditText
+                android:id="@+id/mail_insc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/entrez_l_adresse_mail"
+                android:inputType="textPersonName"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/colorWhite"
+                tools:layout_editor_absoluteX="153dp"
+                tools:layout_editor_absoluteY="130dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/mdpdeuxpoints"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/mot_de_passedeuxpoints"
+                android:textColor="@color/colorWhite"
+                tools:layout_editor_absoluteX="81dp"
+                tools:layout_editor_absoluteY="191dp" />
+
+            <EditText
+                android:id="@+id/mdp_insc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/entrez_le_mot_de_passe"
+                android:inputType="textPassword"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/colorWhite"
+                tools:layout_editor_absoluteX="133dp"
+                tools:layout_editor_absoluteY="209dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/remdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/confirmation"
+                android:textColor="@color/colorWhite"
+                tools:layout_editor_absoluteX="81dp"
+                tools:layout_editor_absoluteY="292dp" />
+
+            <EditText
+                android:id="@+id/mdp_re_insc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/confirmez_le_mot_de_passe"
+                android:inputType="textPassword"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/colorWhite"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="311dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/sinscrire"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/s_inscrire"
+                tools:layout_editor_absoluteX="281dp"
+                tools:layout_editor_absoluteY="447dp" />
+
+        </LinearLayout>
+    </ScrollView>
 </android.support.constraint.ConstraintLayout>

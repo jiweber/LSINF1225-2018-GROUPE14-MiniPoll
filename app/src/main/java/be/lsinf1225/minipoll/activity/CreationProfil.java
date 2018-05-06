@@ -36,6 +36,7 @@ public class CreationProfil extends AppCompatActivity {
     EditText et_prename;
     Button creation;
     String imagepath;
+    Boolean photo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +65,7 @@ public class CreationProfil extends AppCompatActivity {
         setFontEdTxt(et_prename);
         creation = findViewById(R.id.validate_cre_pro);
         setFontBut(creation);
+        photo =false;
 
         creation.setOnClickListener(crea);
     }
@@ -77,7 +79,7 @@ public class CreationProfil extends AppCompatActivity {
             public void onClick(View view) {
                 String Name = et_name.getText().toString();
                 String Prename = et_prename.getText().toString();
-                if (Name.equals("") | Prename.equals("") | PP == null) {
+                if (Name.equals("") | Prename.equals("") | !photo) {
                     MiniPoll.notifyShort(R.string.choisirdonnees);
                 } else {
 
@@ -103,6 +105,7 @@ public class CreationProfil extends AppCompatActivity {
         try {
             Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
             PP.setImageBitmap(bitmap);
+            photo = true;
         } catch (IOException e) {
             e.printStackTrace();
         }
