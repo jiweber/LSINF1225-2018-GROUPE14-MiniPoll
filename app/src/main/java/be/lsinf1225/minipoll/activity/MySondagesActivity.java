@@ -9,13 +9,16 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import be.lsinf1225.minipoll.MiniPoll;
 import be.lsinf1225.minipoll.R;
 import be.lsinf1225.minipoll.model.Sondage;
 import be.lsinf1225.minipoll.MySondagesAdapter;
+import be.lsinf1225.minipoll.model.User;
 
 public class MySondagesActivity extends AppCompatActivity {
 
     private ListView listview;
+    private ArrayList<Sondage> sondages;
 
 
     @Override
@@ -23,7 +26,9 @@ public class MySondagesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_sondages);
         listview = (ListView) findViewById(R.id.lv_my_sondages);
-        MySondagesAdapter adapter = new MySondagesAdapter(MySondagesActivity.this, getSondages("user"));
+        sondages = Sondage.getCreatorSondages();
+        sondages.addAll(getSondages("user"));
+        MySondagesAdapter adapter = new MySondagesAdapter(MySondagesActivity.this, sondages);
         listview.setAdapter(adapter);
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -40,7 +45,7 @@ public class MySondagesActivity extends AppCompatActivity {
 
     private ArrayList<Sondage> getSondages(String user){
         ArrayList<Sondage> sondages = new ArrayList<Sondage>();
-        sondages.add(new Sondage(1,"Vacances été", "Louis", new String[]{"Kim","Mens"}, new String[]{"Barcelone","Bamako","LLN le sang"}));
+        sondages.add(new Sondage(1,"Nombre de sondages de db : "+sondages.size(), User.getUserMail(), new String[]{"Kim","Mens"}, new String[]{"Barcelone","Bamako","LLN le sang"}));
         sondages.add(new Sondage(2,"Cinéma entre coupains", "Esteban", new String[]{"Patrick","Sebastien"}, new String[]{"Retour vers le futur","LSINF1225 le film","Osef du ciné on casse ta maison"}));
         sondages.add(new Sondage(3,"Grosse teuf chez qui ?", "Patrick", new String[]{"Patrick","Sebastien"}, new String[]{"Retour vers le futur","LSINF1225 le film","Osef du ciné on casse ta maison"}));
         sondages.add(new Sondage(4,"Top 1000 meilleurs films", "Sebastien", new String[]{"Patrick","Sebastien"}, new String[]{"Retour vers le futur","LSINF1225 le film","Osef du ciné on casse ta maison"}));

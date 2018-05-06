@@ -1,6 +1,7 @@
 package be.lsinf1225.minipoll.model;
 
 public class User {
+    private static String userMail;
     private String mail;
     private String mdp;
     private String prenom;
@@ -53,6 +54,14 @@ public class User {
 
     public void setBestFriend(String bestFriend) {
         this.bestFriend = bestFriend;
+    }
+
+
+    public static String getUserMail() {
+        return userMail;
+    }
+    public static void setUserMail(String mail) {
+        userMail = mail;
     }
 
 }
