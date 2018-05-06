@@ -9,6 +9,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import be.lsinf1225.minipoll.model.User;
+
 /**
  * Classe générale de l'application.
  * <p>
@@ -27,6 +29,16 @@ import android.widget.Toast;
  */
 
 public class MiniPoll extends Application {
+    public static User connected_user;
+
+    public static User getConnected_user() {
+        return connected_user;
+    }
+
+    public static void setConnected_user(User connected_user1) {
+        connected_user = connected_user1;
+    }
+
 
 
     /**

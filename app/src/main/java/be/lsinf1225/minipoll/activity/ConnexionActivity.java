@@ -64,7 +64,7 @@ public class ConnexionActivity extends AppCompatActivity {
             String mail = et_mail.getText().toString();
             String pass = et_password.getText().toString();
             SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
-            String SQL = "select \"Mot de passe\" FROM Utilisateur WHERE Mail = ?";
+            String SQL = "select \"Mot de passe\", Nom, Prénom, Photo FROM Utilisateur WHERE Mail = ?";
             Cursor c = db.rawQuery(SQL,new String[]{mail});
             c.moveToFirst();
             if(c.isAfterLast())
@@ -75,8 +75,11 @@ public class ConnexionActivity extends AppCompatActivity {
             }
             else if((c.getString(0)).equals(pass))
             {
+                String name = c.getString(1);
+                String prename = c.getString(2);
+                String path = c.getString(3);
                 c.close();
-                User.setUserMail(mail);
+                MiniPoll.setConnected_user(new User(mail,pass,prename,name,path));
                 Intent connected = new Intent(getApplicationContext(), MenuPrincipalActivity.class);
                 startActivity(connected);
                 finish();

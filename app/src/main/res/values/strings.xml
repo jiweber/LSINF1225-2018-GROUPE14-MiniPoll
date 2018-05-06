@@ -52,5 +52,9 @@
     <string name="pass_2p">Mot de passe</string>
     <string name="modifier_les_changements">Modifier les changements</string>
     <string name="se_d_connecter">Se déconnecter</string>
+    <string name="mailentrevide">Le mail entré est vide</string>
+    <string name="nomentrevide">Le nom entré est vide</string>
+    <string name="prenomentrevide">Le prénom entré est vide</string>
+    <string name="modireussie">Modification réussie</string>
 
 </resources>

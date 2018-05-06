@@ -18,7 +18,7 @@ public class Questnr {
     private String TitreQstnr;
     private String AuteurQstnr;
 
-    private String u_mail = MiniPoll.getUserMail();
+    private String u_mail = MiniPoll.getConnected_user().getMail();
 
     private static SparseArray<Questnr> questnrSparseArray = new SparseArray<>();
 

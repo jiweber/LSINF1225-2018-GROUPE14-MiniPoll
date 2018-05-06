@@ -1,5 +1,7 @@
 package be.lsinf1225.minipoll.model;
 
+import android.net.Uri;
+
 public class User {
     private static String userMail;
     private String mail;
@@ -7,13 +9,15 @@ public class User {
     private String prenom;
     private String nom;
     private String bestFriend;
+    private String imagePath;
 
-    public User(String mail, String mdp, String prenom, String nom) {
+    public User(String mail, String mdp, String prenom, String nom, String imagePath) {
         this.mail = mail;
         this.mdp = mdp;
         this.prenom = prenom;
         this.nom = nom;
         this.bestFriend = null;
+        this.imagePath = imagePath;
     }
 
     public String getMail() {
@@ -56,10 +60,18 @@ public class User {
         this.bestFriend = bestFriend;
     }
 
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
 
     public static String getUserMail() {
         return userMail;
     }
+
     public static void setUserMail(String mail) {
         userMail = mail;
     }
