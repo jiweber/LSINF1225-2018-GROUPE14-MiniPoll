@@ -71,6 +71,13 @@ INSERT INTO Relation (Utilisateur1, Utilisateur2, Statut) VALUES ('adb@uclouvain
 INSERT INTO Relation (Utilisateur1, Utilisateur2, Statut) VALUES ('jw@uclouvain.be', 'arthur98@gmail.com', 'Ami');
 INSERT INTO Relation (Utilisateur1, Utilisateur2, Statut) VALUES ('LDV@uclouvain.be', 'arthur98@gmail.com', 'Ami');
 INSERT INTO Relation (Utilisateur1, Utilisateur2, Statut) VALUES ('gb@ucluvain.be', 'LDV@uclouvain.be', 'Ami');
+INSERT INTO Relation (Utilisateur1, Utilisateur2, Statut) VALUES ('gb@ucluvain.be', 'LDV@uclouvain.be', 'Ami');
+INSERT INTO Relation (Utilisateur1, Utilisateur2, Statut) VALUES ('gb@ucluvain.be', 'LDV@uclouvain.be', 'Ami');
+INSERT INTO Relation (Utilisateur1, Utilisateur2, Statut) VALUES ('a', 'LDV@uclouvain.be', 'Ami');
+INSERT INTO Relation (Utilisateur1, Utilisateur2, Statut) VALUES ('a', 'LDV@uclouvain.be', 'Ami');
+INSERT INTO Relation (Utilisateur1, Utilisateur2, Statut) VALUES ('gb@ucluvain.be', 'a', 'Ami');
+INSERT INTO Relation (Utilisateur1, Utilisateur2, Statut) VALUES ('gb@ucluvain.be', 'a', 'Amis');
+
 
 -- Table: Réponse_questionnnaire
 DROP TABLE IF EXISTS Réponse_questionnaire;

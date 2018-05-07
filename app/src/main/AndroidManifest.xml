@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="be.lsinf1225.minipoll">
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".MiniPoll"
@@ -30,14 +31,17 @@
             android:label="Nouveau" />
         <activity android:name=".activity.NewSondageActivity" />
         <activity android:name=".activity.Profil" />
-        <activity android:name=".activity.GestionAmis" />
+        <activity android:name=".activity.GestionAmisActivity" />
         <activity android:name=".activity.MySondagesActivity" />
         <activity
             android:name=".activity.MyQuestnrActivity"
             android:label="@string/myquestnr" />
         <activity android:name=".activity.SondageActivity" />
         <activity android:name=".activity.Inscription" />
-        <activity android:name=".activity.CreationProfil"></activity>
+        <activity android:name=".activity.CreationProfil" />
+        <activity android:name=".activity.ListeAmisActivity" />
+        <activity android:name=".activity.DemandesAmisActivity" />
+        <activity android:name=".activity.ChercherAmisActivity"></activity>
     </application>
 
 </manifest>

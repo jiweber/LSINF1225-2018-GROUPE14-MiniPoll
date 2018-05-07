@@ -86,7 +86,7 @@ public class MenuPrincipalActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             Log.i("DEBUG","Bouton amis");
-            Intent amis = new Intent(getApplicationContext(),GestionAmis.class);
+            Intent amis = new Intent(getApplicationContext(),GestionAmisActivity.class);
             Log.i("FLAG", "Passé");
             startActivity(amis);
             Log.i("FLAG", "Présent");

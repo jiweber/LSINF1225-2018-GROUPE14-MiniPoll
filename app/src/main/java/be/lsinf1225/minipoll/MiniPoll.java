@@ -94,4 +94,5 @@ public class MiniPoll extends Application {
         super.onCreate();
         context = (MiniPoll) getApplicationContext();
     }
+
 }
