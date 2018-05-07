@@ -84,14 +84,13 @@ public class ChercherAmisActivity extends AppCompatActivity {
 
             }
         });
-    }
+    };
 
     public ArrayList<String> listePasAmis(){
         ArrayList<String> pas_amis = new ArrayList<>();
         String mail = MiniPoll.getConnected_user().getMail();
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
-        String sql = "select R.Ultilisateur1, R.Utilisateur2, Statut FROM Relation R, Utilisateur U WHERE R.Utilisateur1 = ? OR R.Utilisateur2 = ? AND U.;";
-        String sql = "SELECT U.Mail FROM Utilisateur U, Relation R WHERE  (R.Utilisateur1=? AND U.mail  R.Utilisateur2) OR (R.Utilisateur2=?);"
+        String sql = "SELECT U.Mail FROM Utilisateur U, Relation R WHERE  (R.Utilisateur1=?) OR (R.Utilisateur2=?);";
         Cursor cursorRel = db.rawQuery(sql,new String[]{mail, mail, });
         cursorRel.moveToFirst();
         while(!cursorRel.isAfterLast()){
@@ -99,7 +98,7 @@ public class ChercherAmisActivity extends AppCompatActivity {
             cursorRel.moveToNext();
         }
         cursorRel.close();
-
+        return pas_amis;
 
     }
 
@@ -130,11 +129,11 @@ public class ChercherAmisActivity extends AppCompatActivity {
         cursorAll.moveToFirst();
 
         while( cursorAll.isAfterLast()) {
-            if (cursorAll.getString(0) == user) {
+            if (cursorAll.getString(0) == mail) {
                 String PrenomNom = PrenomNomFromMail(cursorAll.getString(1));
                 liste_All.add(PrenomNom);
             }
-            else if (cursorAll.getString(1) == user) {
+            else if (cursorAll.getString(1) == mail) {
                 String PrenomNom = PrenomNomFromMail(cursorAll.getString(0));
                 liste_All.add(PrenomNom);
             }
@@ -144,7 +143,7 @@ public class ChercherAmisActivity extends AppCompatActivity {
 
         liste_All.removeAll(liste_des_relations);
         ArrayList<String> User= new ArrayList<String>();
-        User.add(user);
+        User.add(mail);
         liste_All.removeAll(User);
 
         return liste_All;
