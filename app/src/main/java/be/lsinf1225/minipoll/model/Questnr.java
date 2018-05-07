@@ -19,8 +19,6 @@ public class Questnr {
     private String AuteurQstnr;
     private int ScoreQstnr;
 
-    private String u_mail = MiniPoll.getConnected_user().getMail();
-
     private static SparseArray<Questnr> questnrSparseArray = new SparseArray<>();
 
     private Questnr(int IDquestnr, String titre, String auteur,int score) {
@@ -48,32 +46,45 @@ public class Questnr {
     public static ArrayList<Questnr> getSQLQuestnr(){
 
         ArrayList<Questnr> questnrs = new ArrayList<Questnr>();
-        //String mail= MiniPoll.getUserMail();
-        String mail="LDV@uclouvain.be";
+
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
+
+        String mail = MiniPoll.getConnected_user().getMail();
 
         String sql = "SELECT Q.IDquestionnaire, Q.Titre, Q.Auteur, PQ.Score" +
                 " FROM Questionnaire Q, Participation_questionnaire PQ" +
                 " WHERE Q.IDquestionnaire=PQ.IDquestionnaire and PQ.mail='"+mail+"'"+";";
 
-        Cursor c = db.rawQuery(sql,null);
-        c.moveToFirst();
-        while (!c.isAfterLast()){
-            int id = c.getInt(0);
-            String titre = c.getString(1);
-            String auteur = c.getString(2);
-            int score = c.getInt(3);
+        String sqlCount = "SELECT count(*) FROM (SELECT Q.IDquestionnaire, Q.Titre, Q.Auteur, PQ.Score" +
+                " FROM Questionnaire Q, Participation_questionnaire PQ" +
+                " WHERE Q.IDquestionnaire=PQ.IDquestionnaire and PQ.mail='"+mail+"');";
+        Cursor count = db.rawQuery(sqlCount,null);
+        count.moveToFirst();
 
-            Questnr questnr = Questnr.questnrSparseArray.get(id);
-            if(questnr==null){
-                questnr = new Questnr(id,titre,auteur,score);
+        if(count.getInt(0)==0){
+            questnrs.add(new Questnr(0,"Pas de Questionnaire en cours",null,0));
+        } else {
+            Cursor c = db.rawQuery(sql,null);
+            c.moveToFirst();
+            while (!c.isAfterLast()){
+                int id = c.getInt(0);
+                String titre = c.getString(1);
+                String auteur = c.getString(2);
+                int score = c.getInt(3);
+
+                Questnr questnr = Questnr.questnrSparseArray.get(id);
+                if(questnr==null){
+                    questnr = new Questnr(id,titre,auteur,score);
+                }
+
+                questnrs.add(questnr);
+                c.moveToNext();
             }
 
-            questnrs.add(questnr);
-            c.moveToNext();
+            c.close();
         }
 
-        c.close();
+        count.close();
         db.close();
 
         return questnrs;
@@ -89,7 +100,10 @@ public class Questnr {
     }
 
     public String toString(){
-        String resume = "Participant: " + u_mail + ";" + Integer.toString(IDQstnr) + " " + TitreQstnr + " " + AuteurQstnr;
+        String resume = "ID: " + Integer.toString(IDQstnr)
+                        + " Titre: " + TitreQstnr
+                        + " Auteur: " + AuteurQstnr
+                        + " Score: " + ScoreQstnr;
         return resume;
     }
 
