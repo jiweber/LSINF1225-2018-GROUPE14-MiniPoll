@@ -18,7 +18,7 @@ import be.lsinf1225.minipoll.MySQLiteHelper;
 import be.lsinf1225.minipoll.R;
 import be.lsinf1225.minipoll.model.User;
 
-public class DemandeAmisActivity extends AppCompatActivity {
+public class DemandesAmisActivity extends AppCompatActivity {
 
     ArrayList<User> amis;
     DemandeAmisAdapter demandeAmisAdapter;
@@ -57,6 +57,15 @@ public class DemandeAmisActivity extends AppCompatActivity {
         }
         cursorRel.close();
         return pas_amis;
-
     }
+
+    public static void accepterAmi(User user1, User user2){                     //User1 est le demandeur
+        SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
+        String sql = "update Relation " +
+                        "set Statut=\"Ami\" " +
+                        "where Utilisateur1=? and Utilisateur2=?;";
+        db.execSQL(sql, new Object[]{user1.getMail(), user2.getMail()} );
+    }
+
+
 }
