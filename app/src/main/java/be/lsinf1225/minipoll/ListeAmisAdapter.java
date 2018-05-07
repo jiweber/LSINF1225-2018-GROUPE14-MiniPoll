@@ -60,7 +60,7 @@ public class ListeAmisAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
   public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
     MyViewHolder myViewHolder = (MyViewHolder) holder;
     myViewHolder.nom_ami.setText(amis.get(position).getPrenom() + " " +amis.get(position).getNom() );
-    Bitmap bitmap = MiniPoll.getConnected_user().getBitmap();
+    Bitmap bitmap = amis.get(position).getBitmap();
     if (bitmap == null){
       myViewHolder.photo_ami.setImageResource(R.drawable.friends);
 
