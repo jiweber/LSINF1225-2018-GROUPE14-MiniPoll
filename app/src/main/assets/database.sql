@@ -88,10 +88,15 @@ DROP TABLE IF EXISTS Utilisateur;
 CREATE TABLE Utilisateur (Mail TEXT NOT NULL UNIQUE PRIMARY KEY, Nom TEXT NOT NULL, Prenom TEXT NOT NULL, Mot_de_passe TEXT NOT NULL, Photo TEXT NOT NULL, "Meilleur ami" TEXT, FOREIGN KEY ("Meilleur ami") REFERENCES Utilisateur (Mail));
 INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami") VALUES ('harry.smith@mymail.com', 'Smith', 'Harry', 'hsmIth123', 'default.jpeg', 'a');
 INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami") VALUES ('a', 'Debraie', 'Arthur', 'a', 'My_foto.jpeg', 'gb@ucluvain.be');
-INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami") VALUES ('LDV@uclouvain.be', 'De Vogeleer', 'Louis', '123', '''default.jpeg''', NULL);
-INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami") VALUES ('adb@uclouvain.be', 'de Biolley', 'Antoine', '321', '''default.jpeg''', NULL);
-INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami") VALUES ('jw@uclouvain.be', 'Weber', 'Jimmy', '596', '''default.jpeg''', NULL);
-INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami") VALUES ('gb@ucluvain.be', 'Bellon', 'Guillaume', '''0234''', '''default.jpeg''', NULL);
+INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami") VALUES ('LDV@uclouvain.be', 'De Vogeleer', 'Louis', '123', 'default.jpeg', NULL);
+INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami") VALUES ('adb@uclouvain.be', 'de Biolley', 'Antoine', '321', 'default.jpeg', NULL);
+INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami") VALUES ('jw@uclouvain.be', 'Weber', 'Jimmy', '596', 'default.jpeg', NULL);
+INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami") VALUES ('gb@ucluvain.be', 'Bellon', 'Guillaume', '0234', 'default.jpeg', NULL);
+
+INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami") VALUES ('Celine.dion@ucluvain.be', 'Dion', 'Celine', '1111', 'default.jpeg', NULL);
+INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami") VALUES ('Angelina.jolie@ucluvain.be', 'Jolie', 'Angelina', '1111', 'default.jpeg', NULL);
+INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami") VALUES ('Angelika.Putin@ucluvain.be', 'Putin', 'Angelika', '1111', 'default.jpeg', NULL);
+INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami") VALUES ('Michele.Obama@ucluvain.be', 'Obama', 'Michele', '1111', 'default.jpeg', NULL);
 
 COMMIT TRANSACTION;
 PRAGMA foreign_keys = on;
