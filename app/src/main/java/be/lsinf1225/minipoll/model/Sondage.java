@@ -74,14 +74,14 @@ public class Sondage implements Serializable{
 
     public static ArrayList<Sondage> getCreatorSondages(){
         Log.i("test1","entrée getCreatorSondages()");
-        Log.i("test1","");
         ArrayList<Sondage> sondages = new ArrayList<Sondage>();
-        String mail = User.getUserMail();
+        String mail = MiniPoll.getConnected_user().getMail();
+        Log.i("test1",mail);
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
-        Log.i("test1","toujours là");
-        String sqlID = "SELECT IDsondage, Intitulé  FROM Sondage WHERE Mail_Auteur = '" + mail + "';";
+        String sqlID = "SELECT IDsondage, Intitulé  FROM Sondage WHERE Mail_auteur = ?;";
         Log.i("test1","sqlID :"+sqlID);
-        Cursor c = db.rawQuery(sqlID, null);
+        Cursor c = db.rawQuery(sqlID, new String[]{mail});
+        Log.i("test1", String.valueOf(c.getCount()));
         c.moveToFirst();
         while (!c.isAfterLast()){
             Log.i("test1","entrée boucle getCreatorSondages()");
@@ -111,9 +111,10 @@ public class Sondage implements Serializable{
     */
 
     private static String[] getSQLParticipants(int id, SQLiteDatabase db){
-        String sqlPart = "SELECT A.Mail_participant FROM Participation_sondage A, Sondage S WHERE A.IDsondage = '"+id+"';";
+        Log.i("test1","id in part : "+id);
+        String sqlPart = "SELECT distinct A.Mail_participant FROM Participation_sondage A, Sondage S WHERE A.IDsondage = ?;";
         Log.i("test1","sqlPart : "+sqlPart);
-        Cursor cPart = db.rawQuery(sqlPart, null);
+        Cursor cPart = db.rawQuery(sqlPart, new String[]{Integer.toString(id)});
         ArrayList<String> participants = new ArrayList<String>();
         cPart.moveToFirst();
         while(!cPart.isAfterLast()){
@@ -127,9 +128,10 @@ public class Sondage implements Serializable{
     }
 
     private static String[] getSQLPropositions(int id, SQLiteDatabase db){
-        String sqlProp = "SELECT O.Ennoncé_de_la_proposition FROM Proposition_sondage O, Sondage S WHERE O.IDsondage = '"+id+"';";
+        Log.i("test1","id in prop : "+id);
+        String sqlProp = "SELECT distinct O.Ennoncé_de_la_proposition FROM Proposition_sondage O, Sondage S WHERE O.IDsondage = ?";
         Log.i("test1","sqlProp : "+sqlProp);
-        Cursor cProp = db.rawQuery(sqlProp, null);
+        Cursor cProp = db.rawQuery(sqlProp, new String[]{Integer.toString(id)});
         ArrayList<String> propositions = new ArrayList<String>();
         cProp.moveToFirst();
         while(!cProp.isAfterLast()){
