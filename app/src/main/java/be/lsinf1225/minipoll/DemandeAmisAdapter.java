@@ -64,12 +64,13 @@ public class DemandeAmisAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         MyViewHolder myViewHolder = (MyViewHolder) holder;
         myViewHolder.tv_ami.setText(amis.get(position).getNom());
         myViewHolder.btn_accept.setOnClickListener(acceptClickListener);
-        try{
-            Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), Uri.parse(MiniPoll.getConnected_user().getImagePath()));
-            myViewHolder.im_ami.setImageBitmap(bitmap);
-        } catch (IOException e) {
-            e.printStackTrace();
+        Bitmap bitmap = MiniPoll.getConnected_user().getBitmap();
+        if (bitmap == null){
             myViewHolder.im_ami.setImageResource(R.drawable.friends);
+
+        }else{
+            myViewHolder.im_ami.setImageBitmap(bitmap);
+
         }
     }
 

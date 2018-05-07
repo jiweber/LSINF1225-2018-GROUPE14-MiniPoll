@@ -25,10 +25,10 @@ public class DemandeAmisActivity extends AppCompatActivity {
         setContentView(R.layout.activity_liste_amis);
 
         amis = new ArrayList<>();
-        amis.add(new User("test", "test", "test", "test", "test"));
-        amis.add(new User("test", "test", "test", "test", "test"));
-        amis.add(new User("test", "test", "test", "test", "test"));
-        amis.add(new User("test", "test", "test", "test", "test"));
+        amis.add(new User("test", "test", "test", "test", null));
+        amis.add(new User("test", "test", "test", "test", null));
+        amis.add(new User("test", "test", "test", "test", null));
+        amis.add(new User("test", "test", "test", "test", null));
 
 
 

@@ -1,10 +1,7 @@
 package be.lsinf1225.minipoll.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Path;
-import android.graphics.Picture;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -19,6 +16,7 @@ import android.widget.TextView;
 
 import java.io.IOException;
 
+import be.lsinf1225.minipoll.BitmapUtil;
 import be.lsinf1225.minipoll.MiniPoll;
 import be.lsinf1225.minipoll.MySQLiteHelper;
 import be.lsinf1225.minipoll.R;
@@ -35,7 +33,10 @@ public class CreationProfil extends AppCompatActivity {
     EditText et_name;
     EditText et_prename;
     Button creation;
-    String imagepath;
+    byte[] blob_image;
+
+    Bitmap bitmap = null; //picture
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +65,7 @@ public class CreationProfil extends AppCompatActivity {
         setFontEdTxt(et_prename);
         creation = findViewById(R.id.validate_cre_pro);
         setFontBut(creation);
-        imagepath = "default.jpg";
+        blob_image = null;
         creation.setOnClickListener(crea);
     }
 
@@ -81,11 +82,12 @@ public class CreationProfil extends AppCompatActivity {
                     MiniPoll.notifyShort(R.string.choisirdonnees);
                 } else {
 
-                    String SQL = "INSERT INTO Utilisateur (Mail, Nom, Prénom, \"Mot de passe\", Photo) VALUES (?,?,?,?,?);";
-                    MySQLiteHelper.get().getWritableDatabase().execSQL(SQL, new Object[]{Mail, Name, Prename, Mdp, imagepath});
+                    String SQL = "INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo) VALUES (?,?,?,?,?);";
+                    blob_image = BitmapUtil.getBytes(bitmap);
+                    MySQLiteHelper.get().getWritableDatabase().execSQL(SQL, new Object[]{Mail, Name, Prename, Mdp, blob_image});
                     MiniPoll.notifyLong(R.string.Profilcree);
                     Intent menu = new Intent(getApplicationContext(), MenuPrincipalActivity.class);
-                    MiniPoll.setConnected_user(new User(Mail,Mdp,Prename,Name, imagepath));
+                    MiniPoll.setConnected_user(new User(Mail,Mdp,Prename,Name, CreationProfil.this.bitmap));
                     startActivity(menu);
                     ConnexionActivity.connexion.finish();
                     Inscription.inscription.finish();
@@ -94,14 +96,12 @@ public class CreationProfil extends AppCompatActivity {
             }
         };
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         Uri uri = data.getData();
-        imagepath = String.valueOf(uri);
         try {
-            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+            bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
             PP.setImageBitmap(bitmap);
         } catch (IOException e) {
             e.printStackTrace();
