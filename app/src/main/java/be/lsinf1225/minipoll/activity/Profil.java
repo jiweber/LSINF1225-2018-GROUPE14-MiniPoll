@@ -174,7 +174,7 @@ public class Profil extends AppCompatActivity {
                                     if(MiniPoll.getConnected_user().getMdp().equals(verif.getEt_password().getText().toString())) {
                                         String SQLW = "UPDATE Utilisateur SET Mail = ?, Nom = ?, Prenom = ?, Photo = ? WHERE Mail = ?;";
                                         MySQLiteHelper.get().getWritableDatabase().execSQL(SQLW, new Object[]{newMail, newName, newPrename, BitmapUtil.getBytes(bitmap), MiniPoll.getConnected_user().getMail()});
-                                        MiniPoll.setConnected_user(new User(newMail, MiniPoll.getConnected_user().getMdp(), newPrename, newName, bitmap));
+                                        MiniPoll.setConnected_user(new User(newMail,newName, newPrename, MiniPoll.getConnected_user().getMdp(), bitmap));
                                         Intent menu = new Intent(getApplicationContext(),MenuPrincipalActivity.class);
                                         startActivity(menu);
                                         MiniPoll.notifyLong(R.string.modireussie);
@@ -199,7 +199,7 @@ public class Profil extends AppCompatActivity {
                                     if(MiniPoll.getConnected_user().getMdp().equals(verif.getEt_password().getText().toString())) {
                                         String SQLW = "UPDATE Utilisateur SET Mail = ?, Nom = ?, Prenom = ?, Mot_de_passe = ?, Photo = ? WHERE Mail = ?;";
                                         MySQLiteHelper.get().getWritableDatabase().execSQL(SQLW,new Object[]{newMail,newName,newPrename,newPassword, BitmapUtil.getBytes(bitmap),MiniPoll.getConnected_user().getMail()});
-                                        MiniPoll.setConnected_user(new User(newMail,newPassword,newPrename,newName, bitmap));
+                                        MiniPoll.setConnected_user(new User(newMail,newName,newPrename, newPassword, bitmap));
                                         Intent menu = new Intent(getApplicationContext(),MenuPrincipalActivity.class);
                                         startActivity(menu);
                                         MiniPoll.notifyLong(R.string.modireussie);
