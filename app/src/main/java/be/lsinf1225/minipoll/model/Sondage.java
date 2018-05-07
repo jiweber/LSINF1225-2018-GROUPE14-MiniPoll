@@ -12,15 +12,17 @@ import be.lsinf1225.minipoll.MiniPoll;
 import be.lsinf1225.minipoll.MySQLiteHelper;
 import be.lsinf1225.minipoll.activity.ConnexionActivity;
 
-public class Sondage implements Serializable{
+public class Sondage{
 
     private int id;
     private String title;
     private String creator;
     private String[] participants;
-    private int[][] rangs;
+    private int participantsNumber;
+    private int[] ranks;
+    private int[] answers;
+    private int remainingAnswers;
     private Proposition[] propositions;
-    private int[] status;
 
     public Sondage(int id, String title, String creator, String[] participants, String[] enonces) {
         this.id = id;
@@ -28,16 +30,58 @@ public class Sondage implements Serializable{
         this.creator = creator;
         this.participants = participants;
         int propositionNumber = enonces.length;
-        this.rangs = new int[propositionNumber][participants.length];
+        this.ranks = new int[propositionNumber];
         this.propositions = new Proposition[propositionNumber];
         for(int i=0; i<propositionNumber; i++){
             this.propositions[i] = new Proposition(enonces[i]);
         }
-        this.status = new int[participants.length];
+        this.participantsNumber = participants.length;
+        this.answers = new int[participantsNumber];
+        for(int i=0; i<participantsNumber; i++){
+            answers[i] = -1;
+        }
+        this.remainingAnswers = participantsNumber;
     }
 
     public Proposition[] getPropositions() {
         return propositions;
+    }
+
+    public void answerSondage(String participant, String proposition){
+        answers[getParticipantIndex(participant)] = getPropositionIndex(proposition);
+        remainingAnswers --;
+    }
+
+    public int getParticipantIndex(String participant){
+        for(int i=0; i<participantsNumber; i++){
+            if(participant.compareTo(participants[i]) == 0){
+                return i;
+            }
+            Log.i("test2", participant + " != " + participants[i]);
+        }
+        return -1;
+    }
+
+    public int getPropositionIndex(String proposition){
+        for(int i=0; i<participantsNumber; i++){
+            if(propositions[i].getEnonce().compareTo(participants[i]) == 0){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public String[] getRemainingParticipants(){
+        if(remainingAnswers == 0) return null;
+        ArrayList<String> list = new ArrayList<String>();
+        for(int i=0; i<participantsNumber; i++){
+            if(answers[i] == -1){
+                list.add(participants[i]);
+            }
+        }
+        String[] tab = new String[list.size()];
+        tab = list.toArray(tab);
+        return tab;
     }
 
     public int getId(){
@@ -51,17 +95,18 @@ public class Sondage implements Serializable{
         return creator;
     }
 
-    public int getStatus(String mail){
-        double res = Math.random()*3;
-        if(0<=res && res<1){
+    public int getStatus(){
+        String mail = MiniPoll.getConnected_user().getMail();
+//        double rand = Math.random()*3;
+//        if(rand>=0 && rand<1) return 0;
+//        if(rand>=1 && rand<2) return 1;
+//        return 2;
+        if(mail.compareTo(creator) == 0) return 3;
+        if(remainingAnswers == 0) return 2;
+        if(answers[getParticipantIndex(mail)] == -1){
             return 0;
         }
-        if(1<=res && res<2){
-            return 1;
-        }
-        else{
-            return 2;
-        }
+        return 1;
     }
 
     public String[] getEnonces(){
@@ -78,7 +123,7 @@ public class Sondage implements Serializable{
         String mail = MiniPoll.getConnected_user().getMail();
         Log.i("test1",mail);
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
-        String sqlID = "SELECT IDsondage, Intitulé  FROM Sondage WHERE Mail_auteur = ?;";
+        String sqlID = "SELECT IDsondage, Intitule  FROM Sondage WHERE Mail_auteur = ?;";
         Log.i("test1","sqlID :"+sqlID);
         Cursor c = db.rawQuery(sqlID, new String[]{mail});
         Log.i("test1", String.valueOf(c.getCount()));
@@ -96,19 +141,16 @@ public class Sondage implements Serializable{
         return sondages;
     }
 
-    /*
     public static Sondage getSondage(int id){
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
-        String sql = "SELECT Intitulé, Mail_Auteur FROM Sondage S WHERE S.IDsondage ='" + id + "';";
-        Cursor c = db.rawQuery(sql, null);
+        String sql = "SELECT Intitule, Mail_auteur FROM Sondage S WHERE S.IDsondage = ?;";
+        Cursor c = db.rawQuery(sql, new String[]{Integer.toString(id)});
         c.moveToFirst();
-
-        Sondage s = new Sondage(id, c.getString(0), c.getString(1), getSQLParticipants(id, db), getSQLPropositions(id, db))) ;
+        Sondage s = new Sondage(id, c.getString(0), c.getString(1), getSQLParticipants(id, db), getSQLPropositions(id, db));
         c.close();
         db.close();
         return s;
     }
-    */
 
     private static String[] getSQLParticipants(int id, SQLiteDatabase db){
         Log.i("test1","id in part : "+id);
@@ -129,7 +171,7 @@ public class Sondage implements Serializable{
 
     private static String[] getSQLPropositions(int id, SQLiteDatabase db){
         Log.i("test1","id in prop : "+id);
-        String sqlProp = "SELECT distinct O.Ennoncé_de_la_proposition FROM Proposition_sondage O, Sondage S WHERE O.IDsondage = ?";
+        String sqlProp = "SELECT distinct O.Ennonce_de_la_proposition FROM Proposition_sondage O, Sondage S WHERE O.IDsondage = ?";
         Log.i("test1","sqlProp : "+sqlProp);
         Cursor cProp = db.rawQuery(sqlProp, new String[]{Integer.toString(id)});
         ArrayList<String> propositions = new ArrayList<String>();
@@ -144,10 +186,6 @@ public class Sondage implements Serializable{
         return propositionsTab;
     }
 
-    public static String[] getRemainingFriends()
-    {
-        return null;                            //TODO
-    }
     private class Proposition {
         private String enonce;
         private int generalRank;

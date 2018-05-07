@@ -58,6 +58,7 @@
     <string name="modireussie">Modification réussie</string>
     <string name="veuillezremplir">Veuillez remplir tous les champs</string>
     <string name="mdpincorr">Mot de passe saisi incorrect</string>
+    <string name="title_qst">Mes Questions</string>
 
     <!-- dilemme -->
     <string name="nouveau_dilemme">Nouvelle demande d\'aide</string>

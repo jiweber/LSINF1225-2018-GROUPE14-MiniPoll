@@ -1,6 +1,8 @@
 package be.lsinf1225.minipoll.model;
 
-import android.net.Uri;
+import android.graphics.Bitmap;
+
+import be.lsinf1225.minipoll.BitmapUtil;
 
 public class User {
     private static String userMail;
@@ -9,15 +11,15 @@ public class User {
     private String prenom;
     private String nom;
     private String bestFriend;
-    private String imagePath;
+    private Bitmap bitmap;
 
-    public User(String mail, String mdp, String prenom, String nom, String imagePath) {
+    public User(String mail, String nom, String prenom, String mdp, Bitmap bitmap) {
         this.mail = mail;
         this.mdp = mdp;
         this.prenom = prenom;
         this.nom = nom;
         this.bestFriend = null;
-        this.imagePath = imagePath;
+        this.bitmap = bitmap;
     }
 
     public String getMail() {
@@ -60,12 +62,12 @@ public class User {
         this.bestFriend = bestFriend;
     }
 
-    public String getImagePath() {
-        return imagePath;
+    public Bitmap getBitmap() {
+        return bitmap;
     }
 
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
     }
 
     public static String getUserMail() {

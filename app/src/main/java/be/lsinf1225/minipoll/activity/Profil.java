@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import java.io.IOException;
 
+import be.lsinf1225.minipoll.BitmapUtil;
 import be.lsinf1225.minipoll.MiniPoll;
 import be.lsinf1225.minipoll.MySQLiteHelper;
 import be.lsinf1225.minipoll.R;
@@ -39,7 +40,7 @@ public class Profil extends AppCompatActivity {
     ImageView mod_pic;
     Button mod_validate;
     Button mod_logout;
-    String imagepath;
+    Bitmap bitmap;
     Boolean modif;
     Activity mod;
 
@@ -60,7 +61,7 @@ public class Profil extends AppCompatActivity {
         mod_pic  =findViewById(R.id.pic);
         mod_validate  =findViewById(R.id.mod_validate);
         mod_logout  =findViewById(R.id.mod_logout);
-        imagepath = MiniPoll.getConnected_user().getImagePath();
+        bitmap = MiniPoll.getConnected_user().getBitmap();
         modif = false;
 
         setFontTxt(tv_mod_title);
@@ -79,12 +80,8 @@ public class Profil extends AppCompatActivity {
         et_mod_name.setText(MiniPoll.getConnected_user().getNom());
         et_mod_prename.setText(MiniPoll.getConnected_user().getPrenom());
         et_mod_mail.setText(MiniPoll.getConnected_user().getMail());
-        try{
-        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(MiniPoll.getConnected_user().getImagePath()));
-        mod_pic.setImageBitmap(bitmap);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        bitmap = MiniPoll.getConnected_user().getBitmap();
+        if (bitmap != null)mod_pic.setImageBitmap(bitmap);
         mod_logout.setOnClickListener(logout);
         mod_validate.setOnClickListener(vali);
         mod_pic.setOnClickListener(new View.OnClickListener() {
@@ -175,9 +172,9 @@ public class Profil extends AppCompatActivity {
                                 @Override
                                 public void onClick(View view) {
                                     if(MiniPoll.getConnected_user().getMdp().equals(verif.getEt_password().getText().toString())) {
-                                        String SQLW = "UPDATE Utilisateur SET Mail = ?, Nom = ?, Prénom = ?, Photo = ? WHERE Mail = ?;";
-                                        MySQLiteHelper.get().getWritableDatabase().execSQL(SQLW, new Object[]{newMail, newName, newPrename, imagepath, MiniPoll.getConnected_user().getMail()});
-                                        MiniPoll.setConnected_user(new User(newMail, MiniPoll.getConnected_user().getMdp(), newPrename, newName, imagepath));
+                                        String SQLW = "UPDATE Utilisateur SET Mail = ?, Nom = ?, Prenom = ?, Photo = ? WHERE Mail = ?;";
+                                        MySQLiteHelper.get().getWritableDatabase().execSQL(SQLW, new Object[]{newMail, newName, newPrename, BitmapUtil.getBytes(bitmap), MiniPoll.getConnected_user().getMail()});
+                                        MiniPoll.setConnected_user(new User(newMail,newName, newPrename, MiniPoll.getConnected_user().getMdp(), bitmap));
                                         Intent menu = new Intent(getApplicationContext(),MenuPrincipalActivity.class);
                                         startActivity(menu);
                                         MiniPoll.notifyLong(R.string.modireussie);
@@ -200,9 +197,9 @@ public class Profil extends AppCompatActivity {
                                 @Override
                                 public void onClick(View view) {
                                     if(MiniPoll.getConnected_user().getMdp().equals(verif.getEt_password().getText().toString())) {
-                                        String SQLW = "UPDATE Utilisateur SET Mail = ?, Nom = ?, Prénom = ?, \"Mot de passe\" = ?, Photo = ? WHERE Mail = ?;";
-                                        MySQLiteHelper.get().getWritableDatabase().execSQL(SQLW,new Object[]{newMail,newName,newPrename,newPassword,imagepath,MiniPoll.getConnected_user().getMail()});
-                                        MiniPoll.setConnected_user(new User(newMail,newPassword,newPrename,newName,imagepath));
+                                        String SQLW = "UPDATE Utilisateur SET Mail = ?, Nom = ?, Prenom = ?, Mot_de_passe = ?, Photo = ? WHERE Mail = ?;";
+                                        MySQLiteHelper.get().getWritableDatabase().execSQL(SQLW,new Object[]{newMail,newName,newPrename,newPassword, BitmapUtil.getBytes(bitmap),MiniPoll.getConnected_user().getMail()});
+                                        MiniPoll.setConnected_user(new User(newMail,newName,newPrename, newPassword, bitmap));
                                         Intent menu = new Intent(getApplicationContext(),MenuPrincipalActivity.class);
                                         startActivity(menu);
                                         MiniPoll.notifyLong(R.string.modireussie);
@@ -239,9 +236,8 @@ public class Profil extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         Uri uri = data.getData();
-        imagepath = String.valueOf(uri);
         try {
-            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+            bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
             mod_pic.setImageBitmap(bitmap);
             modif = true;
         } catch (IOException e) {

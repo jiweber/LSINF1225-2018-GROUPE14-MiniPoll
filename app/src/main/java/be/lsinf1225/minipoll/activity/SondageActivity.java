@@ -10,26 +10,28 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import be.lsinf1225.minipoll.MiniPoll;
 import be.lsinf1225.minipoll.R;
 import be.lsinf1225.minipoll.model.Sondage;
 
 public class SondageActivity extends AppCompatActivity {
 
-    private Sondage sondage;
     private ListView listview;
     private TextView tv_amis;
     private TextView tv_titre;
+    private Sondage sondage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sondage);
-        sondage = (Sondage) getIntent().getSerializableExtra("serializabled_sondage");
+        int id = getIntent().getIntExtra("sondage_id", 0);
+        sondage = Sondage.getSondage(id);
 
         tv_titre = (TextView) findViewById(R.id.tv_sondage_titre);
         tv_titre.setText(sondage.getTitle());
 
         tv_amis = findViewById(R.id.tv_sondage_amis);
-        String[] remFriends = new String[]{"User1","User2"};//sondage.getRemainingFriends(); //TODO
+        String[] remFriends = sondage.getRemainingParticipants();
         String message = "Personnes n'ayant pas encore répondu : \n";
         message += remFriends[0];
         for(int i=1; i<remFriends.length; i++){
@@ -47,7 +49,7 @@ public class SondageActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long arg3) {
                 view.setSelected(true);
                 String selected = (String) parent.getItemAtPosition(position);
-                //sondage.answer(MiniPoll.getUserMail(), selected);
+                //sondage.answerSondage(MiniPoll.getConnected_user().getMail(), selected);
             }
         });
     }

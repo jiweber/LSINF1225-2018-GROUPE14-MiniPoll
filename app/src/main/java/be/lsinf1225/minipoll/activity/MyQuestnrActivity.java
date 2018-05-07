@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -33,9 +34,9 @@ public class MyQuestnrActivity extends AppCompatActivity {
         qstnr=findViewById(R.id.listQstrn);
 
         /*DEBUG*/
-        /*if (Questnr.getSQLQuestnr().get(0)!=null){
+        if (Questnr.getSQLQuestnr().get(0)!=null){
             Log.i("test1",Questnr.getSQLQuestnr().get(0).toString());
-        } else {Log.i("test1","missing");}*/
+        } else {Log.i("test1","missing");}
 
         if (Questnr.getTtitles().get(0)!=null){
             Log.i("test2",Questnr.getTtitles().get(0));
@@ -47,7 +48,16 @@ public class MyQuestnrActivity extends AppCompatActivity {
 
         qstnr.setAdapter(adapter);
 
-    }
+        qstnr.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String itemValue = (String) qstnr.getItemAtPosition(i);
+                Log.i("Click on item: ", itemValue);
+                Intent intent = new Intent(MyQuestnrActivity.this, MyQstActivity.class);
+                startActivity(intent);
+            }
+        });
 
+    }
 
 }
