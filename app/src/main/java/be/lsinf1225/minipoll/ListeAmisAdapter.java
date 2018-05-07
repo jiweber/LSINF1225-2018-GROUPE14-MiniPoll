@@ -60,12 +60,13 @@ public class ListeAmisAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         MyViewHolder myViewHolder = (MyViewHolder) holder;
         myViewHolder.nom_ami.setText(amis.get(position).getNom());
-        try{
-            Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), Uri.parse(MiniPoll.getConnected_user().getImagePath()));
-            myViewHolder.photo_ami.setImageBitmap(bitmap);
-        } catch (IOException e) {
-            e.printStackTrace();
+        Bitmap bitmap = MiniPoll.getConnected_user().getBitmap();
+        if (bitmap == null){
             myViewHolder.photo_ami.setImageResource(R.drawable.friends);
+
+        }else{
+            myViewHolder.photo_ami.setImageBitmap(bitmap);
+
         }
     }
 

@@ -15,6 +15,7 @@ import com.daprlabs.cardstack.SwipeDeck;
 import java.util.ArrayList;
 import java.util.List;
 
+import be.lsinf1225.minipoll.BitmapUtil;
 import be.lsinf1225.minipoll.MiniPoll;
 import be.lsinf1225.minipoll.MySQLiteHelper;
 import be.lsinf1225.minipoll.R;
@@ -99,7 +100,7 @@ public class ChercherAmisActivity extends AppCompatActivity {
         cursorRel.moveToFirst();
         Log.i("DEBUG_J", "pasamis_nombre" + String.valueOf(cursorRel.getCount()));
         while(!cursorRel.isAfterLast()){
-            pas_amis.add(new User(cursorRel.getString(0), cursorRel.getString(1),cursorRel.getString(2),cursorRel.getString(3), cursorRel.getString(4) ));
+            pas_amis.add(new User(cursorRel.getString(0), cursorRel.getString(1),cursorRel.getString(2),cursorRel.getString(3), BitmapUtil.getBitmap(cursorRel.getBlob(4)) ));
             cursorRel.moveToNext();
         }
         cursorRel.close();

@@ -27,10 +27,10 @@ public class ListeAmisActivity extends AppCompatActivity{
         Log.i("DEBUG_J", "listamisactivity");
 
         amis = new ArrayList<>();
-        amis.add(new User("test", "test", "test", "test", "test"));
-        amis.add(new User("test", "test", "test", "test", "test"));
-        amis.add(new User("test", "test", "test", "test", "test"));
-        amis.add(new User("test", "test", "test", "test", "test"));
+        amis.add(new User("test", "test", "test", "test", null));
+        amis.add(new User("test", "test", "test", "test", null));
+        amis.add(new User("test", "test", "test", "test", null));
+        amis.add(new User("test", "test", "test", "test", null));
 
         Log.i("DEBUG_J", "listamisactivity" + amis.size());
 

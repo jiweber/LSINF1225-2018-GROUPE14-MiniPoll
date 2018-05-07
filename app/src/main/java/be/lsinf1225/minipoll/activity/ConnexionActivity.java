@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import be.lsinf1225.minipoll.BitmapUtil;
 import be.lsinf1225.minipoll.MiniPoll;
 import be.lsinf1225.minipoll.MySQLiteHelper;
 import be.lsinf1225.minipoll.R;
@@ -77,9 +79,9 @@ public class ConnexionActivity extends AppCompatActivity {
             {
                 String name = c.getString(1);
                 String prename = c.getString(2);
-                String path = c.getString(3);
+                Bitmap bitmap = BitmapUtil.getBitmap(c.getBlob(3));
                 c.close();
-                MiniPoll.setConnected_user(new User(mail,pass,prename,name,path));
+                MiniPoll.setConnected_user(new User(mail,pass,prename,name,bitmap));
                 Intent connected = new Intent(getApplicationContext(), MenuPrincipalActivity.class);
                 startActivity(connected);
                 finish();
