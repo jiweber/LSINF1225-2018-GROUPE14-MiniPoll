@@ -31,7 +31,7 @@ public class SondageActivity extends AppCompatActivity {
         tv_titre.setText(sondage.getTitle());
 
         tv_amis = findViewById(R.id.tv_sondage_amis);
-        String[] remFriends = new String[]{"user1","user2"}; //sondage.getRemainingFriends();
+        String[] remFriends = sondage.getRemainingParticipants();
         String message = "Personnes n'ayant pas encore répondu : \n";
         message += remFriends[0];
         for(int i=1; i<remFriends.length; i++){

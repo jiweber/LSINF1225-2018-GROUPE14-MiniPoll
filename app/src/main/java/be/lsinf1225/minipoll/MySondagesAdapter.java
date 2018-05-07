@@ -42,7 +42,7 @@ public class MySondagesAdapter extends ArrayAdapter<Sondage> {
         //il ne reste plus qu'à remplir notre vue
         viewHolder.creator.setText(sondage.getCreator());
         viewHolder.enonce.setText(sondage.getTitle());
-        int statut = sondage.getStatus("user");
+        int statut = sondage.getStatus();
         Resources res = getContext().getResources();
         if(statut == 0) {
             viewHolder.status.setImageDrawable(res.getDrawable(R.drawable.a_remplir));
@@ -50,8 +50,11 @@ public class MySondagesAdapter extends ArrayAdapter<Sondage> {
         else if(statut == 1){
             viewHolder.status.setImageDrawable(res.getDrawable(R.drawable.en_attente));
         }
-        else{
+        else if(statut == 2){
             viewHolder.status.setImageDrawable(res.getDrawable(R.drawable.remplis));
+        }
+        else{
+            viewHolder.status.setImageDrawable(res.getDrawable(R.drawable.creator));
         }
 
         return convertView;
