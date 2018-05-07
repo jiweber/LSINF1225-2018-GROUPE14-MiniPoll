@@ -33,9 +33,9 @@ public class MyQuestnrActivity extends AppCompatActivity {
         qstnr=findViewById(R.id.listQstrn);
 
         /*DEBUG*/
-        /*if (Questnr.getSQLQuestnr().get(0)!=null){
+        if (Questnr.getSQLQuestnr().get(0)!=null){
             Log.i("test1",Questnr.getSQLQuestnr().get(0).toString());
-        } else {Log.i("test1","missing");}*/
+        } else {Log.i("test1","missing");}
 
         if (Questnr.getTtitles().get(0)!=null){
             Log.i("test2",Questnr.getTtitles().get(0));

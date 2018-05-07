@@ -17,15 +17,17 @@ public class Questnr {
     private int IDQstnr;
     private String TitreQstnr;
     private String AuteurQstnr;
+    private int ScoreQstnr;
 
     private String u_mail = MiniPoll.getConnected_user().getMail();
 
     private static SparseArray<Questnr> questnrSparseArray = new SparseArray<>();
 
-    private Questnr(int IDquestnr, String titre, String auteur) {
+    private Questnr(int IDquestnr, String titre, String auteur,int score) {
         this.IDQstnr = IDquestnr;
         this.TitreQstnr = titre;
         this.AuteurQstnr = auteur;
+        this.ScoreQstnr = score;
         Questnr.questnrSparseArray.put(IDquestnr,this);
     }
 
@@ -41,14 +43,16 @@ public class Questnr {
         return AuteurQstnr;
     }
 
-    private static ArrayList<Questnr> getSQLQuestnr(){
+    public int getScoreQstnr() { return ScoreQstnr; }
+
+    public static ArrayList<Questnr> getSQLQuestnr(){
 
         ArrayList<Questnr> questnrs = new ArrayList<Questnr>();
         //String mail= MiniPoll.getUserMail();
         String mail="LDV@uclouvain.be";
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
 
-        String sql = "SELECT Q.IDquestionnaire, Q.Titre, Q.Auteur" +
+        String sql = "SELECT Q.IDquestionnaire, Q.Titre, Q.Auteur, PQ.Score" +
                 " FROM Questionnaire Q, Participation_questionnaire PQ" +
                 " WHERE Q.IDquestionnaire=PQ.IDquestionnaire and PQ.mail='"+mail+"'"+";";
 
@@ -58,10 +62,11 @@ public class Questnr {
             int id = c.getInt(0);
             String titre = c.getString(1);
             String auteur = c.getString(2);
+            int score = c.getInt(3);
 
             Questnr questnr = Questnr.questnrSparseArray.get(id);
             if(questnr==null){
-                questnr = new Questnr(id,titre,auteur);
+                questnr = new Questnr(id,titre,auteur,score);
             }
 
             questnrs.add(questnr);
