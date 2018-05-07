@@ -1,5 +1,7 @@
 package be.lsinf1225.minipoll.activity;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
@@ -11,7 +13,10 @@ import android.widget.Button;
 import com.daprlabs.cardstack.SwipeDeck;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import be.lsinf1225.minipoll.MiniPoll;
+import be.lsinf1225.minipoll.MySQLiteHelper;
 import be.lsinf1225.minipoll.R;
 import be.lsinf1225.minipoll.model.User;
 
@@ -79,7 +84,79 @@ public class ChercherAmisActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public ArrayList<String> listePasAmis(){
+        ArrayList<String> pas_amis = new ArrayList<>();
+        String mail = MiniPoll.getConnected_user().getMail();
+        SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
+        String sql = "select R.Ultilisateur1, R.Utilisateur2, Statut FROM Relation R, Utilisateur U WHERE R.Utilisateur1 = ? OR R.Utilisateur2 = ? AND U.;";
+        String sql = "SELECT U.Mail FROM Utilisateur U, Relation R WHERE  (R.Utilisateur1=? AND U.mail  R.Utilisateur2) OR (R.Utilisateur2=?);"
+        Cursor cursorRel = db.rawQuery(sql,new String[]{mail, mail, });
+        cursorRel.moveToFirst();
+        while(!cursorRel.isAfterLast()){
+
+            cursorRel.moveToNext();
+        }
+        cursorRel.close();
 
 
     }
+
+    public List<String> ListeAmis(){
+
+        List<String> liste_des_relations = new ArrayList<>();
+        final String mail = MiniPoll.getConnected_user().getMail();
+        SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
+        String SQLRel = "select Ultilisateur1, Utilisateur2, Statut FROM Relation WHERE Utilisateur1 = ? or Utilisateur2 = ?;";
+        Cursor cursorRel = db.rawQuery(SQLRel,new String[]{mail, mail});
+        cursorRel.moveToFirst();
+
+        while( !cursorRel.isAfterLast()) {
+            if (cursorRel.getString(0) == mail) {
+                String PrenomNom = PrenomNomFromMail(cursorRel.getString(1));
+                liste_des_relations.add(PrenomNom);
+            } else if (cursorRel.getString(1) == mail) {
+                String PrenomNom = PrenomNomFromMail(cursorRel.getString(0));
+                liste_des_relations.add(PrenomNom);
+            }
+            cursorRel.moveToNext();
+        }
+        cursorRel.close();
+
+        List<String> liste_All = new ArrayList<>();
+        String SQLAll = "select Mail FROM Utilisateur";
+        Cursor cursorAll = db.rawQuery(SQLAll,new String[]{"Mail"});
+        cursorAll.moveToFirst();
+
+        while( cursorAll.isAfterLast()) {
+            if (cursorAll.getString(0) == user) {
+                String PrenomNom = PrenomNomFromMail(cursorAll.getString(1));
+                liste_All.add(PrenomNom);
+            }
+            else if (cursorAll.getString(1) == user) {
+                String PrenomNom = PrenomNomFromMail(cursorAll.getString(0));
+                liste_All.add(PrenomNom);
+            }
+            cursorAll.moveToNext();
+        }
+        cursorAll.close();
+
+        liste_All.removeAll(liste_des_relations);
+        ArrayList<String> User= new ArrayList<String>();
+        User.add(user);
+        liste_All.removeAll(User);
+
+        return liste_All;
+    }
+
+    public String PrenomNomFromMail(String mail){
+        Log.d("DEBUG : CHERCHE AMIS", " Construction des amis ");
+        String SQL = "select Prénom, Nom FROM Utilisateur WHERE Mail = "+ mail;
+        SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
+        Cursor cursor = db.rawQuery(SQL,null);
+        return cursor.getString(1)+" "+cursor.getString(2);
+    }
+
+
 }

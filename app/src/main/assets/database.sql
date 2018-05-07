@@ -39,12 +39,12 @@ CREATE TABLE Proposition_dilemme (ID_dilemme TEXT NOT NULL REFERENCES Dilemme (I
 
 -- Table: Proposition_sondage
 DROP TABLE IF EXISTS Proposition_sondage;
-CREATE TABLE Proposition_sondage (IDsondage INTEGER NOT NULL REFERENCES Sondage (IDsondage), "Ennoncé de la proposition" TEXT NOT NULL);
-INSERT INTO Proposition_sondage (IDsondage, "Ennoncé de la proposition") VALUES (1, 'Madrid');
-INSERT INTO Proposition_sondage (IDsondage, "Ennoncé de la proposition") VALUES (1, 'Paris');
-INSERT INTO Proposition_sondage (IDsondage, "Ennoncé de la proposition") VALUES (1, 'Londres');
-INSERT INTO Proposition_sondage (IDsondage, "Ennoncé de la proposition") VALUES (2, 'Bob');
-INSERT INTO Proposition_sondage (IDsondage, "Ennoncé de la proposition") VALUES (2, 'Francis');
+CREATE TABLE Proposition_sondage (IDsondage INTEGER NOT NULL REFERENCES Sondage (IDsondage), "Ennoncé_de_la_proposition" TEXT NOT NULL);
+INSERT INTO Proposition_sondage (IDsondage, "Ennoncé_de_la_proposition") VALUES (1, 'Madrid');
+INSERT INTO Proposition_sondage (IDsondage, "Ennoncé_de_la_proposition") VALUES (1, 'Paris');
+INSERT INTO Proposition_sondage (IDsondage, "Ennoncé_de_la_proposition") VALUES (1, 'Londres');
+INSERT INTO Proposition_sondage (IDsondage, "Ennoncé_de_la_proposition") VALUES (2, 'Bob');
+INSERT INTO Proposition_sondage (IDsondage, "Ennoncé_de_la_proposition") VALUES (2, 'Francis');
 
 -- Table: Question
 DROP TABLE IF EXISTS Question;
