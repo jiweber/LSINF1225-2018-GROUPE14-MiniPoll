@@ -64,7 +64,7 @@ public class ConnexionActivity extends AppCompatActivity {
             String mail = et_mail.getText().toString();
             String pass = et_password.getText().toString();
             SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
-            String SQL = "select \"Mot de passe\", Nom, Prénom, Photo FROM Utilisateur WHERE Mail = ?";
+            String SQL = "select Mot_de_passe, Nom, Prenom, Photo FROM Utilisateur WHERE Mail = ?";
             Cursor c = db.rawQuery(SQL,new String[]{mail});
             c.moveToFirst();
             if(c.isAfterLast())
