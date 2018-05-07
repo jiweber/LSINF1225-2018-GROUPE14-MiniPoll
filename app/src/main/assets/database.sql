@@ -64,13 +64,13 @@ INSERT INTO Questionnaire (IDquestionnaire, Titre, Auteur) VALUES (2, 'Maths', '
 
 -- Table: Relation
 DROP TABLE IF EXISTS Relation;
-CREATE TABLE Relation (Utilisateur1 TEXT NOT NULL REFERENCES Utilisateur (Mail) ON DELETE CASCADE ON UPDATE CASCADE MATCH FULL, Utilisateur2 TEXT NOT NULL REFERENCES Utilisateur (Mail) ON DELETE CASCADE ON UPDATE CASCADE, Statut TEXT NOT NULL DEFAULT 'En attente' CHECK (statut IN ('Ami', 'En attente', 'Rejet')), PRIMARY KEY (Utilisateur1, Utilisateur2), FOREIGN KEY (Utilisateur2) REFERENCES Utilisateur (Mail), FOREIGN KEY (Utilisateur1) REFERENCES Utilisateur (Mail));
+CREATE TABLE Relation (Utilisateur1 TEXT NOT NULL REFERENCES Utilisateur (Mail) ON DELETE CASCADE ON UPDATE CASCADE MATCH FULL, Utilisateur2 TEXT NOT NULL REFERENCES Utilisateur (Mail) ON DELETE CASCADE ON UPDATE CASCADE, Statut TEXT NOT NULL DEFAULT 'En_attente' CHECK (statut IN ('Ami', 'En_attente', 'Rejet')), PRIMARY KEY (Utilisateur1, Utilisateur2), FOREIGN KEY (Utilisateur2) REFERENCES Utilisateur (Mail), FOREIGN KEY (Utilisateur1) REFERENCES Utilisateur (Mail));
 INSERT INTO Relation (Utilisateur1, Utilisateur2, Statut) VALUES ('harry.smith@mymail.com', 'a', 'Ami');
 INSERT INTO Relation (Utilisateur1, Utilisateur2, Statut) VALUES ('gb@ucluvain.be', 'a', 'Ami');
-INSERT INTO Relation (Utilisateur1, Utilisateur2, Statut) VALUES ('jw@uclouvain.be', 'harry.smith@mymail.com', 'En attente');
+INSERT INTO Relation (Utilisateur1, Utilisateur2, Statut) VALUES ('jw@uclouvain.be', 'harry.smith@mymail.com', 'En_attente');
 INSERT INTO Relation (Utilisateur1, Utilisateur2, Statut) VALUES ('adb@uclouvain.be', 'a', 'Ami');
 INSERT INTO Relation (Utilisateur1, Utilisateur2, Statut) VALUES ('jw@uclouvain.be', 'a', 'Ami');
-INSERT INTO Relation (Utilisateur1, Utilisateur2, Statut) VALUES ('LDV@uclouvain.be', 'a', 'Ami');
+INSERT INTO Relation (Utilisateur1, Utilisateur2, Statut) VALUES ('LDV@uclouvain.be', 'a', 'En_attente');
 INSERT INTO Relation (Utilisateur1, Utilisateur2, Statut) VALUES ('gb@ucluvain.be', 'LDV@uclouvain.be', 'Ami');
 
 -- Table: Reponse_questionnnaire
