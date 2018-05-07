@@ -97,6 +97,8 @@ public class MenuPrincipalActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             Log.i("DEBUG","Bouton aide");
+            Intent dilemmes = new Intent(getApplicationContext(), MyDilemmeActivity.class);
+            startActivity(dilemmes);
         }
     };
 
