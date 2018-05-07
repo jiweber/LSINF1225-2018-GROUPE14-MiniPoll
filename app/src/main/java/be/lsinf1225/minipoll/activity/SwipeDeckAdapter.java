@@ -1,15 +1,21 @@
 package be.lsinf1225.minipoll.activity;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.List;
 
+import be.lsinf1225.minipoll.MySondagesAdapter;
 import be.lsinf1225.minipoll.R;
 import be.lsinf1225.minipoll.model.User;
+
+import static be.lsinf1225.minipoll.MiniPoll.getContext;
 
 public class SwipeDeckAdapter extends BaseAdapter {
 
@@ -39,20 +45,27 @@ public class SwipeDeckAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
-        View v = convertView;
-        if(v == null){
-            LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            // normally use a viewholder
-            v = inflater.inflate(R.layout.tinder_card, parent, false);
+        if(convertView == null){
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.tinder_card,parent, false);
+        }
+        SwipeDeckAdapter.DeckViewHolder viewHolder = (SwipeDeckAdapter.DeckViewHolder) convertView.getTag();
+        if(viewHolder == null){
+            viewHolder = new SwipeDeckAdapter.DeckViewHolder();
+            viewHolder.name = (TextView) convertView.findViewById(R.id.tinder_name);
+            viewHolder.profile_image = (ImageView) convertView.findViewById(R.id.tinder_picture);
+            convertView.setTag(viewHolder);
         }
 
-        v.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String item = (String)getItem(position);
-            }
-        });
+        viewHolder.name.setText(data.get(position).getPrenom() + " " + data.get(position).getNom());
+        Bitmap bitmap = data.get(position).getBitmap();
+        if (bitmap != null)viewHolder.profile_image.setImageBitmap(bitmap);
 
-        return v;
+
+        return convertView;
+    }
+
+    private class DeckViewHolder{
+        public TextView name;
+        public ImageView profile_image;
     }
 }

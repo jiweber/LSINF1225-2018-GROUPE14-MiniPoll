@@ -13,7 +13,7 @@ public class User {
     private String bestFriend;
     private Bitmap bitmap;
 
-    public User(String mail, String mdp, String prenom, String nom, Bitmap bitmap) {
+    public User(String mail, String nom, String prenom, String mdp, Bitmap bitmap) {
         this.mail = mail;
         this.mdp = mdp;
         this.prenom = prenom;

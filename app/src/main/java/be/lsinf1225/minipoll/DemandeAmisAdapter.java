@@ -62,7 +62,7 @@ public class DemandeAmisAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         MyViewHolder myViewHolder = (MyViewHolder) holder;
-        myViewHolder.tv_ami.setText(amis.get(position).getNom());
+        myViewHolder.tv_ami.setText(amis.get(position).getPrenom() + " " +amis.get(position).getNom() );
         myViewHolder.btn_accept.setOnClickListener(acceptClickListener);
         Bitmap bitmap = MiniPoll.getConnected_user().getBitmap();
         if (bitmap == null){
