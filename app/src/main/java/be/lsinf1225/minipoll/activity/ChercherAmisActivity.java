@@ -25,6 +25,8 @@ public class ChercherAmisActivity extends AppCompatActivity {
     Button btn_cancel;
     Button btn_accept;
     SwipeDeck cardStack;
+    ArrayList<User> data;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,11 +50,7 @@ public class ChercherAmisActivity extends AppCompatActivity {
 
         cardStack = (SwipeDeck) findViewById(R.id.swipe_deck);
 
-        final ArrayList<User> data = new ArrayList<>();
-        data.add(new User("test", "test", "test", "test", "test"));
-        data.add(new User("test", "test", "test", "test", "test"));
-        data.add(new User("test", "test", "test", "test", "test"));
-        data.add(new User("test", "test", "test", "test", "test"));
+        data = listePasAmis();
 
 
         final SwipeDeckAdapter adapter = new SwipeDeckAdapter(data, this);
@@ -86,15 +84,24 @@ public class ChercherAmisActivity extends AppCompatActivity {
         });
     };
 
-    public ArrayList<String> listePasAmis(){
-        ArrayList<String> pas_amis = new ArrayList<>();
+    public ArrayList<User> listePasAmis(){
+        ArrayList<User> pas_amis = new ArrayList<>();
         String mail = MiniPoll.getConnected_user().getMail();
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
-        String sql = "SELECT U.Mail FROM Utilisateur U, Relation R WHERE  (R.Utilisateur1=?) OR (R.Utilisateur2=?);";
-        Cursor cursorRel = db.rawQuery(sql,new String[]{mail, mail, });
+        String sql = "SELECT Mail Nom Prenom Mot_de_passe Photo" +
+                "FROM Utilisateur" +
+                "WHERE Mail IS NOT ?" +
+                "EXCEPT" +
+                "SELECT U.MAIL" +
+                "FROM Utilisateur U Relation R" +
+                "WHERE (" +
+                "U.Mail = R.Utilisateur1 AND R.Utilisateur2 = ?" +
+                ") OR (" +
+                "U.Mail = R.Utilisateur2 AND R.Utilisateur1 = ?)";
+        Cursor cursorRel = db.rawQuery(sql,new String[]{mail, mail,mail });
         cursorRel.moveToFirst();
         while(!cursorRel.isAfterLast()){
-
+            pas_amis.add(new User(cursorRel.getString(0), cursorRel.getString(1),cursorRel.getString(2),cursorRel.getString(3), cursorRel.getString(4) ));
             cursorRel.moveToNext();
         }
         cursorRel.close();
