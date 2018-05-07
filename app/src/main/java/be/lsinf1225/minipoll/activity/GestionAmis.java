@@ -44,7 +44,7 @@ public class GestionAmis extends AppCompatActivity {
         demandes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), DemandeAmisActivity.class);
+                Intent intent = new Intent(getApplicationContext(), DemandesAmisActivity.class);
                 startActivity(intent);
             }
         });
