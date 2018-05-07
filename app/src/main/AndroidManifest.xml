@@ -42,6 +42,11 @@
         <activity android:name=".activity.SondageActivity" />
         <activity android:name=".activity.Inscription" />
         <activity android:name=".activity.CreationProfil"></activity>
+        <activity
+            android:name=".activity.MyQstActivity"
+            android:label="@string/title_qst">
+
+        </activity>
     </application>
 
 </manifest>
