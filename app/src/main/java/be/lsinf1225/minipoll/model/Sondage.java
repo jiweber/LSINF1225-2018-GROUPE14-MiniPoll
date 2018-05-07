@@ -57,6 +57,7 @@ public class Sondage{
             if(participant.compareTo(participants[i]) == 0){
                 return i;
             }
+            Log.i("test2", participant + " != " + participants[i]);
         }
         return -1;
     }
@@ -79,7 +80,7 @@ public class Sondage{
             }
         }
         String[] tab = new String[list.size()];
-        tab = (String []) list.toArray();
+        tab = list.toArray(tab);
         return tab;
     }
 
@@ -94,16 +95,18 @@ public class Sondage{
         return creator;
     }
 
-    public int getStatus(String mail){
-        double rand = Math.random()*3;
-        if(rand>=0 && rand<1) return 0;
-        if(rand>=1 && rand<2) return 1;
-        return 2;
-//       if(remainingAnswers == 0) return 2;
-//        if(answers[getParticipantIndex(mail)] == -1){
-//            return 0;
-//        }
-//        return 1;
+    public int getStatus(){
+        String mail = MiniPoll.getConnected_user().getMail();
+//        double rand = Math.random()*3;
+//        if(rand>=0 && rand<1) return 0;
+//        if(rand>=1 && rand<2) return 1;
+//        return 2;
+        if(mail.compareTo(creator) == 0) return 3;
+        if(remainingAnswers == 0) return 2;
+        if(answers[getParticipantIndex(mail)] == -1){
+            return 0;
+        }
+        return 1;
     }
 
     public String[] getEnonces(){
@@ -183,10 +186,6 @@ public class Sondage{
         return propositionsTab;
     }
 
-    public static String[] getRemainingFriends()
-    {
-        return null;                            //TODO
-    }
     private class Proposition {
         private String enonce;
         private int generalRank;
