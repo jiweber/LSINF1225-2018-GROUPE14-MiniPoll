@@ -17,15 +17,17 @@ public class Questnr {
     private String AuteurQstnr;
     private int ScoreQstnr;
     private int nbrQuestions;
+    private int StatutQstnr;
 
     //private static SparseArray<Questnr> questnrSparseArray = new SparseArray<>();
 
-    private Questnr(int IDquestnr, String titre, String auteur,int score,int nbr_qst) {
+    private Questnr(int IDquestnr, String titre, String auteur,int score,int nbr_qst,int statut) {
         this.IDQstnr = IDquestnr;
         this.TitreQstnr = titre;
         this.AuteurQstnr = auteur;
         this.ScoreQstnr = score;
         this.nbrQuestions = nbr_qst;
+        this.StatutQstnr = statut;
         //Questnr.questnrSparseArray.put(IDquestnr,this);
     }
 
@@ -62,7 +64,7 @@ public class Questnr {
 
         String mail = MiniPoll.getConnected_user().getMail();
 
-        String sqlMain = "SELECT Q.IDquestionnaire, Q.Titre, Q.Auteur, PQ.Score, nbr_qst" +
+        String sqlMain = "SELECT Q.IDquestionnaire, Q.Titre, Q.Auteur, PQ.Score, nbr_qst, PQ.Statut" +
                 " FROM Questionnaire Q, Participation_questionnaire PQ, " +
                 "(SELECT Qstnr.IDquestionnaire, count(*) as nbr_qst" +
                 " FROM Questionnaire qstnr,Question qst" +
@@ -80,7 +82,7 @@ public class Questnr {
         count.moveToFirst();
 
         if(count.getInt(0)==0){
-            questnrs.add(new Questnr(0,"Pas de Questionnaire en cours",null,0,0));
+            questnrs.add(new Questnr(0,"Pas de Questionnaire en cours",null,0,0,0));
         } else {
             // récupération de l'IDquestionnaire, le titre, l'auteur du score et du nbr de questions
             Cursor c = db.rawQuery(sqlMain,null);
@@ -91,13 +93,14 @@ public class Questnr {
                 String auteur = c.getString(2);
                 int score = c.getInt(3);
                 int nbr = c.getInt(4);
+                int statut = c.getInt(5);
 
                 /*Questnr questnr = Questnr.questnrSparseArray.get(id);
                 if(questnr==null){
                     questnr = new Questnr(id,titre,auteur,score);
                 }*/
 
-                Questnr questnr = new Questnr(id,titre,auteur,score,nbr);
+                Questnr questnr = new Questnr(id,titre,auteur,score,nbr,statut);
 
                 questnrs.add(questnr);
                 c.moveToNext();
@@ -130,7 +133,8 @@ public class Questnr {
                         + " Titre: " + TitreQstnr
                         + " Auteur: " + AuteurQstnr
                         + " Score: " + ScoreQstnr
-                        + " Nbr de questions: " + nbrQuestions;
+                        + " Nbr de questions: " + nbrQuestions
+                        + " Statut : " + StatutQstnr;
         return resume;
     }
 

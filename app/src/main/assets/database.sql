@@ -18,11 +18,12 @@ CREATE TABLE Participant_dilemme (ID_proposition REFERENCES Proposition_dilemme 
 
 -- Table: Participation_questionnaire
 DROP TABLE IF EXISTS Participation_questionnaire;
-CREATE TABLE Participation_questionnaire (Mail TEXT NOT NULL REFERENCES Utilisateur (Mail) ON DELETE CASCADE ON UPDATE CASCADE, IDquestionnaire INTEGER NOT NULL REFERENCES Questionnaire (IDquestionnaire) ON DELETE CASCADE ON UPDATE CASCADE, Score INTEGER DEFAULT (0), PRIMARY KEY (Mail, IDquestionnaire), FOREIGN KEY (Mail) REFERENCES Utilisateur (Mail));
-INSERT INTO Participation_questionnaire (Mail, IDquestionnaire, Score) VALUES ('a', 1, 2);
-INSERT INTO Participation_questionnaire (Mail, IDquestionnaire, Score) VALUES ('LDV@uclouvain.be', 1, 0);
-INSERT INTO Participation_questionnaire (Mail, IDquestionnaire, Score) VALUES ('LDV@uclouvain.be', 2, 2);
-INSERT INTO Participation_questionnaire (Mail, IDquestionnaire, Score) VALUES ('a', 2, 2);
+CREATE TABLE Participation_questionnaire (Mail TEXT NOT NULL REFERENCES Utilisateur (Mail) ON DELETE CASCADE ON UPDATE CASCADE, IDquestionnaire INTEGER NOT NULL REFERENCES Questionnaire (IDquestionnaire) ON DELETE CASCADE ON UPDATE CASCADE, Score INTEGER DEFAULT (0), Statut INTEGER DEFAULT (0), PRIMARY KEY (Mail, IDquestionnaire), FOREIGN KEY (Mail) REFERENCES Utilisateur (Mail));
+INSERT INTO Participation_questionnaire (Mail, IDquestionnaire, Score, Statut) VALUES ('a', 1, 2, 2);
+INSERT INTO Participation_questionnaire (Mail, IDquestionnaire, Score, Statut) VALUES ('LDV@uclouvain.be', 1, 0, 0);
+INSERT INTO Participation_questionnaire (Mail, IDquestionnaire, Score, Statut) VALUES ('LDV@uclouvain.be', 2, 1, 2);
+INSERT INTO Participation_questionnaire (Mail, IDquestionnaire, Score, Statut) VALUES ('a', 2, 1, 1);
+
 
 -- Table: Participation_sondage
 DROP TABLE IF EXISTS Participation_sondage;
