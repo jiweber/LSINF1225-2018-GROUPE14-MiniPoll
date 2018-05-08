@@ -43,6 +43,8 @@
         <activity android:name=".activity.Inscription" />
         <activity android:name=".activity.NewDilemmeActivity" />
         <activity android:name=".activity.CreationProfil"></activity>
+        <activity android:name=".activity.MyQstActivity"
+            android:label="@string/title_qst"/>
     </application>
 
 </manifest>

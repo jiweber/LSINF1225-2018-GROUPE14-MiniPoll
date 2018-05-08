@@ -1,7 +1,7 @@
 --
--- File generated with SQLiteStudio v3.1.1 on Mon May 7 15:53:44 2018
+-- File generated with SQLiteStudio v3.1.1 on mar. mai 8 11:41:32 2018
 --
--- Text encoding used: ISO-8859-4
+-- Text encoding used: System
 --
 PRAGMA foreign_keys = off;
 BEGIN TRANSACTION;
@@ -18,9 +18,9 @@ CREATE TABLE Participant_dilemme (ID_proposition REFERENCES Proposition_dilemme 
 
 -- Table: Participation_questionnaire
 DROP TABLE IF EXISTS Participation_questionnaire;
-CREATE TABLE Participation_questionnaire (Mail TEXT NOT NULL REFERENCES Utilisateur (Mail) ON DELETE CASCADE ON UPDATE CASCADE, IDquestionnaire INTEGER NOT NULL REFERENCES Questionnaire (IDquestionnaire) ON DELETE CASCADE ON UPDATE CASCADE, Score INTEGER, PRIMARY KEY (Mail, IDquestionnaire), FOREIGN KEY (Mail) REFERENCES Utilisateur (Mail));
+CREATE TABLE Participation_questionnaire (Mail TEXT NOT NULL REFERENCES Utilisateur (Mail) ON DELETE CASCADE ON UPDATE CASCADE, IDquestionnaire INTEGER NOT NULL REFERENCES Questionnaire (IDquestionnaire) ON DELETE CASCADE ON UPDATE CASCADE, Score INTEGER DEFAULT (0), PRIMARY KEY (Mail, IDquestionnaire), FOREIGN KEY (Mail) REFERENCES Utilisateur (Mail));
 INSERT INTO Participation_questionnaire (Mail, IDquestionnaire, Score) VALUES ('a', 1, 2);
-INSERT INTO Participation_questionnaire (Mail, IDquestionnaire, Score) VALUES ('LDV@uclouvain.be', 1, NULL);
+INSERT INTO Participation_questionnaire (Mail, IDquestionnaire, Score) VALUES ('LDV@uclouvain.be', 1, 0);
 INSERT INTO Participation_questionnaire (Mail, IDquestionnaire, Score) VALUES ('LDV@uclouvain.be', 2, 2);
 INSERT INTO Participation_questionnaire (Mail, IDquestionnaire, Score) VALUES ('a', 2, 2);
 
@@ -49,12 +49,12 @@ INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition) VALUES (2
 
 -- Table: Question
 DROP TABLE IF EXISTS Question;
-CREATE TABLE Question (IDquestion INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, IDquestionnaire TEXT NOT NULL REFERENCES Questionnaire (IDquestionnaire) ON DELETE CASCADE ON UPDATE CASCADE, Enonce TEXT NOT NULL);
-INSERT INTO Question (IDquestion, IDquestionnaire, Enonce) VALUES (1, '1', 'Quand fut d?couvert l''Am?rique ?');
-INSERT INTO Question (IDquestion, IDquestionnaire, Enonce) VALUES (2, '1', 'Cr?ation de la Belgique ?');
-INSERT INTO Question (IDquestion, IDquestionnaire, Enonce) VALUES (3, '2', '1+1=?');
-INSERT INTO Question (IDquestion, IDquestionnaire, Enonce) VALUES (4, '2', '3*6=?');
-INSERT INTO Question (IDquestion, IDquestionnaire, Enonce) VALUES (5, '1', 'Bataille de Hastings');
+CREATE TABLE Question (IDquestion INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, IDquestionnaire TEXT NOT NULL REFERENCES Questionnaire (IDquestionnaire) ON DELETE CASCADE ON UPDATE CASCADE, Enonce TEXT NOT NULL, number INTEGER NOT NULL);
+INSERT INTO Question (IDquestion, IDquestionnaire, Enonce, number) VALUES (1, '1', 'Quand fut découvert l''Amérique ?', 1);
+INSERT INTO Question (IDquestion, IDquestionnaire, Enonce, number) VALUES (2, '1', 'Création de la Belgique ?', 2);
+INSERT INTO Question (IDquestion, IDquestionnaire, Enonce, number) VALUES (3, '1', 'Actuel Roi des belges ?', 3);
+INSERT INTO Question (IDquestion, IDquestionnaire, Enonce, number) VALUES (4, '2', '1+1=?', 1);
+INSERT INTO Question (IDquestion, IDquestionnaire, Enonce, number) VALUES (5, '2', '3*6=?', 2);
 
 -- Table: Questionnaire
 DROP TABLE IF EXISTS Questionnaire;
@@ -75,7 +75,27 @@ INSERT INTO Relation (Utilisateur1, Utilisateur2, Statut) VALUES ('gb@ucluvain.b
 
 -- Table: Reponse_questionnnaire
 DROP TABLE IF EXISTS Reponse_questionnnaire;
-CREATE TABLE Reponse_questionnnaire (IDquestion INTEGER REFERENCES Question (IDquestion) ON DELETE CASCADE ON UPDATE CASCADE NOT NULL, Format TEXT CHECK (format IN ('txt', 'pic')) NOT NULL, Enonce TEXT NOT NULL, Est_solution BOOLEAN NOT NULL CHECK (Est_solution IN ('true', 'false')));
+CREATE TABLE Reponse_questionnnaire (IDquestion INTEGER REFERENCES Question (IDquestion) ON DELETE CASCADE ON UPDATE CASCADE NOT NULL, Format TEXT CHECK (format IN ('txt', 'pic')) NOT NULL, Texte TEXT NOT NULL, Est_solution BOOLEAN NOT NULL CHECK (Est_solution IN ('true', 'false')));
+INSERT INTO Reponse_questionnnaire (IDquestion, Format, Texte, Est_solution) VALUES (1, 'txt', '1400', 'false');
+INSERT INTO Reponse_questionnnaire (IDquestion, Format, Texte, Est_solution) VALUES (1, 'txt', '1300', 'false');
+INSERT INTO Reponse_questionnnaire (IDquestion, Format, Texte, Est_solution) VALUES (1, 'txt', '1200', 'false');
+INSERT INTO Reponse_questionnnaire (IDquestion, Format, Texte, Est_solution) VALUES (1, 'txt', '1498', 'true');
+INSERT INTO Reponse_questionnnaire (IDquestion, Format, Texte, Est_solution) VALUES (2, 'txt', '1831', 'true');
+INSERT INTO Reponse_questionnnaire (IDquestion, Format, Texte, Est_solution) VALUES (2, 'txt', '1800', 'false');
+INSERT INTO Reponse_questionnnaire (IDquestion, Format, Texte, Est_solution) VALUES (2, 'txt', '1850', 'false');
+INSERT INTO Reponse_questionnnaire (IDquestion, Format, Texte, Est_solution) VALUES (2, 'txt', 'Wallonie indépendante', 'false');
+INSERT INTO Reponse_questionnnaire (IDquestion, Format, Texte, Est_solution) VALUES (3, 'txt', 'Albert 1', 'false');
+INSERT INTO Reponse_questionnnaire (IDquestion, Format, Texte, Est_solution) VALUES (3, 'txt', 'Philippe', 'true');
+INSERT INTO Reponse_questionnnaire (IDquestion, Format, Texte, Est_solution) VALUES (3, 'txt', 'Baudouin', 'false');
+INSERT INTO Reponse_questionnnaire (IDquestion, Format, Texte, Est_solution) VALUES (3, 'txt', 'Albert 2', 'false');
+INSERT INTO Reponse_questionnnaire (IDquestion, Format, Texte, Est_solution) VALUES (4, 'txt', '1', 'false');
+INSERT INTO Reponse_questionnnaire (IDquestion, Format, Texte, Est_solution) VALUES (4, 'txt', '2', 'true');
+INSERT INTO Reponse_questionnnaire (IDquestion, Format, Texte, Est_solution) VALUES (4, 'txt', '3', 'false');
+INSERT INTO Reponse_questionnnaire (IDquestion, Format, Texte, Est_solution) VALUES (4, 'txt', '4', 'false');
+INSERT INTO Reponse_questionnnaire (IDquestion, Format, Texte, Est_solution) VALUES (5, 'txt', '18', 'true');
+INSERT INTO Reponse_questionnnaire (IDquestion, Format, Texte, Est_solution) VALUES (5, 'txt', '21', 'false');
+INSERT INTO Reponse_questionnnaire (IDquestion, Format, Texte, Est_solution) VALUES (5, 'txt', '12', 'false');
+INSERT INTO Reponse_questionnnaire (IDquestion, Format, Texte, Est_solution) VALUES (5, 'txt', '24', 'false');
 
 -- Table: Sondage
 DROP TABLE IF EXISTS Sondage;
@@ -90,9 +110,9 @@ INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami")
 INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami") VALUES ('a', 'Debraie', 'Arthur', 'a', 'My_foto.jpeg', 'gb@ucluvain.be');
 INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami") VALUES ('LDV@', 'De Vogeleer', 'Louis', 'LDV', NULL, NULL);
 INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami") VALUES ('ADB@', 'de Biolley', 'Antoine', 'ADB', NULL, NULL);
-INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami") VALUES ('JW@', 'Weber', 'Jimmy', 'JW',NULL, NULL);
+INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami") VALUES ('JW@', 'Weber', 'Jimmy', 'JW', NULL, NULL);
 INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami") VALUES ('GB@', 'Bellon', 'Guillaume', 'GB', NULL, NULL);
-INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami") VALUES ('CD@', 'Dion', 'Celine', 'CD',NULL, NULL);
+INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami") VALUES ('CD@', 'Dion', 'Celine', 'CD', NULL, NULL);
 INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami") VALUES ('AJ@', 'Jolie', 'Angelina', 'AJ', NULL, NULL);
 INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami") VALUES ('AP@', 'Putin', 'Angelika', 'AP', NULL, NULL);
 INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami") VALUES ('MO@', 'Obama', 'Michele', 'MO', NULL, NULL);
