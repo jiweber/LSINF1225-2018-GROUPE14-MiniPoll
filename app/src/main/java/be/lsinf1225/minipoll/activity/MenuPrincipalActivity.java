@@ -6,10 +6,13 @@ import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import be.lsinf1225.minipoll.MySQLiteHelper;
 import be.lsinf1225.minipoll.R;
 
 public class MenuPrincipalActivity extends AppCompatActivity {
@@ -45,6 +48,28 @@ public class MenuPrincipalActivity extends AppCompatActivity {
 
         menu_activity = this;
 
+    }
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_sign_out: {
+                // TODO @guilaume bellon sign out
+                break;
+            }
+            case R.id.action_update_databas: {
+                MySQLiteHelper.updateDatabase();
+            }
+        }
+        return false;
     }
 
     View.OnClickListener btn_profil_ls = new View.OnClickListener() {

@@ -16,6 +16,7 @@ import android.widget.TextView;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import be.lsinf1225.minipoll.activity.DemandesAmisActivity;
 import be.lsinf1225.minipoll.model.User;
 
 
@@ -70,8 +71,9 @@ public class DemandeAmisAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         }else{
             myViewHolder.im_ami.setImageBitmap(bitmap);
-
         }
+        myViewHolder.btn_accept.setTag(position);
+        myViewHolder.btn_accept.setOnClickListener(acceptClickListener);
     }
 
 
@@ -84,7 +86,8 @@ public class DemandeAmisAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     View.OnClickListener acceptClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-
+            int position = (int) view.getTag();
+            DemandesAmisActivity.accepterAmi(amis.get(position),MiniPoll.getConnected_user());
         }
     };
 
