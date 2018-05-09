@@ -17,6 +17,7 @@ import java.util.List;
 
 import be.lsinf1225.minipoll.R;
 import be.lsinf1225.minipoll.model.Question;
+import be.lsinf1225.minipoll.model.Questnr;
 
 public class MyQstActivity extends AppCompatActivity {
 
@@ -42,21 +43,37 @@ public class MyQstActivity extends AppCompatActivity {
 
         qsts.setAdapter(adapter);
 
+        //retrieving Statut and nbr_qst for the questionnaire
+
+        final int Statut = Questnr.getSmallQstnr(Questnr.getSQLQuestnr(),id_qstnr).get(0).getStatutQstnr();
+        final int NbrQst = Questnr.getSmallQstnr(Questnr.getSQLQuestnr(),id_qstnr).get(0).getNbrQuestions();
+
         qsts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(MyQstActivity.this,MyReponseActivity.class);
 
                 String itemValue = (String) qsts.getItemAtPosition(i);
                 Log.i("Click on item: ",itemValue);
-
                 int itemPosition = (int) qsts.getItemIdAtPosition(i);
                 Log.i("QST_ID: ", String.valueOf(itemPosition));
                 int valueToPass = Question.getSmallQst(BigList,id_qstnr).get(itemPosition).getQstID();
                 Log.i("Value: ", String.valueOf(valueToPass));
-                intent.putExtra("id_qst",Question.getSmallQst(BigList,id_qstnr).get(itemPosition).getQstID());
 
-                startActivity(intent);
+                if(Question.getSmallQst(BigList,id_qstnr).get(itemPosition).getQstNum() <= Statut){
+
+                    Intent intent = new Intent(MyQstActivity.this,ReponseOverActivity.class);
+                    startActivity(intent);
+
+                } else{
+
+                    Intent intent = new Intent(MyQstActivity.this,MyReponseActivity.class);
+
+                    intent.putExtra("id_qst",Question.getSmallQst(BigList,id_qstnr).get(itemPosition).getQstID());
+                    intent.putExtra("title_qst",Question.getSmallQst(BigList,id_qstnr).get(itemPosition).getQstTitle());
+                    //intent.putExtra("id_qstnr",id_qstnr);
+
+                    startActivity(intent);
+                }
 
             }
         });

@@ -47,6 +47,8 @@
             android:label="@string/title_qst"/>
         <activity android:name=".activity.MyReponseActivity"
             android:label="@string/title_reponse"/>
+        <activity android:name=".activity.ReponseOverActivity"
+            android:label=" "/>
     </application>
 
 </manifest>

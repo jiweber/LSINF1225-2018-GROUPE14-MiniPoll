@@ -61,7 +61,7 @@ public class MenuPrincipalActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
+    /*@Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_sign_out: {
@@ -91,7 +91,7 @@ public class MenuPrincipalActivity extends AppCompatActivity {
             }
         }
         return false;
-    }
+    }*/
 
     View.OnClickListener btn_profil_ls = new View.OnClickListener() {
         @Override

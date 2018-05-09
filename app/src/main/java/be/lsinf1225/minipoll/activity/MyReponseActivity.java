@@ -16,7 +16,7 @@ import be.lsinf1225.minipoll.model.Reponse;
 
 public class MyReponseActivity extends AppCompatActivity {
 
-    private TextView enonce;
+    private TextView enonceQst;
     private ListView ListeReponses;
 
     private ArrayList<Reponse> BigList = Reponse.getSQLReponse();
@@ -28,9 +28,15 @@ public class MyReponseActivity extends AppCompatActivity {
         final int idQst = getIntent().getIntExtra("id_qst",0);
         Log.i("QUESTION_ID: ",String.valueOf(idQst));
 
+        final String enonce = getIntent().getStringExtra("title_qst");
+        Log.i("Title_qst: ",enonce);
+
+        /*final int idQstnr = getIntent().getIntExtra("id_qstnr",0);
+        Log.i("QSTNR_ID: ",String.valueOf(idQstnr));*/
+
         setContentView(R.layout.activity_reponse);
 
-        enonce =findViewById(R.id.enonceQst);
+        enonceQst =findViewById(R.id.enonceQst);
         ListeReponses=findViewById(R.id.listeReponses);
 
         List<String> ListeRep = Reponse.getTextes(Reponse.getSmallRep(BigList,idQst));
@@ -39,5 +45,6 @@ public class MyReponseActivity extends AppCompatActivity {
                 ListeRep);
 
         ListeReponses.setAdapter(adapter);
+        enonceQst.setText(enonce);
     }
 }

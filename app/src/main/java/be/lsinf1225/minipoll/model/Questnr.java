@@ -51,6 +51,9 @@ public class Questnr {
         return nbrQuestions;
     }
 
+    public int getStatutQstnr() {
+        return StatutQstnr;
+    }
 
     // incrémentation de Statut: à utiliser lorsque le ClinOnItem se produit
     // to do
@@ -116,6 +119,23 @@ public class Questnr {
         db.close();
 
         return questnrs;
+    }
+
+    public static ArrayList<Questnr> getSmallQstnr(ArrayList<Questnr> qtnrs,int idQstnr){
+
+        ArrayList<Questnr> SmallQstnr = new ArrayList<Questnr>();
+
+        int j=0;
+
+        for(int i=0;i<qtnrs.size();i++){
+            if(qtnrs.get(i).getIDQstnr()==idQstnr){
+                SmallQstnr.add(qtnrs.get(i));
+                j++;
+            }
+        }
+
+        return SmallQstnr;
+
     }
 
     // methode pour simplifier l'affichage des sujest dans l'activité MyQuestnrActivity
