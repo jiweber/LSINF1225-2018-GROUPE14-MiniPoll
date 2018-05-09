@@ -45,6 +45,8 @@
         <activity android:name=".activity.CreationProfil"></activity>
         <activity android:name=".activity.MyQstActivity"
             android:label="@string/title_qst"/>
+        <activity android:name=".activity.MyReponseActivity"
+            android:label="@string/title_reponse"/>
     </application>
 
 </manifest>

@@ -3,6 +3,7 @@ package be.lsinf1225.minipoll.model;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,11 +83,30 @@ public class Question {
         return titles;
     }
 
+    public static ArrayList<Question> getSmallQst(ArrayList<Question> questions,int IDqstnr){
+
+        ArrayList<Question> SmallQstnr = new ArrayList<Question>();
+
+        int j=0;
+
+        for (int i=0;i<questions.size();i++){
+            Log.i("Qst_list: ", questions.get(i).toString());
+
+            if(questions.get(i).getQstnrID()==IDqstnr){
+                SmallQstnr.add(questions.get(i));
+                j++;
+            }
+        }
+
+        return SmallQstnr;
+
+    }
+
     public String toString(){
         String resume = "ID qstnr: " + QstnrID
-                      + "ID question: " + QstID
-                      + "Enoncé: " + QstTitle
-                      + "Numéro de la question: " + QstNum;
+                      + " ID question: " + QstID
+                      + " Enoncé: " + QstTitle
+                      + " Numéro de la question: " + QstNum;
 
         return resume;
     }

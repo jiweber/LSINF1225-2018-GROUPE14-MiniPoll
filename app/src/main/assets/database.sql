@@ -75,28 +75,28 @@ INSERT INTO Relation (Utilisateur1, Utilisateur2, Statut) VALUES ('LDV@uclouvain
 INSERT INTO Relation (Utilisateur1, Utilisateur2, Statut) VALUES ('gb@ucluvain.be', 'LDV@uclouvain.be', 'Ami');
 
 -- Table: Reponse_questionnnaire
-DROP TABLE IF EXISTS Reponse_questionnnaire;
-CREATE TABLE Reponse_questionnnaire (IDquestion INTEGER REFERENCES Question (IDquestion) ON DELETE CASCADE ON UPDATE CASCADE NOT NULL, Format TEXT CHECK (format IN ('txt', 'pic')) NOT NULL, Texte TEXT NOT NULL, Est_solution BOOLEAN NOT NULL CHECK (Est_solution IN ('true', 'false')));
-INSERT INTO Reponse_questionnnaire (IDquestion, Format, Texte, Est_solution) VALUES (1, 'txt', '1400', 'false');
-INSERT INTO Reponse_questionnnaire (IDquestion, Format, Texte, Est_solution) VALUES (1, 'txt', '1300', 'false');
-INSERT INTO Reponse_questionnnaire (IDquestion, Format, Texte, Est_solution) VALUES (1, 'txt', '1200', 'false');
-INSERT INTO Reponse_questionnnaire (IDquestion, Format, Texte, Est_solution) VALUES (1, 'txt', '1498', 'true');
-INSERT INTO Reponse_questionnnaire (IDquestion, Format, Texte, Est_solution) VALUES (2, 'txt', '1831', 'true');
-INSERT INTO Reponse_questionnnaire (IDquestion, Format, Texte, Est_solution) VALUES (2, 'txt', '1800', 'false');
-INSERT INTO Reponse_questionnnaire (IDquestion, Format, Texte, Est_solution) VALUES (2, 'txt', '1850', 'false');
-INSERT INTO Reponse_questionnnaire (IDquestion, Format, Texte, Est_solution) VALUES (2, 'txt', 'Wallonie indépendante', 'false');
-INSERT INTO Reponse_questionnnaire (IDquestion, Format, Texte, Est_solution) VALUES (3, 'txt', 'Albert 1', 'false');
-INSERT INTO Reponse_questionnnaire (IDquestion, Format, Texte, Est_solution) VALUES (3, 'txt', 'Philippe', 'true');
-INSERT INTO Reponse_questionnnaire (IDquestion, Format, Texte, Est_solution) VALUES (3, 'txt', 'Baudouin', 'false');
-INSERT INTO Reponse_questionnnaire (IDquestion, Format, Texte, Est_solution) VALUES (3, 'txt', 'Albert 2', 'false');
-INSERT INTO Reponse_questionnnaire (IDquestion, Format, Texte, Est_solution) VALUES (4, 'txt', '1', 'false');
-INSERT INTO Reponse_questionnnaire (IDquestion, Format, Texte, Est_solution) VALUES (4, 'txt', '2', 'true');
-INSERT INTO Reponse_questionnnaire (IDquestion, Format, Texte, Est_solution) VALUES (4, 'txt', '3', 'false');
-INSERT INTO Reponse_questionnnaire (IDquestion, Format, Texte, Est_solution) VALUES (4, 'txt', '4', 'false');
-INSERT INTO Reponse_questionnnaire (IDquestion, Format, Texte, Est_solution) VALUES (5, 'txt', '18', 'true');
-INSERT INTO Reponse_questionnnaire (IDquestion, Format, Texte, Est_solution) VALUES (5, 'txt', '21', 'false');
-INSERT INTO Reponse_questionnnaire (IDquestion, Format, Texte, Est_solution) VALUES (5, 'txt', '12', 'false');
-INSERT INTO Reponse_questionnnaire (IDquestion, Format, Texte, Est_solution) VALUES (5, 'txt', '24', 'false');
+DROP TABLE IF EXISTS Reponse_questionnaire;
+CREATE TABLE Reponse_questionnaire (IDquestion INTEGER REFERENCES Question (IDquestion) ON DELETE CASCADE ON UPDATE CASCADE NOT NULL, Format TEXT CHECK (format IN ('txt', 'pic')) NOT NULL, Texte TEXT NOT NULL, Est_solution TEXT NOT NULL CHECK (Est_solution IN ('true', 'false')));
+INSERT INTO Reponse_questionnaire (IDquestion, Format, Texte, Est_solution) VALUES (1, 'txt', '1400', 'false');
+INSERT INTO Reponse_questionnaire (IDquestion, Format, Texte, Est_solution) VALUES (1, 'txt', '1300', 'false');
+INSERT INTO Reponse_questionnaire (IDquestion, Format, Texte, Est_solution) VALUES (1, 'txt', '1200', 'false');
+INSERT INTO Reponse_questionnaire (IDquestion, Format, Texte, Est_solution) VALUES (1, 'txt', '1498', 'true');
+INSERT INTO Reponse_questionnaire (IDquestion, Format, Texte, Est_solution) VALUES (2, 'txt', '1831', 'true');
+INSERT INTO Reponse_questionnaire (IDquestion, Format, Texte, Est_solution) VALUES (2, 'txt', '1800', 'false');
+INSERT INTO Reponse_questionnaire (IDquestion, Format, Texte, Est_solution) VALUES (2, 'txt', '1850', 'false');
+INSERT INTO Reponse_questionnaire (IDquestion, Format, Texte, Est_solution) VALUES (2, 'txt', 'Wallonie indépendante', 'false');
+INSERT INTO Reponse_questionnaire (IDquestion, Format, Texte, Est_solution) VALUES (3, 'txt', 'Albert 1', 'false');
+INSERT INTO Reponse_questionnaire (IDquestion, Format, Texte, Est_solution) VALUES (3, 'txt', 'Philippe', 'true');
+INSERT INTO Reponse_questionnaire (IDquestion, Format, Texte, Est_solution) VALUES (3, 'txt', 'Baudouin', 'false');
+INSERT INTO Reponse_questionnaire (IDquestion, Format, Texte, Est_solution) VALUES (3, 'txt', 'Albert 2', 'false');
+INSERT INTO Reponse_questionnaire (IDquestion, Format, Texte, Est_solution) VALUES (4, 'txt', '1', 'false');
+INSERT INTO Reponse_questionnaire (IDquestion, Format, Texte, Est_solution) VALUES (4, 'txt', '2', 'true');
+INSERT INTO Reponse_questionnaire (IDquestion, Format, Texte, Est_solution) VALUES (4, 'txt', '3', 'false');
+INSERT INTO Reponse_questionnaire (IDquestion, Format, Texte, Est_solution) VALUES (4, 'txt', '4', 'false');
+INSERT INTO Reponse_questionnaire (IDquestion, Format, Texte, Est_solution) VALUES (5, 'txt', '18', 'true');
+INSERT INTO Reponse_questionnaire (IDquestion, Format, Texte, Est_solution) VALUES (5, 'txt', '21', 'false');
+INSERT INTO Reponse_questionnaire (IDquestion, Format, Texte, Est_solution) VALUES (5, 'txt', '12', 'false');
+INSERT INTO Reponse_questionnaire (IDquestion, Format, Texte, Est_solution) VALUES (5, 'txt', '24', 'false');
 
 -- Table: Sondage
 DROP TABLE IF EXISTS Sondage;
