@@ -7,18 +7,20 @@
     card_view:cardCornerRadius="6dp"
     card_view:cardElevation="10dp"
     >
-    <LinearLayout
+    <RelativeLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="200dp">
+        android:minHeight="200dp"
+        android:gravity="center">
         <TextView
             android:id="@+id/tinder_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <ImageView
+            android:layout_below="@id/tinder_name"
             android:id="@+id/tinder_picture"
             android:layout_width="100dp"
             android:layout_height="100dp" />
-    </LinearLayout>
+    </RelativeLayout>
 </android.support.v7.widget.CardView>

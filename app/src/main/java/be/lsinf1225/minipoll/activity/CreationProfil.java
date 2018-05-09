@@ -87,7 +87,7 @@ public class CreationProfil extends AppCompatActivity {
                     MySQLiteHelper.get().getWritableDatabase().execSQL(SQL, new Object[]{Mail, Name, Prename, Mdp, blob_image});
                     MiniPoll.notifyLong(R.string.Profilcree);
                     Intent menu = new Intent(getApplicationContext(), MenuPrincipalActivity.class);
-                    MiniPoll.setConnected_user(new User(Mail,Mdp,Prename,Name, CreationProfil.this.bitmap));
+                    MiniPoll.setConnected_user(new User(Mail, Name, Prename,Mdp, CreationProfil.this.bitmap));
                     startActivity(menu);
                     ConnexionActivity.connexion.finish();
                     Inscription.inscription.finish();

@@ -81,7 +81,7 @@ public class ConnexionActivity extends AppCompatActivity {
                 String prename = c.getString(2);
                 Bitmap bitmap = BitmapUtil.getBitmap(c.getBlob(3));
                 c.close();
-                MiniPoll.setConnected_user(new User(mail,pass,prename,name,bitmap));
+                MiniPoll.setConnected_user(new User(mail,name,prename,pass,bitmap));
                 Intent connected = new Intent(getApplicationContext(), MenuPrincipalActivity.class);
                 startActivity(connected);
                 finish();

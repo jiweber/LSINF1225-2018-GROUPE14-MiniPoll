@@ -62,7 +62,7 @@ public class ListeAmisAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     myViewHolder.nom_ami.setText(amis.get(position).getPrenom() + " " +amis.get(position).getNom() );
     Bitmap bitmap = amis.get(position).getBitmap();
     if (bitmap == null){
-      myViewHolder.photo_ami.setImageResource(R.drawable.friends);
+      myViewHolder.photo_ami.setImageResource(android.R.drawable.sym_def_app_icon);
 
     }else{
       myViewHolder.photo_ami.setImageBitmap(bitmap);

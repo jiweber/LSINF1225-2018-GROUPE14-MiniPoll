@@ -64,5 +64,7 @@
     <string name="nouveau_dilemme">Nouvelle demande d\'aide</string>
     <string name="inviter_un_ami">Inviter un ami</string>
     <string name="Titre">Titre</string>
+    <string name="title_reponse">Mes Réponses</string>
+    <string name="Reponse_is_over">Vous avez déjà répondu à la question</string>
 
 </resources>
