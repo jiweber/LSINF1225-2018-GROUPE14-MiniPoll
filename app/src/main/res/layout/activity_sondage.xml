@@ -44,14 +44,16 @@
             <ListView
                 android:id="@+id/lv_sondage"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_height="327dp"
                 android:layout_gravity="center"
-                android:background="@drawable/bg_key"/>
+                android:choiceMode="singleChoice"
+                android:listSelector="@color/pressed_color" />
 
             <Button
+                android:id="@+id/btn_envoyer"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center" />
+                android:layout_height="wrap_content"
+                android:text="Envoyer" />
 
         </LinearLayout>
     </ScrollView>

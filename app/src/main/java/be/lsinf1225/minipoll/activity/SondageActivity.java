@@ -1,10 +1,13 @@
 package be.lsinf1225.minipoll.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -20,6 +23,7 @@ public class SondageActivity extends AppCompatActivity {
     private TextView tv_amis;
     private TextView tv_titre;
     private Sondage sondage;
+    private Button button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +43,9 @@ public class SondageActivity extends AppCompatActivity {
         }
         tv_amis.setText(message);
 
+        button = (Button) findViewById(R.id.btn_envoyer);
+        button.setOnClickListener(envoyer);
+
         listview = (ListView) findViewById(R.id.lv_sondage);
         String[] propositions = sondage.getEnonces();
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(SondageActivity.this, android.R.layout.simple_list_item_1, propositions);
@@ -47,10 +54,19 @@ public class SondageActivity extends AppCompatActivity {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long arg3) {
-                view.setSelected(true);
-                String selected = (String) parent.getItemAtPosition(position);
-                //sondage.answerSondage(MiniPoll.getConnected_user().getMail(), selected);
+                if(!sondage.isCreator(MiniPoll.getConnected_user().getMail())) {
+                    listview.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
+                    listview.setSelector(android.R.color.holo_blue_light);
+                    String selected = (String) parent.getItemAtPosition(position);
+                    sondage.answerSondage(MiniPoll.getConnected_user().getMail(), selected);
+                }
             }
         });
     }
+    View.OnClickListener envoyer = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            //Intent pannel = new Intent(getApplicationContext(), SondagePannelActiviy.class);
+        }
+    };
 }

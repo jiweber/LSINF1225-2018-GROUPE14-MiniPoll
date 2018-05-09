@@ -27,7 +27,7 @@ public class MySondagesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_sondages);
         listview = (ListView) findViewById(R.id.lv_my_sondages);
-        sondages = Sondage.getCreatorSondages();
+        sondages = Sondage.getSondages();
         //sondages.addAll(getSondages("user"));
         MySondagesAdapter adapter = new MySondagesAdapter(MySondagesActivity.this, sondages);
         listview.setAdapter(adapter);
