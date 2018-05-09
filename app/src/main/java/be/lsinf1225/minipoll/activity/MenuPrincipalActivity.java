@@ -2,6 +2,8 @@ package be.lsinf1225.minipoll.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import be.lsinf1225.minipoll.MiniPoll;
 import be.lsinf1225.minipoll.MySQLiteHelper;
 import be.lsinf1225.minipoll.R;
 
@@ -62,11 +65,29 @@ public class MenuPrincipalActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_sign_out: {
-                // TODO @guilaume bellon sign out
+                MiniPoll.setConnected_user(null);
+                MenuPrincipalActivity.menu_activity.finish();
+                Intent log = new Intent(getApplicationContext(),ConnexionActivity.class);
+                startActivity(log);
+                finish();                break;
+            }
+            case R.id.action_upgrade_databas: {
+                MySQLiteHelper.upgradeDatabase(this);
                 break;
             }
-            case R.id.action_update_databas: {
-                MySQLiteHelper.updateDatabase();
+            case R.id.action_remove_relationships:{
+                SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
+                String deleteSql = "DROP TABLE IF EXISTS Relation";
+                db.execSQL(deleteSql);
+                String createSql = "CREATE TABLE Relation (" +
+                        "Utilisateur1 TEXT NOT NULL REFERENCES Utilisateur (Mail) ON DELETE CASCADE ON UPDATE CASCADE MATCH FULL, " +
+                        "Utilisateur2 TEXT NOT NULL REFERENCES Utilisateur (Mail) ON DELETE CASCADE ON UPDATE CASCADE, " +
+                        "Statut TEXT NOT NULL DEFAULT 'En_attente' CHECK (statut IN ('Ami', 'En_attente', 'Rejet')), " +
+                        "PRIMARY KEY (Utilisateur1, Utilisateur2), " +
+                        "FOREIGN KEY (Utilisateur2) REFERENCES Utilisateur (Mail), " +
+                        "FOREIGN KEY (Utilisateur1) REFERENCES Utilisateur (Mail)); " ;
+                db.execSQL(createSql);
+                break;
             }
         }
         return false;
