@@ -119,7 +119,7 @@ public class Questnr {
     }
 
     // methode pour simplifier l'affichage des sujest dans l'activité MyQuestnrActivity
-    public static List<String> getTtitles(){
+    public static List<String> getTitles(){
         List<String> titles = new ArrayList<String>();
         ArrayList<Questnr> qst = Questnr.getSQLQuestnr();
         for (int i=0;i < qst.size();i++){
