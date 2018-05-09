@@ -66,6 +66,7 @@ public class ChercherAmisActivity extends AppCompatActivity {
             @Override
             public void cardSwipedRight(int position) {
                 Log.i("MainActivity", "card was swiped right, position in adapter: " + position);
+                demanderAmi(MiniPoll.getConnected_user(), data.get(position));
             }
 
             @Override
@@ -108,59 +109,13 @@ public class ChercherAmisActivity extends AppCompatActivity {
 
     }
 
-    public List<String> ListeAmis(){
 
-        List<String> liste_des_relations = new ArrayList<>();
-        final String mail = MiniPoll.getConnected_user().getMail();
+
+    public void demanderAmi(User user1, User user2){ //User1 demande
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
-        String SQLRel = "select Ultilisateur1, Utilisateur2, Statut FROM Relation WHERE Utilisateur1 = ? or Utilisateur2 = ?;";
-        Cursor cursorRel = db.rawQuery(SQLRel,new String[]{mail, mail});
-        cursorRel.moveToFirst();
-
-        while( !cursorRel.isAfterLast()) {
-            if (cursorRel.getString(0) == mail) {
-                String PrenomNom = PrenomNomFromMail(cursorRel.getString(1));
-                liste_des_relations.add(PrenomNom);
-            } else if (cursorRel.getString(1) == mail) {
-                String PrenomNom = PrenomNomFromMail(cursorRel.getString(0));
-                liste_des_relations.add(PrenomNom);
-            }
-            cursorRel.moveToNext();
-        }
-        cursorRel.close();
-
-        List<String> liste_All = new ArrayList<>();
-        String SQLAll = "select Mail FROM Utilisateur";
-        Cursor cursorAll = db.rawQuery(SQLAll,new String[]{"Mail"});
-        cursorAll.moveToFirst();
-
-        while( cursorAll.isAfterLast()) {
-            if (cursorAll.getString(0) == mail) {
-                String PrenomNom = PrenomNomFromMail(cursorAll.getString(1));
-                liste_All.add(PrenomNom);
-            }
-            else if (cursorAll.getString(1) == mail) {
-                String PrenomNom = PrenomNomFromMail(cursorAll.getString(0));
-                liste_All.add(PrenomNom);
-            }
-            cursorAll.moveToNext();
-        }
-        cursorAll.close();
-
-        liste_All.removeAll(liste_des_relations);
-        ArrayList<String> User= new ArrayList<String>();
-        User.add(mail);
-        liste_All.removeAll(User);
-
-        return liste_All;
-    }
-
-    public String PrenomNomFromMail(String mail){
-        Log.d("DEBUG : CHERCHE AMIS", " Construction des amis ");
-        String SQL = "select Prénom, Nom FROM Utilisateur WHERE Mail = "+ mail;
-        SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
-        Cursor cursor = db.rawQuery(SQL,null);
-        return cursor.getString(1)+" "+cursor.getString(2);
+        String sql = "INSERT INTO Relation (Utilisateur1,Utilisateur2,Statut) "+
+                "VALUES(?, ?, \"En_attente\")";
+        db.execSQL(sql, new Object[]{user1.getMail(), user2.getMail()} );
     }
 
 

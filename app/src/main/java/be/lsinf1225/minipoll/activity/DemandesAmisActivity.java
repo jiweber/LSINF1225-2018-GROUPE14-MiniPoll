@@ -48,8 +48,8 @@ public class DemandesAmisActivity extends AppCompatActivity {
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
         String sql = "select * " +
                 "from Utilisateur U, Relation R " +
-                "where  R.Statut=\"En_attente\" and( (U.Mail=R.Utilisateur1 and R.Utilisateur2=?) or  (U.Mail=R.Utilisateur2 and R.Utilisateur1= ? )) ";
-        Cursor cursorRel = db.rawQuery(sql,new String[]{mail, mail }) ;
+                "where  R.Statut=\"En_attente\" and U.Mail=R.Utilisateur1 and R.Utilisateur2=?  ";
+        Cursor cursorRel = db.rawQuery(sql,new String[]{mail}) ;
         cursorRel.moveToFirst();
         while(!cursorRel.isAfterLast()){
             pas_amis.add(new User(cursorRel.getString(0), cursorRel.getString(1),cursorRel.getString(2),cursorRel.getString(3), BitmapUtil.getBitmap(cursorRel.getBlob(4)) ));

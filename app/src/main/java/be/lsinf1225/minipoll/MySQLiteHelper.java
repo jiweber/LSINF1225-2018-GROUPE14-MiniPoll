@@ -32,7 +32,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
      *
      * @note Le numéro de version doit changer de manière monotone.
      */
-    private static final int DATABASE_VERSION = 1;
+    private static  int DATABASE_VERSION = 4;
 
     /**
      * Instance de notre classe afin de pouvoir y accéder facilement depuis n'importe quel objet.
@@ -140,13 +140,19 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
      *
      * @post Les tables de la base de données passées en argument sont effacées.
      */
-    private void deleteDatabase(SQLiteDatabase db) {
+    private static void deleteDatabase(SQLiteDatabase db) {
         Cursor c = db.query("sqlite_master", new String[]{"name"}, "type = 'table' AND name NOT LIKE '%sqlite_%'", null, null, null, null, null);
         c.moveToFirst();
         while (!c.isAfterLast()) {
             db.execSQL("DROP TABLE IF EXISTS " + c.getString(0));
             c.moveToNext();
         }
+    }
+
+    public static void updateDatabase(){
+        DATABASE_VERSION++;
+        instance =null;
+        SQLiteDatabase db = get().getReadableDatabase();
     }
 
 }
