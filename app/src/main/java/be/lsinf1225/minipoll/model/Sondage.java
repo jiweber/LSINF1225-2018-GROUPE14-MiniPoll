@@ -156,6 +156,7 @@ public class Sondage{
         }
         c.close();
         db.close();
+        Log.i("test1","nombre de sondages : "+ sondages.size());
         return sondages;
     }
 

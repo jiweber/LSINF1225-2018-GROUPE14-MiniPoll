@@ -16,6 +16,10 @@ INSERT INTO Dilemme (IDdilemme, Auteur, Titre, Participant) VALUES (2, 'gb@uclou
 DROP TABLE IF EXISTS Participant_dilemme;
 CREATE TABLE Participant_dilemme (ID_proposition REFERENCES Proposition_dilemme (IDproposition) ON DELETE CASCADE ON UPDATE CASCADE NOT NULL, Evaluation CHECK (evaluation IN ('j aime', 'je n aime pas')));
 
+-- Table: Proposition_dilemme
+DROP TABLE IF EXISTS Proposition_dilemme;
+CREATE TABLE Proposition_dilemme (IDdilemme TEXT NOT NULL REFERENCES Dilemme (IDdilemme) ON DELETE CASCADE ON UPDATE CASCADE, Sujet TEXT NOT NULL, Format TEXT NOT NULL CHECK (format IN ('txt', 'pic')), IDproposition TEXT PRIMARY KEY NOT NULL REFERENCES Proposition_dilemme (IDproposition) ON DELETE CASCADE ON UPDATE CASCADE);
+
 -- Table: Participation_questionnaire
 DROP TABLE IF EXISTS Participation_questionnaire;
 CREATE TABLE Participation_questionnaire (Mail TEXT NOT NULL REFERENCES Utilisateur (Mail) ON DELETE CASCADE ON UPDATE CASCADE, IDquestionnaire INTEGER NOT NULL REFERENCES Questionnaire (IDquestionnaire) ON DELETE CASCADE ON UPDATE CASCADE, Score INTEGER DEFAULT (0), Statut INTEGER DEFAULT (0), PRIMARY KEY (Mail, IDquestionnaire), FOREIGN KEY (Mail) REFERENCES Utilisateur (Mail));
@@ -24,6 +28,14 @@ INSERT INTO Participation_questionnaire (Mail, IDquestionnaire, Score, Statut) V
 INSERT INTO Participation_questionnaire (Mail, IDquestionnaire, Score, Statut) VALUES ('ldv@uclouvain.be', 2, 1, 2);
 INSERT INTO Participation_questionnaire (Mail, IDquestionnaire, Score, Statut) VALUES ('a', 2, 1, 1);
 
+-- Table: Sondage
+DROP TABLE IF EXISTS Sondage;
+CREATE TABLE Sondage (IDsondage INTEGER NOT NULL DEFAULT 1 PRIMARY KEY AUTOINCREMENT UNIQUE, Nombre_choix INTEGER NOT NULL DEFAULT 2, Mail_auteur TEXT NOT NULL REFERENCES Utilisateur (Mail) ON DELETE CASCADE ON UPDATE CASCADE, Intitule TEXT NOT NULL, FOREIGN KEY (Mail_auteur) REFERENCES Utilisateur (Mail));
+INSERT INTO Sondage (IDsondage, Nombre_choix, Mail_auteur, Intitule) VALUES (1, 2, 'a', 'Plus belle capitale');
+INSERT INTO Sondage (IDsondage, Nombre_choix, Mail_auteur, Intitule) VALUES (2, 2, 'harry.smith@mymail.com', 'Nom de mon prochain fils');
+INSERT INTO Sondage (IDsondage, Nombre_choix, Mail_auteur, Intitule) VALUES (3, 2, 'jd@uclouvain.be', 'Vacances entre potes');
+INSERT INTO Sondage (IDsondage, Nombre_choix, Mail_auteur, Intitule) VALUES (4, 2, 'jw@uclouvain.be', 'Film cinéma vendredi');
+INSERT INTO Sondage (IDsondage, Nombre_choix, Mail_auteur, Intitule) VALUES (5, 2, 'ew@uclouvain.be', 'Participation soirée de gala');
 
 -- Table: Participation_sondage
 DROP TABLE IF EXISTS Participation_sondage;
@@ -34,11 +46,21 @@ INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) V
 INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('jw@uclouvain.be', 2, NULL, NULL);
 INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('gb@uclouvain.be', 2, NULL, NULL);
 INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('ldv@uclouvain.be', 2, 3, NULL);
-INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('a', 2, NULL, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('a', 3, NULL, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('gb@uclouvain.be', 3, 2, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('harry.smith@mymail.com', 3, 1, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('tc@uclouvain.be', 3, 0, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('jw@uclouvain.be', 3, 2, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('gb@uclouvain.be', 4, 4, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('harry.smith@mymail.com', 4, NULL, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('cd@uclouvain.be', 4, 1, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('a', 4, NULL, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('a', 5, 0, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('tc@uclouvain.be', 5, 2, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('gb@uclouvain.be', 5, 1, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('cd@uclouvain.be', 5, NULL, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('ldv@uclouvain.be', 5, 0, NULL);
 
--- Table: Proposition_dilemme
-DROP TABLE IF EXISTS Proposition_dilemme;
-CREATE TABLE Proposition_dilemme (IDdilemme TEXT NOT NULL REFERENCES Dilemme (IDdilemme) ON DELETE CASCADE ON UPDATE CASCADE, Sujet TEXT NOT NULL, Format TEXT NOT NULL CHECK (format IN ('txt', 'pic')), IDproposition TEXT PRIMARY KEY NOT NULL REFERENCES Proposition_dilemme (IDproposition) ON DELETE CASCADE ON UPDATE CASCADE);
 
 -- Table: Proposition_sondage
 DROP TABLE IF EXISTS Proposition_sondage;
@@ -53,6 +75,18 @@ INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition) VALUES (2
 INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition) VALUES (2, 'Francis');
 INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition) VALUES (2, 'Henry');
 INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition) VALUES (2, 'Enzo');
+INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition) VALUES (3, 'Week-end à Knokke');
+INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition) VALUES (3, 'Semaine dans les Ardennes');
+INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition) VALUES (3, 'City trip à Prague');
+INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition) VALUES (4, 'Ready Player One');
+INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition) VALUES (4, 'Pierre Lapin');
+INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition) VALUES (4, 'Avengers : Infinity War');
+INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition) VALUES (4, 'Comme des rois');
+INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition) VALUES (4, 'Death wish');
+INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition) VALUES (4, 'Gaston Lagaffe');
+INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition) VALUES (5, 'Je viens');
+INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition) VALUES (5, 'Je ne sais pas encore');
+INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition) VALUES (5, 'Je ne suis pas là');
 
 -- Table: Question
 DROP TABLE IF EXISTS Question;
@@ -104,11 +138,6 @@ INSERT INTO Reponse_questionnaire (IDquestion, Format, Texte, Est_solution) VALU
 INSERT INTO Reponse_questionnaire (IDquestion, Format, Texte, Est_solution) VALUES (5, 'txt', '12', 'false');
 INSERT INTO Reponse_questionnaire (IDquestion, Format, Texte, Est_solution) VALUES (5, 'txt', '24', 'false');
 
--- Table: Sondage
-DROP TABLE IF EXISTS Sondage;
-CREATE TABLE Sondage (IDsondage INTEGER NOT NULL DEFAULT 1 PRIMARY KEY AUTOINCREMENT UNIQUE, Nombre_choix INTEGER NOT NULL DEFAULT 2, Mail_auteur TEXT NOT NULL REFERENCES Utilisateur (Mail) ON DELETE CASCADE ON UPDATE CASCADE, Intitule TEXT NOT NULL, FOREIGN KEY (Mail_auteur) REFERENCES Utilisateur (Mail));
-INSERT INTO Sondage (IDsondage, Nombre_choix, Mail_auteur, Intitule) VALUES (1, 2, 'a', 'Plus belle capitale');
-INSERT INTO Sondage (IDsondage, Nombre_choix, Mail_auteur, Intitule) VALUES (2, 2, 'harry.smith@mymail.com', 'Nom de mon prochain fils');
 
 -- Table: Utilisateur
 DROP TABLE IF EXISTS Utilisateur;

@@ -62,6 +62,7 @@ public class SondagePannelActivity extends AppCompatActivity {
             sondage.cloture();
             MiniPoll.notifyShort(R.string.sondage_cloture);
             Intent mySondages = new Intent(getApplicationContext(), MySondagesActivity.class);
+            startActivity(mySondages);
         }
     };
 }
