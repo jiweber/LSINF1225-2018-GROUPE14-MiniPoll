@@ -1,9 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activity.SondagePannelActivity">
+
+<android.support.constraint.ConstraintLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".activity.SondageActivity">
+
+<ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_sondage_pannel_titre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_sondage_pannel_amis"
+            android:layout_width="342dp"
+            android:layout_height="68dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="12dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@id/tv_sondage_titre"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ListView
+            android:id="@+id/lv_sondage_pannel"
+            android:layout_width="fill_parent"
+            android:layout_height="327dp"
+            android:layout_gravity="center"
+            android:choiceMode="singleChoice"
+            android:listSelector="@color/pressed_color" />
+
+        <Button
+            android:id="@+id/btn_cloturer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cloturer" />
+
+    </LinearLayout>
+</ScrollView>
 
 </android.support.constraint.ConstraintLayout>

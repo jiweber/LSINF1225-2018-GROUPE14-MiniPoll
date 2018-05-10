@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import be.lsinf1225.minipoll.MiniPoll;
@@ -19,7 +20,6 @@ public class Sondage{
     private String creator;
     private String[] participants;
     private int participantsNumber;
-    private int[] ranks;
     private int[] answers;
     private int remainingAnswers;
     private Proposition[] propositions;
@@ -31,10 +31,9 @@ public class Sondage{
         this.creator = creator;
         this.participants = participants;
         int propositionNumber = enonces.length;
-        this.ranks = new int[propositionNumber];
         this.propositions = new Proposition[propositionNumber];
         for(int i=0; i<propositionNumber; i++){
-            this.propositions[i] = new Proposition(enonces[i]);
+            propositions[i] = new Proposition(enonces[i], 0);
         }
         this.participantsNumber = participants.length;
         this.answers = new int[participantsNumber];
@@ -45,10 +44,6 @@ public class Sondage{
         this.clotured = false;
     }
 
-    public Proposition[] getPropositions() {
-        return propositions;
-    }
-
     public boolean isCreator(String mail){
         return mail.equals(creator);
     }
@@ -56,7 +51,11 @@ public class Sondage{
     public void answerSondage(String participant, String proposition){
         int indexProposition = getPropositionIndex(proposition);
         answers[getParticipantIndex(participant)] = indexProposition;
+        propositions[indexProposition].selected();
         remainingAnswers --;
+        if(remainingAnswers == 0){
+            cloture();
+        }
         String sql = "UPDATE Participation_sondage SET IDchoix = ? WHERE Mail_participant = ?;";
         MySQLiteHelper.get().getWritableDatabase().execSQL(sql, new Object[]{indexProposition, participant});
     }
@@ -103,6 +102,24 @@ public class Sondage{
         return creator;
     }
 
+    public String[] getEnonces(){
+        String[] enonces = new String[propositions.length];
+        for(int i=0; i<propositions.length; i++){
+            enonces[i] = propositions[i].getEnonce();
+        }
+        return enonces;
+    }
+
+    public ArrayList<Proposition> getPropositions(){
+        int length = propositions.length;
+        ArrayList<Proposition> res = new ArrayList<Proposition>(length);
+        for(int i=0; i<length; i++){
+            res.add(propositions[i]);
+        }
+        Log.i("test3","taille res : "+res.size());
+        return res;
+    }
+
     public void cloture(){
         clotured = true;
     }
@@ -122,13 +139,6 @@ public class Sondage{
         return 1;
     }
 
-    public String[] getEnonces(){
-        String[] enonces = new String[propositions.length];
-        for(int i=0; i<propositions.length; i++){
-            enonces[i] = propositions[i].getEnonce();
-        }
-        return enonces;
-    }
 
     public static ArrayList<Sondage> getSondages(){
         ArrayList<Sondage> sondages = new ArrayList<Sondage>();
@@ -190,21 +200,25 @@ public class Sondage{
         return propositionsTab;
     }
 
-    private class Proposition {
+    public class Proposition{
         private String enonce;
-        private int generalRank;
+        private int score;
 
-        public Proposition(String enonce) {
+        public Proposition(String enonce, int score) {
             this.enonce = enonce;
-            generalRank = 0;
+            this.score = score;
         }
 
         public String getEnonce() {
             return enonce;
         }
 
-        public void setGeneralRank(int generalRank) {
-            this.generalRank = generalRank;
+        public int getScore(){
+            return  score;
+        }
+
+        public void selected() {
+            score ++;
         }
     }
 }

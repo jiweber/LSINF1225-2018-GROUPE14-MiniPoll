@@ -20,28 +20,20 @@ import be.lsinf1225.minipoll.model.Sondage;
 public class SondageActivity extends AppCompatActivity {
 
     private ListView listview;
-    private TextView tv_amis;
     private TextView tv_titre;
     private Sondage sondage;
     private Button button;
+    private String selected;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sondage);
         int id = getIntent().getIntExtra("sondage_id", 0);
         sondage = Sondage.getSondage(id);
+        selected = null;
 
         tv_titre = (TextView) findViewById(R.id.tv_sondage_titre);
         tv_titre.setText(sondage.getTitle());
-
-        tv_amis = findViewById(R.id.tv_sondage_amis);
-        String[] remFriends = sondage.getRemainingParticipants();
-        String message = "Personnes n'ayant pas encore répondu : \n";
-        message += remFriends[0];
-        for(int i=1; i<remFriends.length; i++){
-            message += ", " + remFriends[i];
-        }
-        tv_amis.setText(message);
 
         button = (Button) findViewById(R.id.btn_envoyer);
         button.setOnClickListener(envoyer);
@@ -57,8 +49,7 @@ public class SondageActivity extends AppCompatActivity {
                 if(!sondage.isCreator(MiniPoll.getConnected_user().getMail())) {
                     listview.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
                     listview.setSelector(android.R.color.holo_blue_light);
-                    String selected = (String) parent.getItemAtPosition(position);
-                    sondage.answerSondage(MiniPoll.getConnected_user().getMail(), selected);
+                    selected = (String) parent.getItemAtPosition(position);
                 }
             }
         });
@@ -66,7 +57,13 @@ public class SondageActivity extends AppCompatActivity {
     View.OnClickListener envoyer = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            //Intent pannel = new Intent(getApplicationContext(), SondagePannelActiviy.class);
+            if(selected == null){
+                MiniPoll.notifyShort(R.string.entrez_une_reponse);
+            }
+            else {
+                sondage.answerSondage(MiniPoll.getConnected_user().getMail(), selected);
+                Intent pannel = new Intent(getApplicationContext(), SondagePannelActivity.class);
+            }
         }
     };
 }

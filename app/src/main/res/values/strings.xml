@@ -67,4 +67,9 @@
     <string name="title_reponse">Mes Réponses</string>
     <string name="Reponse_is_over">Vous avez déjà répondu à la question</string>
 
+    <!-- Sondage -->
+    <string name="entrez_une_reponse">Veuillez sélectionner une proposition</string>
+    <string name="sondage_cloture">Le sondage a été cloturé</string>
+
+
 </resources>
