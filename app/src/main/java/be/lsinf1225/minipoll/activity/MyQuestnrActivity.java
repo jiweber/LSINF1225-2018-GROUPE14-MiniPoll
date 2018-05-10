@@ -47,10 +47,12 @@ public class MyQuestnrActivity extends AppCompatActivity {
         qstnr.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                
                 String itemValue = (String) qstnr.getItemAtPosition(i);
                 Log.i("Click on item: ", itemValue);
-                Intent intent = new Intent(MyQuestnrActivity.this, MyQstActivity.class);
                 int itemPosition = (int) qstnr.getItemIdAtPosition(i);
+
+                Intent intent = new Intent(MyQuestnrActivity.this, MyQstActivity.class);
                 intent.putExtra("id_qstnr",Questnr.getSQLQuestnr().get(itemPosition).getIDQstnr());
                 startActivity(intent);
             }
