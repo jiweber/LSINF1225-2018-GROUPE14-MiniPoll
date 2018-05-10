@@ -31,7 +31,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="146dp"
                     android:contentDescription="@string/imagepoll"
-                    app:srcCompat="@drawable/poll" />
+                    app:srcCompat="@drawable/poll4" />
 
                 <TextView
                     android:id="@+id/textView2"
