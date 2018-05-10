@@ -56,22 +56,22 @@
 
     <ImageButton
         android:id="@+id/amis"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="29dp"
-        android:background="@drawable/friends"
+        android:background="@drawable/groupbutton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginLeft="16dp" />
 
     <ImageButton
         android:id="@+id/profil"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="29dp"
-        android:background="@drawable/ic_launcher_foreground"
+        android:background="@drawable/settings"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginRight="16dp" />
