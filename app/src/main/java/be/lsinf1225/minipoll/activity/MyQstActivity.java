@@ -43,10 +43,10 @@ public class MyQstActivity extends AppCompatActivity {
 
         qsts.setAdapter(adapter);
 
-        //retrieving Statut and nbr_qst for the questionnaire
+        //retrieving Statut and num_qst for the questionnaire
 
-        final int Statut = Questnr.getSmallQstnr(Questnr.getSQLQuestnr(),id_qstnr).get(0).getStatutQstnr();
-        final int NbrQst = Questnr.getSmallQstnr(Questnr.getSQLQuestnr(),id_qstnr).get(0).getNbrQuestions();
+        //final int Statut = Questnr.getSmallQstnr(Questnr.getSQLQuestnr(),id_qstnr).get(0).getStatutQstnr();
+        //final int NbrQst = Questnr.getSmallQstnr(Questnr.getSQLQuestnr(),id_qstnr).get(0).getNbrQuestions();
 
         qsts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -59,7 +59,12 @@ public class MyQstActivity extends AppCompatActivity {
                 int valueToPass = Question.getSmallQst(BigList,id_qstnr).get(itemPosition).getQstID();
                 Log.i("Value: ", String.valueOf(valueToPass));
 
-                if(Question.getSmallQst(BigList,id_qstnr).get(itemPosition).getQstNum() <= Statut){
+                //retrieving Statut and num_qst for the questionnaire
+
+                int Statut = Questnr.getSmallQstnr(Questnr.getSQLQuestnr(),id_qstnr).get(0).getStatutQstnr();
+                int Numquestion = Question.getSmallQst(BigList,id_qstnr).get(itemPosition).getQstNum();
+
+                if(Numquestion <= Statut){
 
                     Intent intent = new Intent(MyQstActivity.this,ReponseOverActivity.class);
                     startActivity(intent);

@@ -44,17 +44,39 @@ public class MyQuestnrActivity extends AppCompatActivity {
 
         qstnr.setAdapter(adapter);
 
+        //retrieving Statut and nbr_qst from object Questnr so that
+        // one can check of the questionnaire is over or not
+
+
         qstnr.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                
+
                 String itemValue = (String) qstnr.getItemAtPosition(i);
                 Log.i("Click on item: ", itemValue);
                 int itemPosition = (int) qstnr.getItemIdAtPosition(i);
 
-                Intent intent = new Intent(MyQuestnrActivity.this, MyQstActivity.class);
-                intent.putExtra("id_qstnr",Questnr.getSQLQuestnr().get(itemPosition).getIDQstnr());
-                startActivity(intent);
+                int status = Questnr.getSQLQuestnr().get(itemPosition).getStatutQstnr();
+                int NbrQst = Questnr.getSQLQuestnr().get(itemPosition).getNbrQuestions();
+
+                if(status < NbrQst){
+
+                    Intent intent = new Intent(MyQuestnrActivity.this, MyQstActivity.class);
+                    intent.putExtra("id_qstnr",Questnr.getSQLQuestnr().get(itemPosition).getIDQstnr());
+                    startActivity(intent);
+
+                } else {
+
+                    Intent intent = new Intent(MyQuestnrActivity.this,QstnrOverActivity.class);
+
+                    int score = Questnr.getSQLQuestnr().get(itemPosition).getScoreQstnr();
+                    intent.putExtra("score_qstnr",score);
+                    intent.putExtra("nbr_qst",NbrQst);
+
+                    startActivity(intent);
+
+                }
+
             }
         });
 

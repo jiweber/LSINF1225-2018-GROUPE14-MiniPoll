@@ -124,7 +124,7 @@ INSERT INTO Reponse_questionnaire (IDquestion, Format, Texte, Est_solution) VALU
 INSERT INTO Reponse_questionnaire (IDquestion, Format, Texte, Est_solution) VALUES (2, 'txt', '1831', 'true');
 INSERT INTO Reponse_questionnaire (IDquestion, Format, Texte, Est_solution) VALUES (2, 'txt', '1800', 'false');
 INSERT INTO Reponse_questionnaire (IDquestion, Format, Texte, Est_solution) VALUES (2, 'txt', '1850', 'false');
-INSERT INTO Reponse_questionnaire (IDquestion, Format, Texte, Est_solution) VALUES (2, 'txt', 'Wallonie indépendante', 'false');
+INSERT INTO Reponse_questionnaire (IDquestion, Format, Texte, Est_solution) VALUES (2, 'txt', '1781', 'false');
 INSERT INTO Reponse_questionnaire (IDquestion, Format, Texte, Est_solution) VALUES (3, 'txt', 'Albert 1', 'false');
 INSERT INTO Reponse_questionnaire (IDquestion, Format, Texte, Est_solution) VALUES (3, 'txt', 'Philippe', 'true');
 INSERT INTO Reponse_questionnaire (IDquestion, Format, Texte, Est_solution) VALUES (3, 'txt', 'Baudouin', 'false');
