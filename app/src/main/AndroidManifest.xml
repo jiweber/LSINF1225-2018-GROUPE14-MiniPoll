@@ -27,6 +27,9 @@
             android:name=".activity.MenuPrincipalActivity"
             android:label="@string/menu_principal" />
         <activity
+            android:name=".activity.MyDilemmeActivity"
+            android:label="Mes Dilemmes" />
+        <activity
             android:name=".activity.NouveauActivity"
             android:label="Nouveau" />
         <activity android:name=".activity.NewSondageActivity" />

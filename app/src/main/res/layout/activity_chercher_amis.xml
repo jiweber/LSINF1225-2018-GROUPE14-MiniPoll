@@ -30,16 +30,16 @@
         <Button
             android:id="@+id/btn_tinder_cancel"
             android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
             android:text="Suivant" />
 
         <Button
             android:id="@+id/btn_tinder_accept"
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="bottom"
+            android:layout_weight="1"
             android:text="Envoyer une demande" />
 
     </LinearLayout>
