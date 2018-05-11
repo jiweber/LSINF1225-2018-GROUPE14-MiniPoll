@@ -85,4 +85,6 @@ public class VerificationMDP extends Dialog {
     public void setCancel(Button cancel) {
         this.cancel = cancel;
     }
+
+
 }

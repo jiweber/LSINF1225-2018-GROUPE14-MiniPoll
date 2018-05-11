@@ -1,6 +1,7 @@
 package be.lsinf1225.minipoll.activity;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -37,9 +39,11 @@ public class SondagePannelActivity extends AppCompatActivity {
         sondage = Sondage.getSondage(id);
 
         tv_titre = (TextView) findViewById(R.id.tv_sondage_pannel_titre);
+        setFontTxt(tv_titre);
         tv_titre.setText(sondage.getTitle());
 
         tv_amis = findViewById(R.id.tv_sondage_pannel_amis);
+        setFontTxt(tv_amis);
         String[] remFriends = sondage.getRemainingParticipants();
         String message;
         if(remFriends.length == 0){
@@ -55,6 +59,7 @@ public class SondagePannelActivity extends AppCompatActivity {
         tv_amis.setText(message);
 
         button = (Button) findViewById(R.id.btn_cloturer);
+        setFontBut(button);
         button.setOnClickListener(cloturer);
 
 
@@ -73,4 +78,31 @@ public class SondagePannelActivity extends AppCompatActivity {
             startActivity(mySondages);
         }
     };
+
+    public void setFontTxt(TextView textView) {
+        try {
+            Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/Quicksand-Light.ttf");
+            textView.setTypeface(typeface);
+        } catch (Exception e) {
+            Log.e("FONT", textView + " not found", e);
+        }
+    }
+
+    public void setFontBut(Button button) {
+        try {
+            Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/Quicksand-Light.ttf");
+            button.setTypeface(typeface);
+        } catch (Exception e) {
+            Log.e("FONT", button + " not found", e);
+        }
+    }
+
+    public void setFontEdTxt(EditText editText) {
+        try {
+            Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/Quicksand-Light.ttf");
+            editText.setTypeface(typeface);
+        } catch (Exception e) {
+            Log.e("FONT", editText + " not found", e);
+        }
+    }
 }

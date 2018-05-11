@@ -2,13 +2,16 @@ package be.lsinf1225.minipoll.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -45,8 +48,10 @@ public class SuiteNouveauQuestionnaire extends AppCompatActivity {
             listeBut.add(new ItemButton(i));
         }
         but=findViewById(R.id.snq_validate);
+        setFontBut(but);
         but.setOnClickListener(validate);
         title = findViewById(R.id.snq_title);
+        setFontTxt(title);
         uriList = new ArrayList<>();
         passe = new boolean[nquest];
         for (int i=0;i<nquest;i++)
@@ -97,4 +102,31 @@ public class SuiteNouveauQuestionnaire extends AppCompatActivity {
             }
         }
     };
+
+    public void setFontTxt(TextView textView) {
+        try {
+            Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/Quicksand-Light.ttf");
+            textView.setTypeface(typeface);
+        } catch (Exception e) {
+            Log.e("FONT", textView + " not found", e);
+        }
+    }
+
+    public void setFontBut(Button button) {
+        try {
+            Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/Quicksand-Light.ttf");
+            button.setTypeface(typeface);
+        } catch (Exception e) {
+            Log.e("FONT", button + " not found", e);
+        }
+    }
+
+    public void setFontEdTxt(EditText editText) {
+        try {
+            Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/Quicksand-Light.ttf");
+            editText.setTypeface(typeface);
+        } catch (Exception e) {
+            Log.e("FONT", editText + " not found", e);
+        }
+    }
 }

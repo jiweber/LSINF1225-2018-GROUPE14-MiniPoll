@@ -2,8 +2,10 @@ package be.lsinf1225.minipoll.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,11 +37,17 @@ public class NewQuestionnaireActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_questionnaire);
 
         title = findViewById(R.id.nq_title);
+        setFontTxt(title);
         tv_titrequest = findViewById(R.id.nq_tv_titre);
+        setFontTxt(tv_titrequest);
         tv_nquest = findViewById(R.id.nq_tv_nquest);
+        setFontTxt(tv_nquest);
         et_nquest = findViewById(R.id.nq_et_nquest);
+        setFontEdTxt(et_nquest);
         et_titrequest = findViewById(R.id.nq_et_titre);
+        setFontEdTxt(et_titrequest);
         button = findViewById(R.id.nq_validate);
+        setFontBut(button);
         nq = this;
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,5 +70,32 @@ public class NewQuestionnaireActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void setFontTxt(TextView textView) {
+        try {
+            Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/Quicksand-Light.ttf");
+            textView.setTypeface(typeface);
+        } catch (Exception e) {
+            Log.e("FONT", textView + " not found", e);
+        }
+    }
+
+    public void setFontBut(Button button) {
+        try {
+            Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/Quicksand-Light.ttf");
+            button.setTypeface(typeface);
+        } catch (Exception e) {
+            Log.e("FONT", button + " not found", e);
+        }
+    }
+
+    public void setFontEdTxt(EditText editText) {
+        try {
+            Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/Quicksand-Light.ttf");
+            editText.setTypeface(typeface);
+        } catch (Exception e) {
+            Log.e("FONT", editText + " not found", e);
+        }
     }
 }
