@@ -61,8 +61,8 @@ public class SwipeDeckAdapter extends BaseAdapter {
         if (bitmap != null){
             viewHolder.profile_image.setImageBitmap(bitmap);
         }else {
-
-        }   viewHolder.profile_image.setImageResource(android.R.drawable.sym_def_app_icon);
+            viewHolder.profile_image.setImageResource(android.R.drawable.sym_def_app_icon);
+        }
 
 
         return convertView;
