@@ -88,7 +88,7 @@ public class CreationProfil extends AppCompatActivity {
                     MiniPoll.notifyLong(R.string.Profilcree);
                     Intent menu = new Intent(getApplicationContext(), MenuPrincipalActivity.class);
                     MiniPoll.setConnected_user(new User(Mail, Name, Prename,Mdp, CreationProfil.this.bitmap));
-                    startActivity(menu);
+                    startActivityForResult(menu,1);
                     ConnexionActivity.connexion.finish();
                     Inscription.inscription.finish();
                     finish();
@@ -99,12 +99,16 @@ public class CreationProfil extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        Uri uri = data.getData();
-        try {
-            bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-            PP.setImageBitmap(bitmap);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(requestCode==1) {
+            if (resultCode == RESULT_OK) {
+                Uri uri = data.getData();
+                try {
+                    bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                    PP.setImageBitmap(bitmap);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 

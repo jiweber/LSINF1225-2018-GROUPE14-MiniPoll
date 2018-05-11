@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -40,6 +39,8 @@ public class NouveauActivity extends AppCompatActivity {
         setFontBut(aide);
 
         sondage.setOnClickListener(nouvsond);
+        aide.setOnClickListener(nouvdil);
+        questionnaire.setOnClickListener(nouvquest);
 
 
     }
@@ -50,9 +51,26 @@ public class NouveauActivity extends AppCompatActivity {
         public void onClick(View view) {
             Intent sond = new Intent(getApplicationContext(), NewSondageActivity.class);
             startActivity(sond);
-            finish();
         }
     };
+
+    View.OnClickListener nouvdil = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent dil = new Intent(getApplicationContext(), NewDilemmeActivity.class);
+            startActivity(dil);
+        }
+    };
+
+    View.OnClickListener nouvquest = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent quest = new Intent(getApplicationContext(), NewQuestionnaireActivity.class);
+            startActivity(quest);
+        }
+    };
+
+
     public void setFontTxt(TextView textView) {
     try {
         Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/Quicksand-Light.ttf");

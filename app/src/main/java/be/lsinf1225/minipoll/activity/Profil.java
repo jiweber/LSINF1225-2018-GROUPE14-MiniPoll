@@ -81,7 +81,8 @@ public class Profil extends AppCompatActivity {
         et_mod_prename.setText(MiniPoll.getConnected_user().getPrenom());
         et_mod_mail.setText(MiniPoll.getConnected_user().getMail());
         bitmap = MiniPoll.getConnected_user().getBitmap();
-        if (bitmap != null)mod_pic.setImageBitmap(bitmap);
+        if (bitmap != null)
+            mod_pic.setImageBitmap(bitmap);
         mod_logout.setOnClickListener(logout);
         mod_validate.setOnClickListener(vali);
         mod_pic.setOnClickListener(new View.OnClickListener() {
