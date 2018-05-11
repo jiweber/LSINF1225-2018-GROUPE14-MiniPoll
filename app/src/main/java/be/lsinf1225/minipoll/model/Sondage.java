@@ -47,8 +47,8 @@ public class Sondage{
         }
         this.participantsNumber = participants.length;
         this.answers = choix;
-        this.remainingAnswers = participantsNumber;
-        this.clotured = false;
+        this.remainingAnswers = getRemainingParticipants().length;
+        if(remainingAnswers == 0)  this.clotured = true;
     }
 
     public boolean isCreator(String mail){
@@ -65,6 +65,7 @@ public class Sondage{
         return res;
     }
 
+
     public void answerSondage(String participant, String proposition){
         int indexProposition = getPropositionIndex(proposition);
         int IDProposition = propositions[indexProposition].getIDproposition();
@@ -75,7 +76,6 @@ public class Sondage{
             cloture();
         }
         String sql = "UPDATE Participation_sondage SET IDchoix = ? WHERE Mail_participant = ?;";
-        MySQLiteHelper.updateDatabase();
         MySQLiteHelper.get().getWritableDatabase().execSQL(sql, new Object[]{IDProposition, participant});
     }
 
@@ -98,12 +98,13 @@ public class Sondage{
     }
 
     public String[] getRemainingParticipants(){
-        if(remainingAnswers == 0) return null;
+        //if(remainingAnswers == 0) return null;
         ArrayList<String> list = new ArrayList<String>();
         for(int i=0; i<participantsNumber; i++){
-            if(answers[i] == 0){
+            if(answers[i] == -1){
                 list.add(participants[i]);
             }
+            Log.i("test2","answers : " + answers[i]);
         }
         String[] tab = new String[list.size()];
         tab = list.toArray(tab);
@@ -157,8 +158,8 @@ public class Sondage{
         ArrayList<Sondage> sondages = new ArrayList<Sondage>();
         String mail = MiniPoll.getConnected_user().getMail();
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
-        String sqlID = "SELECT IDsondage, Intitule, Mail_auteur  FROM Sondage WHERE Mail_auteur = ? OR IDsondage = " +
-                "(SELECT IDsondage FROM Participation_sondage WHERE Mail_participant = ?);";
+        String sqlID = "SELECT IDsondage, Intitule, Mail_auteur  FROM Sondage WHERE Mail_auteur = ? UNION" +
+                " SELECT S.IDsondage, S.Intitule, S.Mail_auteur FROM Sondage S, Participation_sondage PS WHERE Mail_participant = ? and S.IDSondage=PS.IDsondage;";
         Cursor c = db.rawQuery(sqlID, new String[]{mail, mail});
         c.moveToFirst();
         while (!c.isAfterLast()){

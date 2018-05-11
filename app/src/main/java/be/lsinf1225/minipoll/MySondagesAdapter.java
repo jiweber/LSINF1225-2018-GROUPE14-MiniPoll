@@ -44,6 +44,7 @@ public class MySondagesAdapter extends ArrayAdapter<Sondage> {
         viewHolder.creator.setText(sondage.getCreator());
         viewHolder.enonce.setText(sondage.getTitle());
         int statut = sondage.getStatus();
+        Log.i("test2","getStatus() : "+statut);
         Resources res = getContext().getResources();
         if(statut == 0) {
             viewHolder.status.setImageDrawable(res.getDrawable(R.drawable.a_remplir));

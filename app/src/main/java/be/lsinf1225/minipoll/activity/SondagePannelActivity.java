@@ -41,10 +41,16 @@ public class SondagePannelActivity extends AppCompatActivity {
 
         tv_amis = findViewById(R.id.tv_sondage_pannel_amis);
         String[] remFriends = sondage.getRemainingParticipants();
-        String message = "Personnes n'ayant pas encore répondu : \n";
-        message += remFriends[0];
-        for(int i=1; i<remFriends.length; i++){
-            message += ", " + remFriends[i];
+        String message;
+        if(remFriends.length == 0){
+            message = "Tous les participants ont répondu.";
+        }
+        else {
+            message = "Personnes n'ayant pas encore répondu : \n";
+            message += remFriends[0];
+            for (int i = 1; i < remFriends.length; i++) {
+                message += ", " + remFriends[i];
+            }
         }
         tv_amis.setText(message);
 

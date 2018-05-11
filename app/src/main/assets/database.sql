@@ -40,26 +40,26 @@ INSERT INTO Sondage (IDsondage, Nombre_choix, Mail_auteur, Intitule) VALUES (5, 
 -- Table: Participation_sondage
 DROP TABLE IF EXISTS Participation_sondage;
 CREATE TABLE Participation_sondage (Mail_participant TEXT NOT NULL REFERENCES Utilisateur (Mail) ON DELETE CASCADE ON UPDATE CASCADE, IDsondage INTEGER NOT NULL REFERENCES Sondage (IDsondage) ON DELETE CASCADE ON UPDATE CASCADE, IDchoix INTEGER REFERENCES Proposition_sondage (IDproposition), Rang INT, FOREIGN KEY (Mail_participant) REFERENCES Utilisateur (Mail), PRIMARY KEY (IDsondage, Mail_participant));
-INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('harry.smith@mymail.com', 1, NULL, NULL);
-INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('adb@uclouvain.be', 1, NULL, NULL);
-INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('gb@uclouvain.be', 1, NULL, NULL);
-INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('jw@uclouvain.be', 2, NULL, NULL);
-INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('gb@uclouvain.be', 2, NULL, NULL);
-INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('ldv@uclouvain.be', 2, NULL, NULL);
-INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('a', 3, NULL, NULL);
-INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('gb@uclouvain.be', 3, NULL, NULL);
-INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('harry.smith@mymail.com', 3, NULL, NULL);
-INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('tc@uclouvain.be', 3, NULL, NULL);
-INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('jw@uclouvain.be', 3, NULL, NULL);
-INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('gb@uclouvain.be', 4, NULL, NULL);
-INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('harry.smith@mymail.com', 4, NULL, NULL);
-INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('cd@uclouvain.be', 4, NULL, NULL);
-INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('a', 4, NULL, NULL);
-INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('a', 5, NULL, NULL);
-INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('tc@uclouvain.be', 5, NULL, NULL);
-INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('gb@uclouvain.be', 5, NULL, NULL);
-INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('cd@uclouvain.be', 5, NULL, NULL);
-INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('ldv@uclouvain.be', 5, NULL, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('harry.smith@mymail.com', 1, -1, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('adb@uclouvain.be', 1, 2, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('gb@uclouvain.be', 1, -1, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('jw@uclouvain.be', 2, 2, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('gb@uclouvain.be', 2, 1, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('a', 2, -1, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('a', 3, -1, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('gb@uclouvain.be', 3, 2, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('harry.smith@mymail.com', 3, -1, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('tc@uclouvain.be', 3, 0, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('jw@uclouvain.be', 3, -1, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('gb@uclouvain.be', 4, 2, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('harry.smith@mymail.com', 4, 3, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('cd@uclouvain.be', 4, -1, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('a', 4, 0, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('a', 5, -1, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('tc@uclouvain.be', 5, -1, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('gb@uclouvain.be', 5, 2, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('cd@uclouvain.be', 5, -1, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('ldv@uclouvain.be', 5, 0, NULL);
 
 
 -- Table: Proposition_sondage
