@@ -61,7 +61,6 @@ public class MenuPrincipalActivity extends AppCompatActivity {
         return true;
     }
 
-    /*@Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_sign_out: {
@@ -71,7 +70,7 @@ public class MenuPrincipalActivity extends AppCompatActivity {
                 startActivity(log);
                 finish();                break;
             }
-            case R.id.action_upgrade_databas: {
+            case R.id.action_upgrade_database: {
                 MySQLiteHelper.upgradeDatabase(this);
                 break;
             }
@@ -91,7 +90,7 @@ public class MenuPrincipalActivity extends AppCompatActivity {
             }
         }
         return false;
-    }*/
+    }
 
     View.OnClickListener btn_profil_ls = new View.OnClickListener() {
         @Override

@@ -149,8 +149,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         }
     }
 
-    public static void updateDatabase(){
-        DATABASE_VERSION++;
+    public static void upgradeDatabase(Context context){
+        context.deleteDatabase(DATABASE_NAME);
         instance =null;
         SQLiteDatabase db = get().getReadableDatabase();
     }

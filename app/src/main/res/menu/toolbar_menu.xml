@@ -11,7 +11,13 @@
         app:showAsAction="never"/>
 
     <item
-        android:id="@+id/action_update_databas"
-        android:title="update database"
+    android:id="@+id/action_upgrade_database"
+    android:title="upgrade database"
+    app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_remove_relationships"
+        android:title="remove relationships"
         app:showAsAction="never"/>
+
 </menu>
