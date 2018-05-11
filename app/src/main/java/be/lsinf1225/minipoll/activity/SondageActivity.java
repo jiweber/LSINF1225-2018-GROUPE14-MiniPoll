@@ -62,8 +62,9 @@ public class SondageActivity extends AppCompatActivity {
             }
             else {
                 sondage.answerSondage(MiniPoll.getConnected_user().getMail(), selected);
-                Intent pannel = new Intent(getApplicationContext(), SondagePannelActivity.class);
-                startActivity(pannel);
+                Intent intent = new Intent(getApplicationContext(), SondagePannelActivity.class);
+                intent.putExtra("sondage_pannel_id", sondage.getId());
+                startActivity(intent);
             }
         }
     };

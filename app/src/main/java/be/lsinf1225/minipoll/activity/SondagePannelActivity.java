@@ -3,6 +3,7 @@ package be.lsinf1225.minipoll.activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -31,7 +32,8 @@ public class SondagePannelActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sondage_pannel);
-        int id = getIntent().getIntExtra("sondage_id", 0);
+        int id = getIntent().getIntExtra("sondage_pannel_id", 0);
+        Log.i("test1", "id reçu : "+ id);
         sondage = Sondage.getSondage(id);
 
         tv_titre = (TextView) findViewById(R.id.tv_sondage_pannel_titre);

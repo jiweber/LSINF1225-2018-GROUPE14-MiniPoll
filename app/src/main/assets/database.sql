@@ -31,7 +31,7 @@ INSERT INTO Participation_questionnaire (Mail, IDquestionnaire, Score, Statut) V
 -- Table: Sondage
 DROP TABLE IF EXISTS Sondage;
 CREATE TABLE Sondage (IDsondage INTEGER NOT NULL DEFAULT 1 PRIMARY KEY AUTOINCREMENT UNIQUE, Nombre_choix INTEGER NOT NULL DEFAULT 2, Mail_auteur TEXT NOT NULL REFERENCES Utilisateur (Mail) ON DELETE CASCADE ON UPDATE CASCADE, Intitule TEXT NOT NULL, FOREIGN KEY (Mail_auteur) REFERENCES Utilisateur (Mail));
-INSERT INTO Sondage (IDsondage, Nombre_choix, Mail_auteur, Intitule) VALUES (1, 2, 'a', 'Plus belle capitale');
+INSERT INTO Sondage (IDsondage, Nombre_choix, Mail_auteur, Intitule) VALUES (1, 3, 'a', 'Plus belle capitale');
 INSERT INTO Sondage (IDsondage, Nombre_choix, Mail_auteur, Intitule) VALUES (2, 2, 'harry.smith@mymail.com', 'Nom de mon prochain fils');
 INSERT INTO Sondage (IDsondage, Nombre_choix, Mail_auteur, Intitule) VALUES (3, 2, 'jd@uclouvain.be', 'Vacances entre potes');
 INSERT INTO Sondage (IDsondage, Nombre_choix, Mail_auteur, Intitule) VALUES (4, 2, 'jw@uclouvain.be', 'Film cinéma vendredi');
@@ -39,54 +39,54 @@ INSERT INTO Sondage (IDsondage, Nombre_choix, Mail_auteur, Intitule) VALUES (5, 
 
 -- Table: Participation_sondage
 DROP TABLE IF EXISTS Participation_sondage;
-CREATE TABLE Participation_sondage (Mail_participant TEXT NOT NULL REFERENCES Utilisateur (Mail) ON DELETE CASCADE ON UPDATE CASCADE, IDsondage INTEGER NOT NULL REFERENCES Sondage (IDsondage) ON DELETE CASCADE ON UPDATE CASCADE, IDchoix INT REFERENCES Proposition_sondage (IDsondage) ON DELETE CASCADE ON UPDATE CASCADE, Rang INT, FOREIGN KEY (Mail_participant) REFERENCES Utilisateur (Mail), PRIMARY KEY (IDsondage, Mail_participant));
-INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('harry.smith@mymail.com', 1, 4, NULL);
-INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('adb@uclouvain.be', 1, 1, NULL);
+CREATE TABLE Participation_sondage (Mail_participant TEXT NOT NULL REFERENCES Utilisateur (Mail) ON DELETE CASCADE ON UPDATE CASCADE, IDsondage INTEGER NOT NULL REFERENCES Sondage (IDsondage) ON DELETE CASCADE ON UPDATE CASCADE, IDchoix INTEGER REFERENCES Proposition_sondage (IDproposition), Rang INT, FOREIGN KEY (Mail_participant) REFERENCES Utilisateur (Mail), PRIMARY KEY (IDsondage, Mail_participant));
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('harry.smith@mymail.com', 1, NULL, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('adb@uclouvain.be', 1, NULL, NULL);
 INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('gb@uclouvain.be', 1, NULL, NULL);
 INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('jw@uclouvain.be', 2, NULL, NULL);
 INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('gb@uclouvain.be', 2, NULL, NULL);
-INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('ldv@uclouvain.be', 2, 3, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('ldv@uclouvain.be', 2, NULL, NULL);
 INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('a', 3, NULL, NULL);
-INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('gb@uclouvain.be', 3, 2, NULL);
-INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('harry.smith@mymail.com', 3, 1, NULL);
-INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('tc@uclouvain.be', 3, 0, NULL);
-INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('jw@uclouvain.be', 3, 2, NULL);
-INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('gb@uclouvain.be', 4, 4, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('gb@uclouvain.be', 3, NULL, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('harry.smith@mymail.com', 3, NULL, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('tc@uclouvain.be', 3, NULL, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('jw@uclouvain.be', 3, NULL, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('gb@uclouvain.be', 4, NULL, NULL);
 INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('harry.smith@mymail.com', 4, NULL, NULL);
-INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('cd@uclouvain.be', 4, 1, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('cd@uclouvain.be', 4, NULL, NULL);
 INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('a', 4, NULL, NULL);
-INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('a', 5, 0, NULL);
-INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('tc@uclouvain.be', 5, 2, NULL);
-INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('gb@uclouvain.be', 5, 1, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('a', 5, NULL, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('tc@uclouvain.be', 5, NULL, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('gb@uclouvain.be', 5, NULL, NULL);
 INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('cd@uclouvain.be', 5, NULL, NULL);
-INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('ldv@uclouvain.be', 5, 0, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('ldv@uclouvain.be', 5, NULL, NULL);
 
 
 -- Table: Proposition_sondage
 DROP TABLE IF EXISTS Proposition_sondage;
-CREATE TABLE Proposition_sondage (IDsondage INTEGER NOT NULL REFERENCES Sondage (IDsondage) ON DELETE CASCADE ON UPDATE CASCADE, Ennonce_de_la_proposition TEXT NOT NULL);
-INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition) VALUES (1, 'Madrid');
-INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition) VALUES (1, 'Paris');
-INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition) VALUES (1, 'Londres');
-INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition) VALUES (1, 'Bruxelles');
-INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition) VALUES (1, 'Tokio');
-INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition) VALUES (1, 'Mexico');
-INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition) VALUES (2, 'Bob');
-INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition) VALUES (2, 'Francis');
-INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition) VALUES (2, 'Henry');
-INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition) VALUES (2, 'Enzo');
-INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition) VALUES (3, 'Week-end à Knokke');
-INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition) VALUES (3, 'Semaine dans les Ardennes');
-INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition) VALUES (3, 'City trip à Prague');
-INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition) VALUES (4, 'Ready Player One');
-INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition) VALUES (4, 'Pierre Lapin');
-INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition) VALUES (4, 'Avengers : Infinity War');
-INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition) VALUES (4, 'Comme des rois');
-INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition) VALUES (4, 'Death wish');
-INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition) VALUES (4, 'Gaston Lagaffe');
-INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition) VALUES (5, 'Je viens');
-INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition) VALUES (5, 'Je ne sais pas encore');
-INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition) VALUES (5, 'Je ne suis pas là');
+CREATE TABLE Proposition_sondage (IDsondage INTEGER NOT NULL REFERENCES Sondage (IDsondage) ON DELETE CASCADE ON UPDATE CASCADE, Ennonce_de_la_proposition TEXT NOT NULL, IDproposition INTEGER NOT NULL);
+INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition, IDproposition) VALUES (1, 'Madrid',1);
+INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition, IDproposition) VALUES (1, 'Paris',2);
+INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition, IDproposition) VALUES (1, 'Londres',3);
+INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition, IDproposition) VALUES (1, 'Bruxelles',4);
+INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition, IDproposition) VALUES (1, 'Tokio',5);
+INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition, IDproposition) VALUES (1, 'Mexico',6);
+INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition, IDproposition) VALUES (2, 'Bob',7);
+INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition, IDproposition) VALUES (2, 'Francis',8);
+INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition, IDproposition) VALUES (2, 'Henry',9);
+INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition, IDproposition) VALUES (2, 'Enzo',10);
+INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition, IDproposition) VALUES (3, 'Week-end à Knokke',11);
+INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition, IDproposition) VALUES (3, 'Semaine dans les Ardennes',12);
+INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition, IDproposition) VALUES (3, 'City trip à Prague',13);
+INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition, IDproposition) VALUES (4, 'Ready Player One',14);
+INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition, IDproposition) VALUES (4, 'Pierre Lapin',15);
+INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition, IDproposition) VALUES (4, 'Avengers : Infinity War',16);
+INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition, IDproposition) VALUES (4, 'Comme des rois',17);
+INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition, IDproposition) VALUES (4, 'Death wish',18);
+INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition, IDproposition) VALUES (4, 'Gaston Lagaffe',19);
+INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition, IDproposition) VALUES (5, 'Je viens',20);
+INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition, IDproposition) VALUES (5, 'Je ne sais pas encore',21);
+INSERT INTO Proposition_sondage (IDsondage, Ennonce_de_la_proposition, IDproposition) VALUES (5, 'Je ne suis pas là',22);
 
 -- Table: Question
 DROP TABLE IF EXISTS Question;

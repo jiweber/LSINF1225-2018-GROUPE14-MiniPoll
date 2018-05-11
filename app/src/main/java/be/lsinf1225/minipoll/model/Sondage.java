@@ -23,23 +23,30 @@ public class Sondage{
     private int[] answers;
     private int remainingAnswers;
     private Proposition[] propositions;
+    private int propositionNumber;
     private boolean clotured;
 
-    public Sondage(int id, String title, String creator, String[] participants, String[] enonces) {
+    public Sondage(int id, String title, String creator, String[] participants, String[] enonces, int[] choix) {
+        Log.i("test1",participants.length +" part =? choix "+ choix.length);
         this.id = id;
         this.title = title;
         this.creator = creator;
         this.participants = participants;
-        int propositionNumber = enonces.length;
+        this.propositionNumber = enonces.length;
         this.propositions = new Proposition[propositionNumber];
+
+
+        SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
+        String sql = "SELECT IDproposition FROM Proposition_sondage WHERE Ennonce_de_la_proposition = ?";
+        Cursor c = db.rawQuery(sql, new String[]{enonces[0]});
+        c.moveToFirst();
+        int firstIDproposition = c.getInt(0);
+        c.close();
         for(int i=0; i<propositionNumber; i++){
-            propositions[i] = new Proposition(enonces[i], 0);
+            propositions[i] = new Proposition(enonces[i], firstIDproposition+i, getScore(firstIDproposition+i, choix));
         }
         this.participantsNumber = participants.length;
-        this.answers = new int[participantsNumber];
-        for(int i=0; i<participantsNumber; i++){
-            answers[i] = -1;
-        }
+        this.answers = choix;
         this.remainingAnswers = participantsNumber;
         this.clotured = false;
     }
@@ -48,16 +55,28 @@ public class Sondage{
         return mail.equals(creator);
     }
 
+    public int getScore(int IDproposition, int[] choix){
+        int res = 0;
+        for(int i=0; i<choix.length; i++){
+            if(choix[i] == IDproposition){
+                res++;
+            }
+        }
+        return res;
+    }
+
     public void answerSondage(String participant, String proposition){
         int indexProposition = getPropositionIndex(proposition);
-        answers[getParticipantIndex(participant)] = indexProposition;
+        int IDProposition = propositions[indexProposition].getIDproposition();
+        answers[getParticipantIndex(participant)] = IDProposition;
         propositions[indexProposition].selected();
         remainingAnswers --;
         if(remainingAnswers == 0){
             cloture();
         }
         String sql = "UPDATE Participation_sondage SET IDchoix = ? WHERE Mail_participant = ?;";
-        MySQLiteHelper.get().getWritableDatabase().execSQL(sql, new Object[]{indexProposition, participant});
+        MySQLiteHelper.updateDatabase();
+        MySQLiteHelper.get().getWritableDatabase().execSQL(sql, new Object[]{IDProposition, participant});
     }
 
     public int getParticipantIndex(String participant){
@@ -70,8 +89,8 @@ public class Sondage{
     }
 
     public int getPropositionIndex(String proposition){
-        for(int i=0; i<participantsNumber; i++){
-            if(propositions[i].getEnonce().equals(participants[i])){
+        for(int i=0; i<propositionNumber; i++){
+            if(propositions[i].getEnonce().equals(proposition)){
                 return i;
             }
         }
@@ -82,7 +101,7 @@ public class Sondage{
         if(remainingAnswers == 0) return null;
         ArrayList<String> list = new ArrayList<String>();
         for(int i=0; i<participantsNumber; i++){
-            if(answers[i] == -1){
+            if(answers[i] == 0){
                 list.add(participants[i]);
             }
         }
@@ -116,7 +135,6 @@ public class Sondage{
         for(int i=0; i<length; i++){
             res.add(propositions[i]);
         }
-        Log.i("test3","taille res : "+res.size());
         return res;
     }
 
@@ -126,13 +144,8 @@ public class Sondage{
 
     public int getStatus(){
         String mail = MiniPoll.getConnected_user().getMail();
-//        double rand = Math.random()*3;
-//        if(rand>=0 && rand<1) return 0;
-//        if(rand>=1 && rand<2) return 1;
-//        return 2;
         if(clotured) return 2;
-        if(mail.compareTo(creator) == 0) return 3;
-        if(remainingAnswers == 0) return 2;
+        if(mail.equals(creator)) return 3;
         if(answers[getParticipantIndex(mail)] == -1){
             return 0;
         }
@@ -144,35 +157,36 @@ public class Sondage{
         ArrayList<Sondage> sondages = new ArrayList<Sondage>();
         String mail = MiniPoll.getConnected_user().getMail();
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
-        String sqlID = "SELECT IDsondage, Intitule  FROM Sondage WHERE Mail_auteur = ? OR IDsondage = " +
+        String sqlID = "SELECT IDsondage, Intitule, Mail_auteur  FROM Sondage WHERE Mail_auteur = ? OR IDsondage = " +
                 "(SELECT IDsondage FROM Participation_sondage WHERE Mail_participant = ?);";
         Cursor c = db.rawQuery(sqlID, new String[]{mail, mail});
         c.moveToFirst();
         while (!c.isAfterLast()){
             int idSondage = c.getInt(0);
+            Log.i("test1","id trouvé : "+idSondage);
             String titre = c.getString(1);
-            sondages.add(new Sondage(idSondage,titre, mail, getSQLParticipants(idSondage, db), getSQLPropositions(idSondage,db))) ;
+            String auteur = c.getString(2);
+            sondages.add(new Sondage(idSondage,titre, auteur, getSQLParticipants(idSondage, db), getSQLPropositions(idSondage,db), getSQLChoix(idSondage, db))) ;
             c.moveToNext();
         }
         c.close();
         db.close();
-        Log.i("test1","nombre de sondages : "+ sondages.size());
         return sondages;
     }
 
     public static Sondage getSondage(int id){
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
-        String sql = "SELECT Intitule, Mail_auteur FROM Sondage S WHERE S.IDsondage = ?;";
+        String sql = "SELECT Intitule, Mail_auteur FROM Sondage WHERE IDsondage = ?;";
         Cursor c = db.rawQuery(sql, new String[]{Integer.toString(id)});
         c.moveToFirst();
-        Sondage s = new Sondage(id, c.getString(0), c.getString(1), getSQLParticipants(id, db), getSQLPropositions(id, db));
+        Sondage s = new Sondage(id, c.getString(0), c.getString(1), getSQLParticipants(id, db), getSQLPropositions(id, db), getSQLChoix(id, db));
         c.close();
         db.close();
         return s;
     }
 
     private static String[] getSQLParticipants(int id, SQLiteDatabase db){
-        String sqlPart = "SELECT distinct A.Mail_participant FROM Participation_sondage A, Sondage S WHERE A.IDsondage = ?;";
+        String sqlPart = "SELECT distinct Mail_participant FROM Participation_sondage WHERE IDsondage = ? ORDER BY Mail_participant;";
         Cursor cPart = db.rawQuery(sqlPart, new String[]{Integer.toString(id)});
         ArrayList<String> participants = new ArrayList<String>();
         cPart.moveToFirst();
@@ -186,8 +200,27 @@ public class Sondage{
         return participantsTab;
     }
 
+    private static int[] getSQLChoix(int id, SQLiteDatabase db){
+        String sqlPart = "SELECT IDchoix FROM Participation_sondage WHERE IDsondage = ? ORDER BY Mail_participant;";
+        Cursor cPart = db.rawQuery(sqlPart, new String[]{Integer.toString(id)});
+        ArrayList<Integer> choix = new ArrayList<Integer>();
+        cPart.moveToFirst();
+        while(!cPart.isAfterLast()){
+            choix.add(cPart.getInt(0));
+            cPart.moveToNext();
+        }
+        cPart.close();
+        int[] choixTab = new int[choix.size()];
+        for(int i=0; i<choix.size(); i++){
+            choixTab[i] = choix.get(i).intValue();
+        }
+        return choixTab;
+    }
+
+
+
     private static String[] getSQLPropositions(int id, SQLiteDatabase db){
-        String sqlProp = "SELECT distinct O.Ennonce_de_la_proposition FROM Proposition_sondage O, Sondage S WHERE O.IDsondage = ?";
+        String sqlProp = "SELECT distinct O.Ennonce_de_la_proposition FROM Proposition_sondage O, Sondage S WHERE O.IDsondage = ? ORDER BY O.IDproposition";
         Cursor cProp = db.rawQuery(sqlProp, new String[]{Integer.toString(id)});
         ArrayList<String> propositions = new ArrayList<String>();
         cProp.moveToFirst();
@@ -203,15 +236,20 @@ public class Sondage{
 
     public class Proposition{
         private String enonce;
+        private int IDproposition;
         private int score;
 
-        public Proposition(String enonce, int score) {
+        public Proposition(String enonce, int IDproposition, int score) {
             this.enonce = enonce;
             this.score = score;
         }
 
         public String getEnonce() {
             return enonce;
+        }
+
+        public int getIDproposition(){
+            return IDproposition;
         }
 
         public int getScore(){

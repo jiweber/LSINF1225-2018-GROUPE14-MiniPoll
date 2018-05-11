@@ -35,15 +35,17 @@ public class MySondagesActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?>adapter, View v, int position, long id){
                 Sondage item = (Sondage) adapter.getItemAtPosition(position);
+                Log.i("test1","id recu par position : "+ item.getId());
                 int status = item.getStatus();
-                if(status == 0 || status == 1) {
+                if(status == 0) {
                     Intent intent = new Intent(MySondagesActivity.this, SondageActivity.class);
                     intent.putExtra("sondage_id", item.getId());
                     startActivity(intent);
                 }
                 else{
                     Intent intent = new Intent(MySondagesActivity.this, SondagePannelActivity.class);
-                    intent.putExtra("sondage_id", item.getId());
+                    intent.putExtra("sondage_pannel_id", item.getId());
+                    Log.i("test1","id dans else recu par position : "+ item.getId());
                     startActivity(intent);
                 }
             }
