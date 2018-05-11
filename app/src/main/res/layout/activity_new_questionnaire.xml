@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context="be.lsinf1225.minipoll.activity.NewQuestionnaireActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/nq_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nouveau questionnaire"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/colorWhite"
+                android:textSize="40sp"
+                tools:layout_editor_absoluteX="146dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/nq_tv_titre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Titre du questionnaire :"
+                android:textColor="@color/colorWhite"
+                tools:layout_editor_absoluteX="85dp"
+                tools:layout_editor_absoluteY="111dp" />
+
+            <EditText
+                android:id="@+id/nq_et_titre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Entrez le titre du questionnaire"
+                android:inputType="textPersonName"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/colorWhite"
+                tools:layout_editor_absoluteX="153dp"
+                tools:layout_editor_absoluteY="130dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/nq_tv_nquest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nombre de questions :"
+                android:textColor="@color/colorWhite"
+                tools:layout_editor_absoluteX="81dp"
+                tools:layout_editor_absoluteY="191dp" />
+
+            <EditText
+                android:id="@+id/nq_et_nquest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Entrez le nombre de questions"
+                android:inputType="number"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/colorWhite"
+                tools:layout_editor_absoluteX="133dp"
+                tools:layout_editor_absoluteY="209dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/nq_validate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Valider"
+                tools:layout_editor_absoluteX="281dp"
+                tools:layout_editor_absoluteY="447dp" />
+
+        </LinearLayout>
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>
