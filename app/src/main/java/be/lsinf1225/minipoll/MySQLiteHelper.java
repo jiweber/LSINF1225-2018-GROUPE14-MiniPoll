@@ -32,7 +32,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
      *
      * @note Le numéro de version doit changer de manière monotone.
      */
-    private static  int DATABASE_VERSION = 14;
+    private static  int DATABASE_VERSION = 16;
 
     /**
      * Instance de notre classe afin de pouvoir y accéder facilement depuis n'importe quel objet.

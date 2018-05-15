@@ -17,6 +17,7 @@
         android:id="@+id/nom_ami"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite"
         android:textSize="20sp"/>
 
     <Button

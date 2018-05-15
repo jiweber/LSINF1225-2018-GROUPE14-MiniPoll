@@ -2,6 +2,8 @@ package be.lsinf1225.minipoll.activity;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -106,7 +108,12 @@ public class ChercherAmisActivity extends AppCompatActivity {
         cursorRel.moveToFirst();
         Log.i("DEBUG_J", "pasamis_nombre" + String.valueOf(cursorRel.getCount()));
         while(!cursorRel.isAfterLast()){
-            pas_amis.add(new User(cursorRel.getString(0), cursorRel.getString(1),cursorRel.getString(2),cursorRel.getString(3), BitmapUtil.getBitmap(cursorRel.getBlob(4)) ));
+            Bitmap bm = null;
+            if(cursorRel.getBlob(4)!=null) {
+                byte[] byteArray = cursorRel.getBlob(4);
+                bm = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+            }
+            pas_amis.add(new User(cursorRel.getString(0), cursorRel.getString(1),cursorRel.getString(2),cursorRel.getString(3), bm ));
             cursorRel.moveToNext();
         }
         cursorRel.close();

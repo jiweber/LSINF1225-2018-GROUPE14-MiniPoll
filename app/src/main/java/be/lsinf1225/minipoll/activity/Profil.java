@@ -235,14 +235,17 @@ public class Profil extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        Uri uri = data.getData();
-        try {
-            bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-            mod_pic.setImageBitmap(bitmap);
-            modif = true;
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                Uri uri = data.getData();
+                try {
+                    bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                    mod_pic.setImageBitmap(bitmap);
+                    modif = true;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 

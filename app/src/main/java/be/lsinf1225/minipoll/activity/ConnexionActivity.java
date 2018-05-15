@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -79,7 +80,11 @@ public class ConnexionActivity extends AppCompatActivity {
             {
                 String name = c.getString(1);
                 String prename = c.getString(2);
-                Bitmap bitmap = BitmapUtil.getBitmap(c.getBlob(3));
+                Bitmap bitmap = null;
+                if(c.getBlob(3)!=null) {
+                    byte[] byteArray = c.getBlob(3);
+                    bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+                }
                 c.close();
                 MiniPoll.setConnected_user(new User(mail,name,prename,pass,bitmap));
                 Intent connected = new Intent(getApplicationContext(), MenuPrincipalActivity.class);

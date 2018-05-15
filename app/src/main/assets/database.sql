@@ -9,8 +9,8 @@ BEGIN TRANSACTION;
 -- Table: Dilemme
 DROP TABLE IF EXISTS Dilemme;
 CREATE TABLE Dilemme (IDdilemme INTEGER NOT NULL DEFAULT 1 PRIMARY KEY AUTOINCREMENT UNIQUE, Auteur TEXT NOT NULL REFERENCES Utilisateur (Mail) ON DELETE CASCADE ON UPDATE CASCADE, Titre TEXT NOT NULL, Participant TEXT REFERENCES Utilisateur (Mail) ON DELETE CASCADE ON UPDATE CASCADE NOT NULL, FOREIGN KEY (Auteur) REFERENCES Utilisateur (Mail));
-INSERT INTO Dilemme (IDdilemme, Auteur, Titre, Participant) VALUES (1, 'harry.smith@mymail.com', 'O? vais-je manger ce soir?', 'gb@uclouvain.be');
-INSERT INTO Dilemme (IDdilemme, Auteur, Titre, Participant) VALUES (2, 'gb@uclouvain.be', 'Quel pull est ce que j''ach?te', 'harry.smith@mymail.com');
+INSERT INTO Dilemme (IDdilemme, Auteur, Titre, Participant) VALUES (1, 'harry.smith@mymail.com', 'Où vais-je manger ce soir?', 'gb@uclouvain.be');
+INSERT INTO Dilemme (IDdilemme, Auteur, Titre, Participant) VALUES (2, 'gb@uclouvain.be', 'Quel pull est ce que j''achète', 'harry.smith@mymail.com');
 
 -- Table: Participant_dilemme
 DROP TABLE IF EXISTS Participant_dilemme;
@@ -23,15 +23,15 @@ CREATE TABLE Proposition_dilemme (IDdilemme TEXT NOT NULL REFERENCES Dilemme (ID
 -- Table: Participation_questionnaire
 DROP TABLE IF EXISTS Participation_questionnaire;
 CREATE TABLE Participation_questionnaire (Mail TEXT NOT NULL REFERENCES Utilisateur (Mail) ON DELETE CASCADE ON UPDATE CASCADE, IDquestionnaire INTEGER NOT NULL REFERENCES Questionnaire (IDquestionnaire) ON DELETE CASCADE ON UPDATE CASCADE, Score INTEGER DEFAULT (0), Statut INTEGER DEFAULT (0), PRIMARY KEY (Mail, IDquestionnaire), FOREIGN KEY (Mail) REFERENCES Utilisateur (Mail));
-INSERT INTO Participation_questionnaire (Mail, IDquestionnaire, Score, Statut) VALUES ('a', 1, 2, 3);
+INSERT INTO Participation_questionnaire (Mail, IDquestionnaire, Score, Statut) VALUES ('km@uclouvain.be', 1, 2, 3);
 INSERT INTO Participation_questionnaire (Mail, IDquestionnaire, Score, Statut) VALUES ('ldv@uclouvain.be', 1, 0, 0);
 INSERT INTO Participation_questionnaire (Mail, IDquestionnaire, Score, Statut) VALUES ('ldv@uclouvain.be', 2, 1, 2);
-INSERT INTO Participation_questionnaire (Mail, IDquestionnaire, Score, Statut) VALUES ('a', 2, 1, 1);
+INSERT INTO Participation_questionnaire (Mail, IDquestionnaire, Score, Statut) VALUES ('km@uclouvain.be', 2, 1, 1);
 
 -- Table: Sondage
 DROP TABLE IF EXISTS Sondage;
 CREATE TABLE Sondage (IDsondage INTEGER NOT NULL DEFAULT 1 PRIMARY KEY AUTOINCREMENT UNIQUE, Nombre_choix INTEGER NOT NULL DEFAULT 2, Mail_auteur TEXT NOT NULL REFERENCES Utilisateur (Mail) ON DELETE CASCADE ON UPDATE CASCADE, Intitule TEXT NOT NULL, FOREIGN KEY (Mail_auteur) REFERENCES Utilisateur (Mail));
-INSERT INTO Sondage (IDsondage, Nombre_choix, Mail_auteur, Intitule) VALUES (1, 3, 'a', 'Plus belle capitale');
+INSERT INTO Sondage (IDsondage, Nombre_choix, Mail_auteur, Intitule) VALUES (1, 3, 'km@uclouvain.be', 'Plus belle capitale');
 INSERT INTO Sondage (IDsondage, Nombre_choix, Mail_auteur, Intitule) VALUES (2, 2, 'harry.smith@mymail.com', 'Nom de mon prochain fils');
 INSERT INTO Sondage (IDsondage, Nombre_choix, Mail_auteur, Intitule) VALUES (3, 2, 'jd@uclouvain.be', 'Vacances entre potes');
 INSERT INTO Sondage (IDsondage, Nombre_choix, Mail_auteur, Intitule) VALUES (4, 2, 'jw@uclouvain.be', 'Film cinéma vendredi');
@@ -45,8 +45,8 @@ INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) V
 INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('gb@uclouvain.be', 1, -1, NULL);
 INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('jw@uclouvain.be', 2, 2, NULL);
 INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('gb@uclouvain.be', 2, 1, NULL);
-INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('a', 2, -1, NULL);
-INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('a', 3, -1, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('km@uclouvain.be', 2, -1, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('km@uclouvain.be', 3, -1, NULL);
 INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('gb@uclouvain.be', 3, 2, NULL);
 INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('harry.smith@mymail.com', 3, -1, NULL);
 INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('tc@uclouvain.be', 3, 0, NULL);
@@ -54,8 +54,8 @@ INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) V
 INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('gb@uclouvain.be', 4, 2, NULL);
 INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('harry.smith@mymail.com', 4, 3, NULL);
 INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('cd@uclouvain.be', 4, -1, NULL);
-INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('a', 4, 0, NULL);
-INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('a', 5, -1, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('km@uclouvain.be', 4, 0, NULL);
+INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('km@uclouvain.be', 5, -1, NULL);
 INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('tc@uclouvain.be', 5, -1, NULL);
 INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('gb@uclouvain.be', 5, 2, NULL);
 INSERT INTO Participation_sondage (Mail_participant, IDsondage, IDchoix, Rang) VALUES ('cd@uclouvain.be', 5, -1, NULL);
@@ -106,12 +106,12 @@ INSERT INTO Questionnaire (IDquestionnaire, Titre, Auteur) VALUES (2, 'Maths', '
 -- Table: Relation
 DROP TABLE IF EXISTS Relation;
 CREATE TABLE Relation (Utilisateur1 TEXT NOT NULL REFERENCES Utilisateur (Mail) ON DELETE CASCADE ON UPDATE CASCADE MATCH FULL, Utilisateur2 TEXT NOT NULL REFERENCES Utilisateur (Mail) ON DELETE CASCADE ON UPDATE CASCADE, Statut TEXT NOT NULL DEFAULT 'En_attente' CHECK (statut IN ('Ami', 'En_attente', 'Rejet')), PRIMARY KEY (Utilisateur1, Utilisateur2), FOREIGN KEY (Utilisateur2) REFERENCES Utilisateur (Mail), FOREIGN KEY (Utilisateur1) REFERENCES Utilisateur (Mail));
-INSERT INTO Relation (Utilisateur1, Utilisateur2, Statut) VALUES ('harry.smith@mymail.com', 'a', 'Ami');
-INSERT INTO Relation (Utilisateur1, Utilisateur2, Statut) VALUES ('gb@uclouvain.be', 'a', 'Ami');
+INSERT INTO Relation (Utilisateur1, Utilisateur2, Statut) VALUES ('harry.smith@mymail.com', 'km@uclouvain.be', 'Ami');
+INSERT INTO Relation (Utilisateur1, Utilisateur2, Statut) VALUES ('gb@uclouvain.be', 'km@uclouvain.be', 'Ami');
 INSERT INTO Relation (Utilisateur1, Utilisateur2, Statut) VALUES ('jw@uclouvain.be', 'harry.smith@mymail.com', 'En_attente');
-INSERT INTO Relation (Utilisateur1, Utilisateur2, Statut) VALUES ('adb@uclouvain.be', 'a', 'Ami');
-INSERT INTO Relation (Utilisateur1, Utilisateur2, Statut) VALUES ('jw@uclouvain.be', 'a', 'Ami');
-INSERT INTO Relation (Utilisateur1, Utilisateur2, Statut) VALUES ('ldv@uclouvain.be', 'a', 'En_attente');
+INSERT INTO Relation (Utilisateur1, Utilisateur2, Statut) VALUES ('adb@uclouvain.be', 'km@uclouvain.be', 'Ami');
+INSERT INTO Relation (Utilisateur1, Utilisateur2, Statut) VALUES ('jw@uclouvain.be', 'km@uclouvain.be', 'Ami');
+INSERT INTO Relation (Utilisateur1, Utilisateur2, Statut) VALUES ('ldv@uclouvain.be', 'km@uclouvain.be', 'En_attente');
 INSERT INTO Relation (Utilisateur1, Utilisateur2, Statut) VALUES ('gb@uclouvain.be', 'ldv@uclouvain.be', 'Ami');
 
 -- Table: Reponse_questionnnaire
@@ -142,8 +142,8 @@ INSERT INTO Reponse_questionnaire (IDquestion, Format, Texte, Est_solution) VALU
 -- Table: Utilisateur
 DROP TABLE IF EXISTS Utilisateur;
 CREATE TABLE Utilisateur (Mail TEXT NOT NULL UNIQUE PRIMARY KEY, Nom TEXT NOT NULL, Prenom TEXT NOT NULL, Mot_de_passe TEXT NOT NULL, Photo BLOB, "Meilleur ami" TEXT, FOREIGN KEY ("Meilleur ami") REFERENCES Utilisateur (Mail));
-INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami") VALUES ('harry.smith@mymail.com', 'Smith', 'Harry', 'hsmIth123', 'default.jpeg', 'a');
-INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami") VALUES ('a', 'a', 'a', 'a',NULL, 'gb@uclouvain.be');
+INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami") VALUES ('harry.smith@mymail.com', 'Smith', 'Harry', 'hsmIth123', 'default.jpeg', 'km@uclouvain.be');
+INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami") VALUES ('km@uclouvain.be', 'Mens', 'Kim', 'Lsinf1225',NULL, 'gb@uclouvain.be');
 INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami") VALUES ('ldv@uclouvain.be', 'De Vogeleer', 'Louis', '1111', NULL, NULL);
 INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami") VALUES ('adb@uclouvain.be', 'de Biolley', 'Antoine', '1111', NULL, NULL);
 INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami") VALUES ('jw@uclouvain.be', 'Weber', 'Jimmy', '1111', NULL, NULL);
@@ -151,11 +151,10 @@ INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami")
 INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami") VALUES ('cd@uclouvain.be', 'Dion', 'Celine', '1111', NULL, NULL);
 INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami") VALUES ('aj@uclouvain.be', 'Jolie', 'Angelina', '1111', NULL, NULL);
 INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami") VALUES ('mo@uclouvain.be', 'Obama', 'Michele', '1111', NULL, NULL);
-
 INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami") VALUES ('jd@uclouvain.be', 'Depp', 'Johnny', '1111', NULL, NULL);
 INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami") VALUES ('bp@uclouvain.be', 'Pitt', 'Brad', '1111', NULL, NULL);
 INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami") VALUES ('jl@uclouvain.be', 'Lawrence', 'Jennifer', '1111', NULL, NULL);
-INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami") VALUES ('tc@uclouvain.be', 'Cruise', 'tom', '1111', NULL, NULL);
+INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami") VALUES ('tc@uclouvain.be', 'Cruise', 'Tom', '1111', NULL, NULL);
 INSERT INTO Utilisateur (Mail, Nom, Prenom, Mot_de_passe, Photo, "Meilleur ami") VALUES ('ew@uclouvain.be', 'Watson', 'Emma', '1111', NULL, NULL);
 
 
